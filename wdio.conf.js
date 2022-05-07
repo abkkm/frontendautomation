@@ -25,7 +25,8 @@ exports.config = {
   // will be called from there.
   //
   //specs: ['./tests/gettingStarted.spec.js'],
-  specs: ['./tests/nodeAssert.spec.js'],
+  //specs: ['./tests/login.spec.js'],
+  specs: ['./tests/smoke1.spec.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -98,8 +99,10 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
+  baseUrl: '/',
   //baseUrl: 'http://localhost',
-  baseUrl: 'https://the-internet.herokuapp.com',
+  // baseUrl: 'http://localhost:8080/index.html',
+  //baseUrl: 'https://the-internet.herokuapp.com',
   // baseUrl: 'https://the-internet.herokuapp.com/jqueryui/menu',
   //
   // Default timeout for all waitFor* commands.
