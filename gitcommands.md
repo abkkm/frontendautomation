@@ -285,6 +285,8 @@ $ git push origin master
 
 After the push is successful, check the online repo.
 
+git push origin HEAD:master
+
 How to revert a merge?
 After a merge is done by using the git merge command, you may undo this by using the reset command. For example:
 1
