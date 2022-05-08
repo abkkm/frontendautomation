@@ -453,3 +453,4 @@ Node version - 12.16.1
 
 Ctrl + P - To open a file in visual code
 F1- To invoke command line
+

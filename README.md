@@ -17,6 +17,7 @@ ctrl+Shift+P
 Open command pallette - @ To see the class members
 Find all references - REname symbol - It renames all symbols
 Right Click on the filename choose split right
+Right click on the filename choose copy path
 
 Ctrl+P- To open a file
 
@@ -68,6 +69,7 @@ See instructions for running locally
 > git commit -m "First version of test suite"
 > git push origin master
 > git status
+>
 > ----End of testsuite run----
 
 ------Debug sync start----
@@ -138,3 +140,87 @@ ctrl + shift + P
 ctrl + P by selecting (debug - toggle auto attach, always - auto attach to every node.js process)
 
 ------Debug async end----
+----Start of Todo MVC--
+C:\1-2ndRound-From-30-Mar-2020\Git-2022\automation>
+git clone https://github.com/tastejs/todomvc.git
+C:\1-2ndRound-From-30-Mar-2020\Git-2022\automation\todomvc\examples\react>http-server
+http://localhost:8080/
+----End of Todo MVC---
+-----Start of How to instll new application---
+
+1. download package.json
+2. do npm install
+   if any problem remove node_modules and package-lock.json
+
+---
+
+1. change specs folder
+
+2. baseUrl: 'http://localhost:8080/index.html'
+3. maxinstances : 1 (2 places)
+
+//Should enter values using setvalues
+//it('should enter value and then delete it
+//it('should enter value and then edit it
+//it('should create some todos
+https://w3c.github.io/webdriver/#keyboard-actions
+
+browser.pause(3000);
+browser.keys(['Control','a']);
+browser.pause(3000);
+browser.keys(['Control','x']);
+browser.pause(3000);
+browser.keys(['Control','v']);
+
+browser.pause('Enter');
+browser.pause(3000);
+TodoPage.todoItem1.moveTo(); // hover.
+TodoPage.deleteItem1.click(); // This element is not reachable. if the element is not visible
+TodoPage.todoItem1.doubleClick();
+
+TodoPage.createTodo('Buy Foods');
+TodoPage.createTodo('Buy Foods');
+TodoPage.createTodo('Buy Foods');
+
+for (let i = 0; i < 100; i++){
+TodoPage.createTodo('Item: ${i + 1}');
+}
+
+let list = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+
+for(let i=0; i < list.length; i++)
+{
+TodoPage.createTodo(list[i]);
+}
+
+get deleteItem1(){
+return $('body > div.container > header > div.col-md-8 > nav > a:nth-child(3)');
+}
+
+createTodo(val) {
+this.todoField.setValue(val);
+browser.keys(['Enter']);
+}
+
+---
+
+Problems:
+
+1. Redundant tests
+2. Non-Specific tests
+3. False negatives
+
+Dynamic selectors:
+
+$ - query selector
+
+$$
+- query selector All
+
+// remove browser.pause for clean up ctivities
+
+jsodc - /** */  Press tab
+See my notes at page 21 in the file Front-EndAutomation-I
+
+-----End of How to instll new application---
+$$
