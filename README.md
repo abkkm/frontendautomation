@@ -220,7 +220,24 @@ $$
 // remove browser.pause for clean up ctivities
 
 jsodc - /** */  Press tab
-See my notes at page 21 in the file Front-EndAutomation-I
+See my notes from page 21 in the file Front-EndAutomation-I & also in the repo
+
+Run
+>npm install chai
+
+const assert = require('assert'); - Brings nodejs assert library.
+const assert = require( - Brings chai assert library.
+
+Mocha hooks - Before each tests or before each suite(before all tests)
+
+Before - Clean up activities, BeaforeEach, After, AfterEach
+
+Remove browser.pause(3000).
+
+//ms,reverse, error
+element.waitForDisplayed(3000);
+
+
 
 -----End of How to instll new application---
 $$
