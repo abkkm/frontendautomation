@@ -1,3 +1,7 @@
+before(() => {
+  browser.setWindowSize(768, 1024);
+});
+
 describe('Getting Started', () => {
   it.skip('should open a web page', () => {
     // browser.url('https://the-internet.herokuapp.com/');

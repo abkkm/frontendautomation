@@ -1,12 +1,3 @@
-const url = require('./urls');
-const video = require('wdio-video-reporter');
-let ENV = process.env.ENV;
-
-if (!ENV) {
-  ENV = url.local;
-} else {
-  ENV = url[process.env.ENV];
-}
 exports.config = {
   //
   // ====================
@@ -17,7 +8,7 @@ exports.config = {
   // on a remote machine).
   runner: 'local',
   // Override default path ('/wd/hub') for chromedriver service.
-  path: '/',
+  //path: '/',
   // ==================
   // Specify Test Files
   // ==================
@@ -69,7 +60,7 @@ exports.config = {
       // 5 instances get started at a time.
       maxInstances: 1,
       //
-      browserName: 'chrome',
+      browserName: 'firefox',
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
@@ -128,7 +119,7 @@ exports.config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver'],
+  services: ['selenium-standalone'],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -150,25 +141,7 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [
-    'spec',
-
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-      },
-    ],
-    [
-      video,
-      {
-        saveAllVideos: false,
-        videoSlowdownMultiplier: 10,
-      },
-    ],
-  ],
+  reporters: ['spec'],
 
   //
   // Options to be passed to Mocha.
@@ -271,11 +244,8 @@ exports.config = {
    * @param {Boolean} result.passed    true if test has passed, otherwise false
    * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    if (test.error !== undefined) {
-      browser.takeScreenshot();
-    }
-  },
+  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
+  // },
 
   /**
    * Hook that gets executed after the suite has ended

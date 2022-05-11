@@ -237,6 +237,178 @@ Remove browser.pause(3000).
 //ms,reverse, error
 element.waitForDisplayed(3000);
 
+---Start of FF---
+
+Browser capabilities - To choose browser version
+make a copy and rename to wdio_ff.conf.js
+1. comment out path
+2. browserName: 'firefox'
+3. services: ['selenium-standalone'],
+
+npm test wdio_ff.conf.js
+
+npm install @wdio/selenium-standalone-service --save-dev
+---end of FF---
+
+waitForDisplayed(timeoutvalue)
+waitForExist(timoutvalue);
+
+Here we can remove timeoutvalue from here and then make read from conf file.
+
+waitForTimeout: 3000,
+
+waitForDisplayed();
+waitForExist();
+
+beforeEach(() => {
+browser.url('');
+});
+afterEach(() => {
+browser.pause(3000);
+});
+
+Instead of
+using
+assert = require('assert')
+
+we can define in the config file.
+
+before: function() {
+
+assert = require('assert');
+global.assert = assert;
+}
+In .eslintrc.json
+
+declare
+
+"assert" : true
+
+in globals section
+
+----------
+
+Windows size
+
+Deteermining
+
+create a file sizes.txt
+iPad = 768 x 1024
+iPhone x = 375 x 812
+desktop = 2800 x 1346
+=widthxheight
+Setting
+
+before(() => {
+browser.setWindowSize(768, 1024);
+});
+
+Since we dont know the user window size
+
+we can use like
+
+before(() => {
+browser.maximizeWindow();
+});
+-----
+Environments
+
+Method 1
+
+make a copy and rename to wdio_prod.conf.js
+
+change baseurl to
+
+baseUrl: 'https://glitchitsystem.com/element_status_demo/',
+
+Method 2
+
+Passing enviroment to config
+
+create a file named urls.js
+module.exports = {
+
+local: 'file:///D:/index.html',
+prod:'https://glitchitsystem.com/element_status_demo/'
+
+};
+
+In wdio.conf.js
+
+const url = require('./urls');
+let ENV = process.env.ENV;
+
+if(!ENV) { // if not specified
+ENV = url.local;
+}else{
+ENV = url[process.env.ENV];
+}
+
+put ENV in the baseUrl
+
+baseUrl: ENV,
+
+if we pass nothig
+
+>npm test -- wdio.conf.js --suite spec3
+
+For Windows
+
+>set ENV=prod&& npm test -- wdio.conf.js --suite spec3
+
+For Mac
+
+>ENV=prod npm test -- wdio.conf.js --suite spec3
+
+----------
+
+Allure reports
+
+npm install @wdio/allure-reporter --save-dev
+npm install -g allure-commandline --save-dev
+
+
+change reporters: ['spec'], to
+
+ reporters: ['spec',
+
+[
+'allure', {
+outputDir: 'allure-results',
+disableWebdriverStepsReporting: true,
+disableWebdriverScreenshotsReporting: true
+}
+]],
+
+>npm test wdio.conf.js
+>allure generate allure-results && allure open
+
+To take screen shot
+afterTest: function(test){
+if(test.error !== undefined){
+browser.takeScreenshot();
+}
+},
+disableWebdriverScreenshotsReporting: false
+>allure generate --clean allure-results && allure open
+
+Video generation
+
+In confi file
+
+use
+const video = require('wdio-video-reporter');
+
+,
+
+[
+video, {
+saveAllVideos: false,
+videoSlowdownMultiplier: 10
+}
+]
+
+>allure generate allure-results && allure open
 
 
 -----End of How to instll new application---

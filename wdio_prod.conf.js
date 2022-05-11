@@ -1,12 +1,3 @@
-const url = require('./urls');
-const video = require('wdio-video-reporter');
-let ENV = process.env.ENV;
-
-if (!ENV) {
-  ENV = url.local;
-} else {
-  ENV = url[process.env.ENV];
-}
 exports.config = {
   //
   // ====================
@@ -108,7 +99,7 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: '/',
+  baseUrl: 'https://glitchitsystem.com/element_status_demo/',
   //baseUrl: 'http://localhost',
   // baseUrl: 'http://localhost:8080/index.html',
   //baseUrl: 'https://the-internet.herokuapp.com',
@@ -150,25 +141,7 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: [
-    'spec',
-
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-      },
-    ],
-    [
-      video,
-      {
-        saveAllVideos: false,
-        videoSlowdownMultiplier: 10,
-      },
-    ],
-  ],
+  reporters: ['spec'],
 
   //
   // Options to be passed to Mocha.
@@ -271,11 +244,8 @@ exports.config = {
    * @param {Boolean} result.passed    true if test has passed, otherwise false
    * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    if (test.error !== undefined) {
-      browser.takeScreenshot();
-    }
-  },
+  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
+  // },
 
   /**
    * Hook that gets executed after the suite has ended
