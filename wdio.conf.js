@@ -1,3 +1,12 @@
+var baseUrl;
+var timeout = process.env.DEBUG ? 99999999 : 10000;
+
+if (process.env.SERVER === 'prod') {
+  baseUrl = 'https://www.google.com';
+} else {
+  baseUrl = 'http://www.webdriveruniversity.com';
+}
+
 const url = require('./urls');
 const video = require('wdio-video-reporter');
 let ENV = process.env.ENV;
@@ -35,11 +44,13 @@ exports.config = {
   //
   //specs: ['./tests/gettingStarted.spec.js'],
   //specs: ['./tests/login.spec.js'],
-  specs: ['./tests/gettingStarted.spec.js'],
+  //specs: ['./tests/gettingStarted.spec.js'],
+  specs: ['./tests/wdio-selenium-nodejs/sync_webdriverUniversityTest.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
   ],
+  sync: true,
   //
   // ============
   // Capabilities
@@ -108,7 +119,8 @@ exports.config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: '/',
+  baseUrl: baseUrl,
+  //baseUrl: '/',
   //baseUrl: 'http://localhost',
   // baseUrl: 'http://localhost:8080/index.html',
   //baseUrl: 'https://the-internet.herokuapp.com',
@@ -128,7 +140,8 @@ exports.config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ['chromedriver'],
+  // services: ['chromedriver'],
+  services: ['selenium-standalone'],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -175,7 +188,7 @@ exports.config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    timeout: 60000,
+    timeout: timeout,
   },
   //
   // =====

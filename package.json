@@ -23,6 +23,7 @@
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-wdio": "^7.19.0",
     "prettier": "^2.6.1",
+    "sync-request": "^6.1.0",
     "wdio-chromedriver-service": "^7.3.2",
     "wdio-video-reporter": "^3.2.1"
   },

@@ -413,3 +413,133 @@ videoSlowdownMultiplier: 10
 
 -----End of How to instll new application---
 $$
+
+> http-server (to start the server)
+> ----Start of WDIO Selenium Nodejs--
+> https://www.webdriveruniversity.com/
+
+> npm init
+> npm install –-save -dev
+> https://www.npmjs.com/package/webdriverio
+> npm install –-save –dev webdriverio@5.23.0
+
+Delete node_modules
+
+Run >npm install
+To install node_modules folder fresh
+
+package.json will be created.
+
+> npm install –-save –dev webdriverio@5.23.0 selenium-standalone@xxx.x
+
+Go to
+$ ./node_modules/.bin/selenium-standalone install
+$ ./node_modules/.bin/selenium-standalone start
+Runs on 4444
+http://127.0.0.1:4444
+http://127.0.0.1:4444/wd/hub/static/resource/hub.html
+
+Go to https://webdriver.io/ and copy the sample code
+
+npm test wdio.conf.js or node xxx.js
+
+./node_modules/.bin/wdio
+
+See word doc at page 2
+
+Instead of selenium server manually we can specify to start automatically.
+
+1.specify
+
+services: ['selenium-standalone'],
+
+2. npm install @wdio/selenium-standalone-service --save-dev
+
+3. change test folder as
+   "test": "wdio" in package.json
+
+Run >npm test
+
+> npm install –-save –dev mocha@latest
+
+run as admin
+netstat -ano | findstr :4444
+taskkill /PID 8620 /F
+
+change browserName: 'chrome' in capabilities secion
+
+./node_modules/.bin/wdio
+
+sync = false
+
+var baseUrl = 'http://www.webdriveruniversity.com';
+
+baseUrl: baseUrl,
+
+browser.url('/");
+
+> npm test -- --baseUrl=http://www.google.com
+
+1.  Command line
+    > npm test -- --baseUrl=http://www.google.com or
+2.  Environment variable
+    > SERVER=prod npm test or >npm test
+    > var baseUrl;
+    > if(process.env.SERVER === 'prod') {
+        baseUrl = 'https://www.google.com';
+        } else {
+        	baseUrl= "http://www.webdriveruniversity.com";
+        }
+
+> npm install –-save –dev mocha@latest
+
+> npm test -- --logLevel=verbose
+> https://nodejs.org/api/assert.html
+
+var assert = require('assert');
+assert.equal(title, 'WebDriverUniversity.com');
+
+var assert = require('chai').assert;
+var expect = require('chai').expect;
+var should = require('chai').should();
+
+var actual = 1;
+var expected = 2;
+
+assert.equal(actual, expected);
+expect(actual).to.equal(expected);
+actual.should.equal(expected);
+
+centralized assertions - Specify in wdio file
+before: function (capabilities, specs) {
+expect = require('chai').expect;
+should = require('chai').should();
+},
+
+> npm test -- --spec=tests/chai.js
+
+---
+
+var timeout = process.env.DEBUG ? 99999999 : 10000;
+add timeut to mochaopts in wdio conf file
+
+mochaOpts: {
+ui: 'bdd',
+timeout: timeout
+}
+
+add browser.debug() before browser.click();
+
+---
+
+Ranorex Selocity selector – Chrome extension
+
+it.skip, it.only
+
+Using external data
+
+npm install --save-dev sync-request
+
+npm set registry=https://registry.npmjs.org/
+
+> ----End of WDIO Selenium Nodejs----
