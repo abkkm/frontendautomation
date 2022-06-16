@@ -20,7 +20,6 @@ Right Click on the filename choose split right
 Right click on the filename choose copy path
 
 Ctrl+P- To open a file
-
 JSONtoCode-
 Create a json file
 ctrl+p to open command pallete

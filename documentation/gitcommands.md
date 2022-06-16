@@ -454,3 +454,58 @@ Node version - 12.16.1
 Ctrl + P - To open a file in visual code
 F1- To invoke command line
 
+---
+
+Create a branch under develop branch
+
+> git fetch
+> git checkout newlycreatedbranch
+> git branch
+
+------Start of Conflits-----
+Fr -
+Keep current(keep current feature branch changes)
+Keep incoming(keep main branch changes)
+
+> git fetch
+> git branch -r
+> git switch bugfix
+> git add .
+> git commit -m "changes done"
+> git push (to bugfix)
+
+I have fixed the bug. Please merge it to main.
+
+This branch has conflicts with main.
+[merge bugfix into main]
+
+> git merge main
+> git switch main
+> git pull
+> git switch bugfix
+> git merge main
+> git switch main
+> git remote -v
+> git pull
+
+local is with master branch
+so need to change main branch
+
+> git pull -u origin main
+> git status
+> git pull origin main
+> git branch --track origin/main
+> git status
+> git pull
+> git switch bugfix
+> git merge main
+> git status
+> git add
+> git commit -m "resolve conflicts"
+> git push
+> git switch main
+> git pull
+> git status
+> git pull origin main
+
+------End of Conflits-----
