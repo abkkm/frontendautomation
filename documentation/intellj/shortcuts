@@ -1,0 +1,18 @@
+sout
+F7 step into
+F8 step over
+Ct y to delete line
+Ct shift a - to open a file
+Ct shift f to search a file
+Shift f6 to rename a file
+Alt shift f10 - run the classes - select the value 
+Alt shift f9 -debug
+Ctrl f5 _ restart in the middle debug.
+Ctrl f9 _ reload the class
+Alt f8 - expression
+Alt 1 full.womdow
+Esc to pit the focus in the window.
+Ctrl E - recent open
+Ctrl b-go to implementation
+Alt f - find search
+Ctrl+shift+f10 - To pass arguments to the program

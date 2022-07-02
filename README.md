@@ -541,4 +541,13 @@ npm install --save-dev sync-request
 
 npm set registry=https://registry.npmjs.org/
 
+//span[@id='bbtn']/p[text()='CLICK ME!']
+/-one level down
+#Id of the element
+
+// - anywhere inside the dom
+
+Sectiion 28
+138 start
+
 > ----End of WDIO Selenium Nodejs----

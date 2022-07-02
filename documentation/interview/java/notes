@@ -1,0 +1,40 @@
+Lamda exp - It is a way to express our funcational interface.
+Stream - It is a sequence of objects that supports various methods which can be pipelined to produce the desired result.
+functional inteface before java 8
+Runnable, Callable, Comparator
+functional interface in java 8
+Function, Predicate, Consumer, Supplier
+
+
+Stream methods :
+
+filter, forEach,sorted, map, flatMap, reduce, groupingBy, Count, collect
+When to use map and flatMap
+
+
+1 to many always use flapmap ( 1 user : many emails)
+
+How to find the frequency of each character in a string using Stream
+
+How to find the highest paid employee from each dept
+
+streams, parallelstream
+
+Botha are used to process grp of objects.
+
+sequencial stream - it executes in a single core of machine in sequencial flow
+parallel stream - all threads use multiple core 
+
+for read operation - we can use parallel stream
+But for write operation - we use sequential stream to maintain data consistency
+
+flow of exection is sequential stream
+
+CompleteableFuture - It is used for asynchronous programming
+
+Future - jdk 1.5
+
+
+
+
+

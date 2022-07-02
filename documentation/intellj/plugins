@@ -1,0 +1,73 @@
+intellj - preferences
+
+1. 
+
+Setting all setter values in a new class
+
+In a new class hover the class instance - more actions - 
+
+Generate all setters with default value.
+
+2. Generate setter, getter convertor.(Dto to entity , entity to dto)
+
+
+Good practice is to wrap entity with dto then return it to the controller.
+
+@RestController
+@RequestMapping("/products")
+public class ProductController {
+
+@Autowired
+private ProductService service;
+
+@PostMapping
+public PRoduct addProduct(@RequestBody ProductDTO productDTO)
+
+return service.saveProduct(productDTO);
+
+}
+
+@GetMapping
+public List<PoductDTO> getProducts(){
+
+List<Product> products = repo.findAll();
+return products.stream().map(ValueMapper::mapEntityToDto).collect(Collectors.toList());
+
+}
+
+3. Dependency conflict or volunerbility check  - Maven Helper
+
+Rather than running dependency tree in command
+
+We use maven helper to see the dependency
+
+Go to pom.xml we can see to tabs 1. Text 2. Dependency Analyzer
+
+volunerbility
+
+Search our dependency right click exclude or if old versions right click jump to source / exclude
+
+4. Codota AI Autocomplete Plugin
+
+Codota AI Autocomplete Plugin
+
+Type BufferedReader
+
+ContextMenu appears
+
+select Codota:readInputLines
+
+5.JSONFormat - with out going external dta  - GSonformat plus
+
+Go gile, - righte click generate- gsonformat plus
+
+
+Go to jsonschema2pojo.org
+
+6. Key Promoto X 
+
+It will show shortcuts in the down side.
+
+
+
+

@@ -1,0 +1,31 @@
+Ctrl+N - To open a file
+Ctrl+N User:14 (Go to use file in the 14th line)
+Ctrl+1
+Ctrl+2
+ctrl+alt+/-
+Alt+enter
+Ct+e
+Ctl+shift+v history
+Ctrl+alt+m extract to a method
+Ctrl+alt+v 
+Ctrl d paste the same line
+Alt insert windows
+Shift shift open
+Ctrl e to open files
+alt+ctrl+I-To indent line (part)
+alt+ctrl+L-To indent whole document
+Al+Enter -Inject regular expression
+Ctrl+Space - Suggestion
+Ctrl+Shift+Space - Suggestion completion
+Ctrl+P-tells method arguments
+Alt+Enter - To implement methods
+Ctrl+0- Override the methods
+Usual-no-press tab-Completes not null
+Condition(.dot)if -Completes if statement
+a.null - Press tab
+a.notnull - Press tab
+Ctrl+F12 - Methods in a class
+Shift+Ctrl+Down - Moves the line
+Ctrl+F10 - Search the class name
+Ctrl+Shift+F10 - Search the folder name
+Ctrl+o - Override the methods

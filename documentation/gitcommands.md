@@ -463,6 +463,8 @@ Create a branch under develop branch
 > git branch
 
 ------Start of Conflits-----
+------Start of Method 1-----
+
 Fr -
 Keep current(keep current feature branch changes)
 Keep incoming(keep main branch changes)
@@ -507,5 +509,33 @@ so need to change main branch
 > git pull
 > git status
 > git pull origin main
+> ------End of Method 1-----
+> ------Start of Method 2-----
+> From master branch create
+> git branch conflictdemo(create branch)
+> git checkout conflictdemo
+> vi welcome.txt
+> git add welcome.txt
+> git commit -m 'conflict-demo'
+> git branch
+> git push origin conflictdemo
+> After pushing to to github
+> raise PR request(select from our branch conflictdemo)
 
+Immediately conflict message apears in github
+
+We can merge only these conflicts solved.[merge from conflictdemo - master)
+
+So go to conflictdemo and pull the changes from the master
+
+conflictdemo >git pull origin master
+
+> vi welcome.txt
+> git add welcome.txt
+> git commit -m 'resolved conflicts'
+> git push origin conflictdemo
+
+Now conflict message disappears. Then merge request( conflictdemo - master)
+
+------End of Method 2-----
 ------End of Conflits-----
