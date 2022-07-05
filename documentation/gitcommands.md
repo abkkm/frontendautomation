@@ -539,3 +539,5 @@ Now conflict message disappears. Then merge request( conflictdemo - master)
 
 ------End of Method 2-----
 ------End of Conflits-----
+git push origin HEAD:master
+------
