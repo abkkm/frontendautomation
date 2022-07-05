@@ -1,0 +1,74 @@
+https://www.youtube.com/watch?v=q2ynYUkVWnY&list=PLF5kUO89mjNqNzTG8NvQWjqS7EGlDvGUs&index=2
+
+Reactive programming
+Keeps main thread free.
+Back pressure on data streams.
+App more response.
+
+Reactive Rest API vs Traditional Rest API
+
+Building Reactive Rest API
+
+Spring Webflux
+
+Webclient * WebTestClient
+
+
+Traditional rest api -
+
+databases blocking call - 1 ms
+rest sysnchronous and blocking call - 1 ms
+
+api takes 2 ms to serve the client request.
+
+A thread will be assigned to a thread which makes database call or API call
+
+the thread per request When the client requests execute thread pool we need to do horizonatal scaling (increase instances)
+
+no back pressure support when client requests are more.
+
+
+We can make asyncrouns and non blcking using reactive rest apis.
+
+Reactive programming
+data flows as an event driven stream which is known as reactive stream.
+
+reactive stream specification
+
+it is created by netflix and pivotal.
+
+It has 4 interfaces.
+
+* Publisher - subscribe
+* Subscriber - onsubscribe, onnext, onerror, oncomplete
+* Subscription - request, cancel
+* Processor - extends both publishser and Subscriber
+
+Publisher - subscriber
+
+Publichser - emits the data, Consumer consumes the data
+
+1. subsciber()
+subsription
+request(n)
+4orderNext(Data)
+4.1 onNext(data)
+...
+4.n onNext(data)
+oncomplete()
+
+Dependencies
+
+dao - publishser
+browser - subscriber
+
+When the subsciber cancels the request. It immediately stops the executioin. But in traditionl approach it coninues execution.
+
+REst API - Controller - Service
+
+Funcation Endpoint - Router - Handler
+
+How to write functional Endpoint
+
+return ServerResponse.ok().
+                contentType(MediaType.TEXT_EVENT_STREAM) // data send as stream not object

@@ -16,3 +16,7 @@ Ctrl E - recent open
 Ctrl b-go to implementation
 Alt f - find search
 Ctrl+shift+f10 - To pass arguments to the program
+Ctrl+Alt+Shift+L - Format code
+Ctrl+Alt+L  - Format code
+Position the cursor on the MyClass in the Java editor and press Ctrl+1 - To create a unit test class
+Right-click on your new test class and select Run-As  JUnit Test.

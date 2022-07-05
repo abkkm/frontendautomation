@@ -1,0 +1,5 @@
+Alternatively you can right-click on your new class in the :_Project Explorer_ or Package Explorer view and select New  Other  Java  JUnit Test Case.
+./gradlew test`or with the `mvn clean verify
+https://github.com/junit-team/junit5
+https://www.vogella.com/tutorials/JUnit/article.html
+https://www.vogella.com/tutorials/Mockito/article.html#mockitousage
