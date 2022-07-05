@@ -72,3 +72,6 @@ How to write functional Endpoint
 
 return ServerResponse.ok().
                 contentType(MediaType.TEXT_EVENT_STREAM) // data send as stream not object
+
+                
+                write all CRUD operations in service class
