@@ -1,0 +1,6 @@
+type cmd
+
+G to bin and type mongod
+27017
+click connect
+
