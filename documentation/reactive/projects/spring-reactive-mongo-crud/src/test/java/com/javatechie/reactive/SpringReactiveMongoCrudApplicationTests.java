@@ -27,6 +27,7 @@ class SpringReactiveMongoCrudApplicationTests {
     @MockBean
     private ProductService service;
 
+
     @Test
     public void addProductTest(){
 		Mono<ProductDto> productDtoMono=Mono.just(new ProductDto("102","mobile",1,10000));
@@ -37,7 +38,10 @@ class SpringReactiveMongoCrudApplicationTests {
 				.exchange()
 				.expectStatus().isOk();//200
 
+				when(mock.post()
+
 	}
+
 
 
 	@Test

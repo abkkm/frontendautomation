@@ -20,3 +20,32 @@ Ctrl+Alt+Shift+L - Format code
 Ctrl+Alt+L  - Format code
 Position the cursor on the MyClass in the Java editor and press Ctrl+1 - To create a unit test class
 Right-click on your new test class and select Run-As  JUnit Test.
+
+https://www.youtube.com/watch?v=fzjbo5TYNVM
+Ctrl+N - search for class file
+Type - CC to go CustomerController
+U:4 - Go to line 4
+crl+shift+N - search for all files
+ctrl+1, 2,3 - Go to project, structures tabs...
+ctrl+B - Navigate to class
+ctrl+alt+left arrow - Go back
+Alt+enter - 
+alt+enter - select assign local variable
+ctrl+E - Latest files
+ctrl+shift+v - paste history
+ctrl+alt+m - Extract into a method
+ctrl+alt+v - extract into a variable
+ctrl+D - To delete a line/grp of lines
+alt+inesrt - 
+HElp+productivity guide
+--------------
+https://www.youtube.com/watch?v=matPBmotxvY
+
+alt+enter - split into declarations
+double tap shift - search dialog
+ctrl+shift+enter - auto completion (put semilcolon, braces...
+)
+crtl+alt+l  - code format
+crtl+alt+o - Organize the imports
+
+-----------

@@ -75,3 +75,98 @@ return ServerResponse.ok().
 
                 
                 write all CRUD operations in service class
+                ----------------------------
+
+requestForData ()
+request(n)
+onNext(1), onNext(2),....onNext(n)
+onComplete()
+
+No more blocking call
+They are realease to do other work.
+
+Reactive programmiing
+-EVent/message driven
+Functional code style
+Baclk pressure on data streams.
+
+https://github.com/shabbirdwd53/reactive-programming-tutorial
+
+https://projectreactor.io/
+
+Netty as non blocking server.
+
+Publisher(Database, server,..) - It will send the data.
+
+OnNext method publisher emits the data using Subscription object.
+
+Mono works with one element
+Flux works with multiple elements
+
+
+Spring reactive uess java reactive library.
+
+We can do opertions on the returned data using operators
+
+After error flux will not stream any data.
+
+Map convert one type to another type
+
+flapMap converts from Mono<String> to Mono<List<String>>
+concapMap will preserve the order of the elements
+flapMapMany - wants to performs operations on mono return flux (Convets mono of objects(string) to flux of objects)
+transforms - converts one type to another type
+filter data we can use multipe places
+
+defaultIfEmpty - if no data pass the default
+switchIfEmpty - gives 
+
+combines different streams
+
+concat - comibens multipe publibers
+concat - static
+concatwith - with instance
+
+merge - comibens multipe publibers( not in sequential manner) - Not wait for the publisher to complete
+merge - static
+mergewith - with instance
+
+
+mergeSequential - Emits teh data in sequential order
+
+upto we saw same type ( result)
+--------------
+
+Zip, ZipWith - Works with different types
+(result is different)
+
+doOnNext
+doOnSubscribe
+doOnComplete
+
+------------
+
+1. handle the error
+2. Resume on the error
+
+onErrorReturn - Sends the default value.
+OnErrorContinue
+
+onErrorMap - Throwable (Maps runtime exp to throwable)
+
+doOnError operators - same as try catch
+
+retry, retry(n) - 
+
+retry - undefinte try
+retry - limited try
+
+retryWhen - retry for particul call(db ,api)
+
+
+backpressure buffer - keeps the data in buffer
+
+Cold stream - same set of data (hhtp call...)
+Hot stream - gets the data at a time interval(sports qote, stock quote)
+
+The StepVerifier is central to testing all things reactive. It gives us a way to assert that what we think is going to come next in the publisher is in fact going to come next in the publisher. The StepVerifier provides several variants on the expect* theme. Think of this as the reactive equivalent to Assert*.
