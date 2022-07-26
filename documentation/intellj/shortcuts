@@ -49,3 +49,11 @@ crtl+alt+l  - code format
 crtl+alt+o - Organize the imports
 
 -----------
+pvsm - public static void main(String args[])
+
+ctrl+Alt+v - local assignment
+
+sout - system.out.println
+
+-----
+
