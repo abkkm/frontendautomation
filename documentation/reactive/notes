@@ -170,3 +170,92 @@ Cold stream - same set of data (hhtp call...)
 Hot stream - gets the data at a time interval(sports qote, stock quote)
 
 The StepVerifier is central to testing all things reactive. It gives us a way to assert that what we think is going to come next in the publisher is in fact going to come next in the publisher. The StepVerifier provides several variants on the expect* theme. Think of this as the reactive equivalent to Assert*.
+
+Conclusion
+doOnNext works only when data is available and doOnSuccess works with or without data.
+doOnNext and doOnSuccess should be used for logging and not updating some values as doOnNext or any of the doOn* methods are NOT subscribing to publishers.
+
+
+fromiterable - fromlist to create flux or mono
+
+after subsbibe the publisher emits the data.
+
+tranform - converts none type to another type(accepts functional interface as input)
+
+if no data to be emitted - defaultIfEmpyt("Default")
+if want to different data - switchIfEmpyt()
+
+concat - with static - (11,12,21,22)
+contactwith  - with instance  - (executes in sequential order) 
+
+.delayEletments - emits the data in the different time rate.
+
+mergewith  - (11,21,12, 22)
+mergesequential  -  (11,12,21,22) -  (executes in sequential order) 
+
+Zip - 11+21, 12+22 (max 8 sources) - returns tuple
+Zipwith 
+
+doon operator - sideeffect - actual behavior dont change., dosuccess, doOnComplete,doOnSubscribe,doOnNext,...
+
+error - when error occurs. the publisher stops emitting the data and sends the error data.
+
+there are two ways to handle the exceptions in reactive streams.
+
+onErrorReturn - Send the default value.
+
+OnErrorContinue - drops the error data and contines another data
+
+onErrorMap - Converts exception to a custom exception.
+donOnError - same as try cathc
+
+@Data
+@AllArgsconstructor
+@NoArgcontructor
+
+flapMap - Flattening the object
+retry - retry when there is an exception
+retry(3) - retry with 3 times after the first attempt.
+retrywhen() - 
+backoff - retry interval
+
+-----
+
+backpressure : suppose my publisher emits 100 data whicah can not be handled b my subscriber.
+
+
+backpressuredrop : handles dropped data.
+
+backpressurebuffer : keeps some data on the buffer
+
+Hot stream : only current data
+
+Cold starem : current data + old data
+
+Debug :
+
+Option 1:
+
+Hooks.onOperatorDebug();
+
+Option 2: Add checkpoint
+
+.map()
+.checkpoint("Error Checkpoint")
+
+Option 3: 
+
+add 
+
+reactive-tools depen
+
+ReactorDebugAgent.init(); 
+ReactorDebugAgent.processExistingClasses();
+in main class
+
+
+-----------------
+
+
+
+

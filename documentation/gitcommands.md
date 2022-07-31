@@ -32,6 +32,50 @@ create a new branvh
 > git merge alien-plot
 > git log
 > git push origin master –u
+> ----Start of Branch----
+> git merge (Merge with local copy)
+> git branch -d branchname
+> git branch
+> git branch new_branch
+> git checkout new_branch
+> git branch -D branchname (force delete)
+
+> git checkout . ( to go to previous version)
+
+> ----End of Branch----
+
+> git checkout . ( to go to previous version)
+
+> git rm --cache filename.js
+> (Moves files to untrack files from staged area)
+
+> git checkout commitid
+
+> git commit -am "Changed Background color"
+
+----Start of diff----
+
+> git reset --hard (gitrepo goes to previous version. we can not undo it. so careful.
+
+> git reset --hard commitid(gitrepo goes to previous version).
+
+> git diff ( all files)
+> git diff index.html (only specific file)
+> git reset --hard (remove all commits)
+> git branch
+> vi dfd.htm
+> git diff
+> git commit branch -m "Add"
+> git diff master
+> (compares local copy with master branch)
+> git log
+> q to quit if large
+
+To check two commit(take first 6 characters)
+
+> git diff 12121 345345
+
+----End of diff----
 
 ---Start of merge----
 create a repo
@@ -540,4 +584,29 @@ Now conflict message disappears. Then merge request( conflictdemo - master)
 ------End of Method 2-----
 ------End of Conflits-----
 git push origin HEAD:master
-------
+
+---
+
+----start of stash-----
+
+> git branch
+> git branch -D difftest
+> git branch dummy
+> git checkout dummy
+> git checkout master
+> git checkout --force master
+> git checkout dummy
+> git stash save dummy_changes
+> git checkout master
+> git checkout dummy
+> git stash list
+> git stash apply dummy_changes
+> git stash apply stash@{0}
+> git diff
+> git stash pop
+> git stash clear
+> git stash list
+> git status
+> git stash drop stash@{1}
+
+----End of stash-----
