@@ -256,6 +256,13 @@ in main class
 
 -----------------
 
+sink can act as both publisher and subsciber
+
+Stream events(server side events) from backend to frontend
+
+One way communication
+
+mulitple thread emits mulitple items via the sink.
 
 
 

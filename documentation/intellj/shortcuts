@@ -58,3 +58,5 @@ sout - system.out.println
 -----
 
 ctrl+p to see the method parameters
+
+ctrl+f12 - to extract method names only.

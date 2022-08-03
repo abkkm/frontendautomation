@@ -42,6 +42,9 @@ create a new branvh
 
 > git checkout . ( to go to previous version)
 
+> git commit --amend
+> git commit --amend -m "New commit message"
+
 > ----End of Branch----
 
 > git checkout . ( to go to previous version)
@@ -608,5 +611,6 @@ git push origin HEAD:master
 > git stash list
 > git status
 > git stash drop stash@{1}
+> git reflog stash
 
 ----End of stash-----
