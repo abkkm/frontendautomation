@@ -1,0 +1,127 @@
+local type variable - only for request
+collection - only for collection
+global - for workspace.
+
+
+There are two editors
+1. Pre request script
+2. Tests
+
+scripting
+
+//Assestions validations - response
+const jsonData = pm.response.json();
+console.log(jsonData);
+console.log(jsonData.ID);
+
+const bookId = jsonData.ID;
+pm.environment.set("book_id",bookId);
+pm.test("Validate Status Code is 200", function(){
+
+    pm.response.to.have.status(200);
+    //pm.response.to.have.property("Msg");
+    pm.expect(jsonData).have.property("Msg");
+    pm.expect(jsonData.Msg).to.eql("successfully added");
+}
+pm.test("Headers cookies responsetime validations", function(){
+
+//how to check the content type header present in the response
+
+pm.respones.to.have.header("Content-Type");
+pm.expect(response.headers.get("Content-Type")).to.eql("application/json;charset=UTF-8");
+pm.expect(pm.response.responseTime).to.be.below(1200);
+expect(pm.response.text()).to.include("successfully added");
+}
+)
+
+to create a company code create global level variable(RS...) in intial value & current value
+put in pre request script
+console.log(pm.globals.get("Companycode"))
+cons code = pm.globals.get("Companycode");
+const val = pm.variables.replaceIn('{{$random
+int}}');
+pm.collectionVariables.set("isbn",code+val); // create collection variable isbn and replace it request body {{isbn}}
+
+------------
+
+const schmema= {
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "isbn": {
+      "type": "string"
+    },
+    "aisle": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "isbn",
+    "aisle",
+    "author"
+  ]
+}
+pm.test("validate the JSon response Schema", function()
+{
+pm.response.to.have.status(200);
+pm.response.to.have.jsonSchema(schema);
+const jsonData = pm.response.json();
+pm.expect(jsonData.msg).to.eql("book is successfully deleted");
+});
+
+
+-----------
+
+json.parse - coverts any object to JSon
+
+you can imprt csv data not excel data
+-------------
+
+select the csv file then run the test
+
+-------
+
+const schema = {
+"type": "array",
+"items":[{
+"type":"object",
+"properties":{
+"book_name": {
+"type": ....
+
+
+pm.test('validate Schema', ()=>
+{
+pm.response.to.have.jsonSchema(schema)
+})
+
+----------
+
+npm install -g newman
+
+newman run collectioname.json -d testData.csv -e env.json -g glo.json
+
+e - environment 
+g- global variable
+d - data data driven
+
+npm install -g newman-reporter-htmlextra
+
+newman run collection.json -r htmlextra
+
+newman run collectioname.json -d testData.csv -e env.json -g glo.json -r htmlextra
+
+-------------
+
+Fork - copy a collection - make changes - merge with parent
+
+create pull request - no comments - approve - merge it with the parent
+create pull request -  comments - not approve - no merge it with the parent
+
+Monitor - schedule our test(smoke) to run in a day.

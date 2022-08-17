@@ -1,0 +1,39 @@
+download war file
+C:\Softwares-2020\Jenkins-2022>java -jar jenkins.war -httpPort=9090
+localhost:9090
+give as admin/admin
+
+Create a Jenkins job to triger postman test execution
+
+
+1.Name as postexution
+(free style project)
+2. Build - Add build step
+For windows select batch 
+For linux /mac selet execute shell
+
+Then give the following commands
+cd /dfdfd/dfdfdf (Move to that folder where all jsons & csvs are present)
+newman run collectioname.json -d testData.csv -e env.json -g glo.json -r htmlextra
+
+Save cchnages
+
+Select Build now
+
+--------------
+
+General
+
+This project is parameterized
+
+Add parameter - choice parameter
+
+Env
+
+Choices UAT, QA
+
+Buid with parameters
+
+cd /dfdfd/dfdfdf (Move to that folder where all jsons & csvs are present)
+newman run collectioname.json -d testData.csv -e "$Env".json -g glo.json -r htmlextra
+-----------

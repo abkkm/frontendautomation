@@ -1,0 +1,346 @@
+Mockio - To mock dependencies
+Stub - It is a class which returs dummy data. 
+Sample implementaton of dependency.
+
+In future dont use stub instead use mock
+TodoService mockTodoService = mock(TodoService.class);
+stub(mockTodoService.retreiveTodos("Parameter")).return("value");
+
+assertEquals(expected,actual); - junit static method
+
+
+In Eclipse in eclipse preferences add frequentlly added mt
+
+
+		List<String> list = mock(List.class);
+
+
+        
+		when(list.get(0)).thenReturn("in28Minutes");
+		assertEquals("in28Minutes", list.get(0));
+		assertNull(list.get(1));
+
+        --see above more in github----
+
+        package com.kkjavatutoials;
+ 
+import java.util.List;
+ 
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+ 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+ 
+public class MockitoCaptorTest1 {
+ 
+	@Test
+	void capterTest() {
+		
+		List<String> mockList = mock(List.class);
+		mockList.add("KK");
+	  
+		ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+	    
+		verify(mockList).add(argumentCaptor.capture());
+	    assertEquals("KK", argumentCaptor.getValue());
+	}
+}
+---------------
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+ 
+import java.util.List;
+ 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.junit.jupiter.MockitoExtension;
+ 
+@ExtendWith(value = { MockitoExtension.class })
+public class MockitoCaptorTest2 {
+ 
+	@Captor
+	private ArgumentCaptor<String> argumentCaptor;
+	
+	@Test
+	void capterTest() {
+		
+		List<String> mockList = mock(List.class);
+		mockList.add("KK");
+	 
+	    verify(mockList).add(argumentCaptor.capture());
+	    assertEquals("KK", argumentCaptor.getValue());
+	}
+}
+
+------------
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+ 
+import java.util.List;
+ 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.Mockito.times;
+ 
+import com.kkjavatutorials.model.Person;
+ 
+@ExtendWith(value = { MockitoExtension.class })
+public class MockitoCaptorTest3 {
+ 
+	@Captor
+	private ArgumentCaptor<Person> argumentCaptor;
+	
+	@Test
+	void capterTest() {
+		
+		List<Person> mockList = mock(List.class);
+		mockList.add(new Person(10, "KK"));
+		mockList.add(new Person(20, "PK"));
+		mockList.add(new Person(30, "SK"));
+	 
+		verify(mockList, times(3)).add(argumentCaptor.capture());
+		
+		List<Person> personList = argumentCaptor.getAllValues();
+	 
+		assertEquals(10, personList.get(0).getId());
+	    assertEquals("KK", personList.get(0).getName());
+	    
+	    assertEquals(20, personList.get(1).getId());
+	    assertEquals("PK", personList.get(1).getName());
+	    
+	    assertEquals(30, personList.get(2).getId());
+	    assertEquals("SK", personList.get(2).getName());
+	}
+}
+
+-----------------
+
+We can use Mockito spy to partial mock an object. When we spy on an object, the real methods are being called unless its subbed.@ Mock Annotation
+
+The most Frequently used annotation in Mockito is @Mock
+Use @Mock annotation to create and inject mocked instances without having to call Mockito.mock(abc.class) manually.
+We may use org.mockito.Mockito class mock() method to create a mock object of a given class or interface.
+@Spy Annotation
+
+Use @Spyannotation to spy on an existing instance
+We usually use Mockito Spy to partial mock an object. When we spy on an object then the real methods are being called unless it’s stubbed.
+
+----
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+ 
+
+/**
+ * Use of @Mock Annotation
+ *
+ */
+@ExtendWith(value = { MockitoExtension.class })
+public class MockEmpoyeeServiceTest_1 {
+ 
+	@Mock
+	private EmployeeServiceImpl employeeService;
+	
+	@Test
+	public void testFetchEmployeeById() {
+		
+		when(employeeService.fetchEmployeeById(2)).thenReturn(getEmployee());
+		Employee employee = employeeService.fetchEmployeeById(2);
+		System.out.println(employee);
+	}
+	
+	private static Employee getEmployee() {
+		Employee employee = new Employee();
+		employee.setEmployee_id(2);
+		employee.setBonus(new BigDecimal(600));
+		employee.setDoj(new Date());
+		employee.setEmployeeName("KK");
+		employee.setEmail("kk.cs2016@yahoo.com");
+		employee.setSalary(50000.00);
+		return employee;
+	}
+}
+-----------
+Use of mock method
+
+package com.infotech.service;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+import org.junit.jupiter.api.Test;
+
+import com.infotech.model.Employee;
+/**
+ * Use of mock method
+ */
+public class MockEmpoyeeServiceTest_2 {
+
+	@Test
+	public void testFetchEmployeeById() {
+		
+		EmployeeServiceImpl employeeService = mock(EmployeeServiceImpl.class);
+		when(employeeService.fetchEmployeeById(2)).thenReturn(getEmployee());
+		Employee employee = employeeService.fetchEmployeeById(2);
+		System.out.println(employee);
+	}
+	
+	private static Employee getEmployee() {
+		Employee employee = new Employee();
+		employee.setEmployee_id(2);
+		employee.setBonus(new BigDecimal(600));
+		employee.setDoj(new Date());
+		employee.setEmployeeName("KK");
+		employee.setEmail("kk.cs2016@yahoo.com");
+		employee.setSalary(50000.00);
+		return employee;
+	}
+}
+------------------
+
+----
+
+Use of @Spy Annotation
+
+package com.infotech.service;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.infotech.model.Employee;
+/**
+ * Use of @Spy Annotation
+ */
+@ExtendWith(value = { MockitoExtension.class })
+public class SpyEmpoyeeServiceTest_1 {
+
+	@Spy
+	private EmployeeServiceImpl employeeService;
+	
+	@Test
+	public void testFetchEmployeeById() {
+		
+		System.out.println(employeeService.hashCode());
+		Employee employee = employeeService.fetchEmployeeById(2);
+		System.out.println(employee);
+	}
+}
+-------------------
+
+Use of spy method
+
+package com.infotech.service;
+
+import static org.mockito.Mockito.spy;
+
+import org.junit.jupiter.api.Test;
+
+import com.infotech.model.Employee;
+/**
+ * Use of spy method
+ */
+public class SpyEmpoyeeServiceTest_2 {
+
+	@Test
+	public void testFetchEmployeeById() {
+		
+		EmployeeServiceImpl employeeService = spy(EmployeeServiceImpl.class);
+		
+		Employee employee = employeeService.fetchEmployeeById(2);
+		System.out.println(employee);
+	}
+}
+
+Console Output of Above Test class when you run as JUnit Test:
+
+Employee [employee_id=2, employeeName=John, email=jonh.cs2016@yahoo.com, salary=90000.0, doj=2020-08-28, bonus=290]
+
+
+--------------
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+ 
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+/**
+ * Mocking Void Methods with Mockito Examples
+ * @author KK JavaTutorials
+ */
+public class WordDictionaryTest {
+	
+	@Test
+	public void whenAddCalledWithVerify() {
+		
+		WordDictionary wordDictionary = mock(WordDictionary.class);
+	  
+		doNothing().when(wordDictionary).add(anyString(), anyString());
+	    wordDictionary.add("awesome", "Very Good");
+	 
+	    verify(wordDictionary, times(1)).add("awesome", "Very Good");
+	    
+	    System.out.println(wordDictionary.getMeaning("awesome"));
+	}
+	
+	@Test
+	public void whenAddCalledValueCaptured() {
+		
+		WordDictionary wordDictionary = mock(WordDictionary.class);
+	    ArgumentCaptor<String> valueCapture = ArgumentCaptor.forClass(String.class);
+	    
+	    doNothing().when(wordDictionary).add(anyString(), valueCapture.capture());
+	 
+	    wordDictionary.add("awesome", "Very Good");
+	    
+	    assertEquals("Very Good", valueCapture.getValue());
+	}
+	
+	@Test
+	public void whenAddCalledRealMethodUsingSpy() {
+		
+		WordDictionary wordDictionary = spy(WordDictionary.class);
+	    doCallRealMethod().when(wordDictionary).add(anyString(),anyString());
+	    
+	    wordDictionary.add("awesome", "Very Good");
+	 
+	    verify(wordDictionary, times(1)).add("awesome", "Very Good");
+	    assertEquals("Very Good", wordDictionary.getMeaning("awesome"));
+	    //System.out.println(wordDictionary.getMeaning("awesome"));
+	}
+	
+	/**
+	 * Test for void Return Type method with Exception
+	 */
+	@Test
+	public void voidMethodThrowingExceptionMockitoTest() {
+		WordDictionary wordDictionary = mock(WordDictionary.class);
+		
+		doThrow(new IllegalStateException("Error occurred!!"))
+	      .when(wordDictionary)
+	      .add(anyString(), anyString());
+	    
+	    assertThrows(IllegalStateException.class, ()->wordDictionary.add("awesome", "Very Good"));
+	}
+ 
+}
+
+----------------

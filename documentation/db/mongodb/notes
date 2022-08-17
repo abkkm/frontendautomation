@@ -4,3 +4,9 @@ G to bin and type mongod
 27017
 click connect
 
+https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#r2dbc.drivers
+
+------------
+
+On delete cascade - 
+whenever you delete parent record its child records get deleted.

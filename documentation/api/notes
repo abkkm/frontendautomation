@@ -1,0 +1,21 @@
+To see API calls
+Go to network tab - click Fetch/XHR
+
+In request headers we have authorization token(upto 30 ..40 mts) called session token that will be used for subsequent calls.
+
+Make a login call get the token 
+
+authorization
+
+API (Application programmng interface) acts as bridge between the client and the server.
+
+
+Rules to be followed while creating API/services
+
+Hit the endpoint/ call the API
+
+Headers/cookies : 
+
+Headers represent the meta-data associated with request and response.In layman terms, we are sending additional details to API to process our request.
+
+Example : Authorization details.

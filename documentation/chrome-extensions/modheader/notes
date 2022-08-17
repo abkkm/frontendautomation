@@ -1,0 +1,7 @@
+Request Headers
+Authorization  : Token #3434335353353535353533
+
+Filters 
+URL Pattern : *//127.0.0.1:8080/*
+
+Check the Authorization 

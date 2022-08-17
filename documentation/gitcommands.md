@@ -607,6 +607,8 @@ git push origin HEAD:master
 > git stash apply stash@{0}
 > git diff
 > git stash pop
+
+
 > git stash clear
 > git stash list
 > git status
