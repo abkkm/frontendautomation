@@ -1,0 +1,75 @@
+Whenever you use mongodb embedded db remove test scope from pom .xml and reimport the project.
+
+-------------
+
+There 2 ways to install
+
+1. download from here
+
+https://www.mongodb.com/try/download/community
+
+2. Got docker compose file(the following yaml file)
+
+version: "3"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db  
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 3000:8081
+
+      -------------------
+
+      Tehre are 2 containers one is monog container and another one is mongo-express
+
+Here container data /data/db   will be hosted by host ./mongo
+
+Also change the ports to 3000 
+ports:
+      - 3000:8081
+
+      >ls docker-compose.yml
+>docker-compose
+
+After running the both containers(mongo, momgo-express) are up.
+
+Post for express server is
+
+localhost:8081
+
+Instead of connnecting with the embedded db connect to above real db.
+
+For data server.
+Here we are using subscribe method.
+But in controller we return publisher.
+
+
+----------------
+
+No need to change application.properties file
+
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo</artifactId>
+			<!--<scope>test</scope>-->
+		</dependency>
+
+        Comment the above embedded db lines and reimport in pom.xml(project-righte click-remimport)
+
+        -------------
+
+        https://www.vinsguru.com/
+
+
+        ----
+        https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#r2dbc.drivers
+
+
+
+
+

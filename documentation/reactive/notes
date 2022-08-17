@@ -264,5 +264,39 @@ One way communication
 
 mulitple thread emits mulitple items via the sink.
 
+--
 
+Order Service - Spring data JPA
+
+product service - nosql - Spring Data Reactive Mongo
+
+User service - rdbms - R2DBC - reactive driver for relational db
+-----
+
+Whenever you use mongodb empbe
+
+BeanUtils - Convert dto to entity
+
+
+---
+
+For data server.
+Here we are using subscribe method.
+But in controller we return publisher.
+
+----
+
+Use flatMap when mono within mono
+
+-----
+
+        return this.service.getUserById(id)
+                    .map(ResponseEntity::ok) // if user is present
+                    .defaultIfEmpty(ResponseEntity.notFound().build()); //if user is not found
+
+                    -----------
+
+
+
+    
 
