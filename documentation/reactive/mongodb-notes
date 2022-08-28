@@ -70,6 +70,32 @@ No need to change application.properties file
         https://docs.spring.io/spring-data/r2dbc/docs/current/reference/html/#r2dbc.drivers
 
 
+------------
+
+maven dependency
+
+Spring Data Reactive MonogoDB
+embedded mangodb
+
+BenaUtils.copyProperties(source, destination)
+
+We can use this above method when source,destinatioin have same properties.
+----
+spring:
+  data:
+    mongodb:
+      database: Productsdb
+      host: localhost
+      port: 27017
 
 
+server:
+  port: 9292
+
+  ---------------
+
+  Go bin direc
+Then run mongod in command prompt
+
+---
 

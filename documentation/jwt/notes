@@ -1,0 +1,50 @@
+Session token:
+
+1. Stateful
+2. Stores information in server side(Sesion ID)
+3. Sutitabe for monolithic app
+
+JWT
+
+-Stateless
+STores information in client side (JWT token)
+-Stuitable for multi instance and microservices
+
+-Header
+-Payload (It contains data) - (user information should not contain sensitive info.. pwd)
+-Siganture
+
+https://app.diagrams.net/
+
+----
+
+Validation
+dto to entity
+save entity
+return response
+
+-----
+
+jwt claims = jwt Payload
+
+---
+Signup & Login - Generate JWT token
+
+Other APIs - VAlidate JWT token
+Code Simple
+
+---
+
+Signup & Login - Generate JWT token
+
+Other APIs - VAlidate JWT token
+
+Interceptor - 
+
+1. Authorize headers
+2. log inbound request and outbound response.
+
+-----
+
+add JWTIntercetor(extends HandleInteceptorAdapter) in CustomWebConfig.
+

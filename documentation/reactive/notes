@@ -5,6 +5,25 @@ Keeps main thread free.
 Back pressure on data streams.
 App more response.
 
+
+1. Took the customer's oder
+2. Told cook for prepare order
+3. Waited for the food to be cooked
+4. Gave it to thte customer
+5. After all of that, then took the next person's order
+which is sysnchronous
+
+
+1. TAke a customers order
+2. Tell the cook to prepare food.
+3. Instead of waiting for it to be cooked, take next persoons order and list for(subscribe to) the cook to tell you the first cusomer's food is done.
+4. Once the food is done, you give the food to the customer
+reactive - asynchronous and non-blocking
+
+when any data changes iin db, it will fire/publish the event. whoever subsribes can stream that data.
+
+
+
 Reactive Rest API vs Traditional Rest API
 
 Building Reactive Rest API
@@ -43,6 +62,24 @@ It has 4 interfaces.
 * Subscriber - onsubscribe, onnext, onerror, oncomplete
 * Subscription - request, cancel
 * Processor - extends both publishser and Subscriber
+
+Publisher is a data source who will always publish an event.
+Susbcription represents the unique relationship between a subscriber and a publisher
+A processor represents a processing stage - which is both a subscriber and a publisher and must obey the contracts of noth.
+
+Reactive programming libary
+
+* Reactor
+* RxJava
+* Jdk9 Flow Reactive Stream
+
+Plugins
+
+--Spring assistant
+
+Dependencies(nly one dep is needed)
+
+-Spring Reactive Web
 
 Publisher - subscriber
 
@@ -300,3 +337,173 @@ Use flatMap when mono within mono
 
     
 
+---------------Start of second time----
+
+doOnSubscribe method the publisher sends the subscription event
+1
+ Mono<String> monoString = Mono.just("java");
+ monoString.Susbcribe(System.out::println);
+ 2
+  Mono<String> monoString = Mono.just("java").log();
+ monoString.Susbcribe(System.out::println);
+ 3
+   Mono<String> monoString = Mono.just("java")
+   .then(Mono.error(new RuntimeException("Exception occured"))
+   .log();
+ monoString.Susbcribe(System.out::println);
+  4
+   Mono<String> monoString = Mono.just("java")
+   .then(Mono.error(new RuntimeException("Exception occured"))
+   .log();
+ monoString.Susbcribe(System.out::println, (e)->System.out.println(e.getMessage()));
+
+ 5
+Flux<String> fluxString = Flux.just("Java", "Spring").log();
+ fluxString.Susbcribe(System.out::println);
+ 6
+Flux<String> fluxString = Flux.just("Java", "Spring")
+.concatWithValues("AWS")
+.log();
+ fluxString.Susbcribe(System.out::println);
+  7
+Flux<String> fluxString = Flux.just("Java", "Spring")
+.concatWithValues("AWS")
+   .concatWith(Flux.error(new RuntimeException("Exception occured"))
+.log();
+ fluxString.Susbcribe(System.out::println, (e)->System.out.println(e.getMessage()));
+  8
+Flux<String> fluxString = Flux.just("Java", "Spring")
+.concatWithValues("AWS")
+   .concatWith(Flux.error(new RuntimeException("Exception occured"))
+   .concatWithValues("Cloud")
+.log();
+ fluxString.Susbcribe(System.out::println, (e)->System.out.println(e.getMessage()));
+
+ 9
+
+         return IntStream.rangeClosed(1, 50)
+                .peek(CustomerDao::sleepExecution)
+                .peek(i -> System.out.println("processing count : " + i))
+                .mapToObj(i -> new Customer(i, "customer" + i))
+                .collect(Collectors.toList());
+
+10
+
+    public Flux<Customer> getCustomersStream()  {
+        return Flux.range(1,10)
+                .delayElements(Duration.ofSeconds(1))
+                .doOnNext(i -> System.out.println("processing count in stream flow : " + i))
+                .map(i -> new Customer(i, "customer" + i));
+    }
+
+ if error occurs onError will be called.
+ if all data emitted then onComplete will ne called.
+
+doOnmethods - side effects
+
+
+Flux<String> fluxString = Flux.just("Java", "Spring").log();
+
+sub
+
+Rest API - Controller - service
+Functional Endpoint - Router - Handler
+
+
+@Configuration
+public class RouterConfig {
+
+    @Autowired
+    private CustomerHandler handler;
+
+    @Autowired
+    private CustomerStreamHandler streamHandler;
+
+    @Bean
+    public RouterFunction<ServerResponse> routerFunction(){
+        return RouterFunctions.route()
+                .GET("/router/customers",handler::loadCustomers)
+                .GET("/router/customers/stream",streamHandler::getCustomers)
+                .GET("/router/customer/{input}",handler::findCustomer)
+                .POST("/router/customer/save",handler::saveCustomer)
+                .build();
+
+    }
+}
+--------
+@Service
+public class CustomerHandler {
+
+    @Autowired
+    private CustomerDao dao;
+
+
+    public Mono<ServerResponse> loadCustomers(ServerRequest request){
+        Flux<Customer> customerList = dao.getCustomerList();
+        return ServerResponse.ok().body(customerList,Customer.class);
+    }
+
+
+    public Mono<ServerResponse> findCustomer(ServerRequest request){
+      int customerId= Integer.valueOf( request.pathVariable("input"));
+       // dao.getCustomerList().filter(c->c.getId()==customerId).take(1).single();
+        Mono<Customer> customerMono = dao.getCustomerList().filter(c -> c.getId() == customerId).next();
+        return ServerResponse.ok().body(customerMono,Customer.class);
+    }
+
+
+    public Mono<ServerResponse> saveCustomer(ServerRequest request){
+        Mono<Customer> customerMono = request.bodyToMono(Customer.class);
+        Mono<String> saveResponse = customerMono.map(dto -> dto.getId() + ":" + dto.getName());
+        return ServerResponse.ok().body(saveResponse,String.class);
+    }
+
+
+
+}
+
+---------
+@Service
+public class CustomerStreamHandler {
+
+    @Autowired
+    private CustomerDao dao;
+
+
+    public Mono<ServerResponse> getCustomers(ServerRequest request) {
+        Flux<Customer> customersStream = dao.getCustomersStream();
+        return ServerResponse.ok().
+                contentType(MediaType.TEXT_EVENT_STREAM) // data send as stream not object
+                .body(customersStream, Customer.class);
+    }
+}
+
+
+-----
+@Service
+public class CustomerHandler {
+
+    @Autowired
+    private CustomerDao dao;
+
+
+    public Mono<ServerResponse> loadCustomers(ServerRequest request){
+        Flux<Customer> customerList = dao.getCustomerList();
+        return ServerResponse.ok().body(customerList,Customer.class);
+    }
+
+
+    public Mono<ServerResponse> findCustomer(ServerRequest request){
+      int customerId= Integer.valueOf( request.pathVariable("input"));
+       // dao.getCustomerList().filter(c->c.getId()==customerId).take(1).single();
+        Mono<Customer> customerMono = dao.getCustomerList().filter(c -> c.getId() == customerId).next();
+        return ServerResponse.ok().body(customerMono,Customer.class);
+    }
+
+
+    public Mono<ServerResponse> saveCustomer(ServerRequest request){
+        Mono<Customer> customerMono = request.bodyToMono(Customer.class);
+        Mono<String> saveResponse = customerMono.map(dto -> dto.getId() + ":" + dto.getName());
+        return ServerResponse.ok().body(saveResponse,String.class);
+    }
+---------------End of second time----

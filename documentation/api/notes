@@ -19,3 +19,6 @@ Headers/cookies :
 Headers represent the meta-data associated with request and response.In layman terms, we are sending additional details to API to process our request.
 
 Example : Authorization details.
+
+
+API : micro services communicate using REST API calls 

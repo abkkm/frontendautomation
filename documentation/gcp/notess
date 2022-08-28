@@ -1,0 +1,11 @@
+cloud.google.com/sdk/docs/install
+
+>gcloud init (for authorization)
+>gcloud config list
+
+cloud.google.com/sdk/docs/install
+>gcloud config set compute/region europe-west1
+>gcloud config set compute/zone europe-west1
+
+>gcloud auth print-access-token
+

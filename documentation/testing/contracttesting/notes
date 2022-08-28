@@ -1,0 +1,39 @@
+pact will generate a contract file from consumer share with providers
+
+contract testing will find the contract breaking in the development stage itself.
+
+We are going to mock using pact.
+
+contract testing will do contract validation(data type) not functional validation (dara vale)
+
+--
+Tool for contract testing - pack JVM (java based)
+
+https://github.com/pact-foundation/pact-jvm/blob/v4.4.x/README.md
+
+1. Write it from consumer side. (au.com.dius.pact.consumer:junit5)
+2. Write it from provider side. (au.com.dius.pact.provider:junit5)
+
+<!-- https://mvnrepository.com/artifact/au.com.dius.pact.consumer/junit5 -->
+<dependency>
+    <groupId>au.com.dius.pact.consumer</groupId>
+    <artifactId>junit5</artifactId>
+    <version>4.3.14</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/au.com.dius.pact.provider/junit5 -->
+<dependency>
+    <groupId>au.com.dius.pact.provider</groupId>
+    <artifactId>junit5</artifactId>
+    <version>4.3.14</version>
+</dependency>
+
+
+after running junit pacts folder created in target folder. In that folder a json contract file craeted.
+
+place consumer craeted contract file place it in the provider.
+PackVErficationText - Test runner
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) - Starts a testing server instance automatically at random port
+
