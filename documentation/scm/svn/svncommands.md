@@ -8,6 +8,10 @@ SVN Terminology
 
 4. Add: New files we created in machine should be added (making eligible for commit)
 
+Directly we can commit and push
+
+For old files we need to do svn update & commit
+
 5. Commit/Check-in: Pushing files from local machine to repository
 
 6. Verion ID/Revision ID: For every commit version-id will be generated
@@ -61,3 +65,15 @@ branches (SIT & UAT env code)
 tags (Production code)
 
 While creating the above respositories we need to mention single project
+
+---
+
+Checking out project
+Local workspace setup
+run app locally
+
+Tortise SVN - diff, update
+Tortise SVN - Show log - select revision - compare revision
+Revert - revert from current versio to previous version
+Tortise SVN - Revert to this version
+Tortise SVN - Get lock / release lock
