@@ -1,0 +1,18 @@
+Test Plan - Add - Threads - Thread Group
+No of Threads 20
+
+Thread group - Add - Sampler - Http request
+
+Basic 
+
+Server Name : localhost
+
+Port 8080
+
+GET
+
+Path /order
+
+
+Http request - Add - listener - view results
+

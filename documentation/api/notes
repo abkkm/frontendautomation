@@ -22,3 +22,6 @@ Example : Authorization details.
 
 
 API : micro services communicate using REST API calls 
+
+
+POST/projectname/v2/cart/promo/add

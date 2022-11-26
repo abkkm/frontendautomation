@@ -1,5 +1,10 @@
 https://www.youtube.com/watch?v=q2ynYUkVWnY&list=PLF5kUO89mjNqNzTG8NvQWjqS7EGlDvGUs&index=2
 
+Reactive programming library
+1. Reactor
+2. Rx Java
+3. JDK9 Flow Reactive stream
+
 Reactive programming
 Keeps main thread free.
 Back pressure on data streams.

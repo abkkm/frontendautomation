@@ -1,0 +1,23 @@
+curl.exe --version
+curl --version
+curl --help
+curl --help category
+curl --help all
+curl https://api.github.com/octocat
+
+curl [options] <url>
+where options -i, -v
+curl [options] <url> | jq
+curl https://api.github.com/octocat | jq
+
+curl -i https://api.github.com/octocat
+
+curl -v localhost:8080/api/students
+curl -v localhost:8080/api/students/1 | jq
+curl -H "Content-Type: application/json" -d "{\"name\": \"New Product\", \"price\": 199.99}" localhost:8080/api/v1/products
+curl -X PUT -H "Content-Type: application/json" -d "{\"id\": 1, \"name\": \"Ha Minh Nam\"}" localhost:8080/api/students/1
+curl -X PATCH -H "Content-Type: application/json" -d "{\"price\": 879.99}" localhost:8080/api/v1/products/100
+	
+curl -v -X DELETE localhost:8080/api/students/2
+
+

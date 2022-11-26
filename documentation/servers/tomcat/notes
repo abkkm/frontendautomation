@@ -1,0 +1,77 @@
+windows-preferences - server - runtime enviroments
+tomcat installtion directory add (bins parent directory)
+jre workbench jre
+
+servers view - add server - select runtime environment
+
+To create Spring mvc
+
+select - new - maven project - select location - 
+maven-archetype-webapp
+
+grouup - com.spring.mvc
+artifactid - springmvc
+package - com.spring.mvc
+
+
+after the above steps
+
+errors will come it will dispears when you add tomcat server environment library.
+
+select project -right click - configure build path - libraries - add library - server runtime - choose tomcat 9.0
+
+-
+errors will disappear.
+
+type maven spring mvc in google 
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.3.23</version>
+</dependency>
+
+
+
+
+
+Then give maven - update
+
+it will download all required libraries(webmvc, aop, beans, context, core, jcl, expression,web)
+
+unable to compile jsp - put some contents in jsp and refresh
+
+If not resfreshed in browser
+ then rerun( run as server)
+
+ --
+
+ steps 5
+
+
+1.Configure the dispatcher servlet(front controller) in web.xml
+
+2.Create Spring Configuration File - where we declare our beans
+
+3.Configure View Resolver (declare as bean in spring config)
+
+4.Create Controller ( works as back end controller)
+
+5.Create a View to show(page)
+
+https://learncodewithdurgesh.com/course/spring-framework-tutorial-learn-code-with-durgesh
+
+-----------------
+
+right click on the server > remove the war and
+ 
+right click on the server again > clean
+
+make sure the maven dependencies are added to deploym
+
+right click on the project > Run As > maven clean
+
+right click on the project again > Run As > maven ins 
+
+and finally deploy the project on to the server. 

@@ -1,0 +1,19 @@
+It's simple. Do not call the long running api from your main controller method. Just return the view (JSP). Then you can fire an ajax request from your document.ready method in your view (Javascript). You can have a seperate @ResourceRequest annotated method in your controller to handle the ajax call. Return the api result (as JSON or something) to the ajax caller. Once the view receives the ajax response, update the UI as you want.
+
+https://www.baeldung.com/spring-rest-timeout
+
+https://ittutorialpoint.com/spring-boot-rest-api-request-timeout/
+
+https://www.youtube.com/watch?v=PQJ7yItbHDE
+
+https://www.youtube.com/watch?v=NEZ2ASoP_nY
+
+https://www.youtube.com/watch?v=lu1UTkSmyfc
+
+https://www.youtube.com/watch?v=qUKd1nW-DXY
+
+https://www.youtube.com/watch?v=az5VwBcZP3s
+
+https://github.com/bill820/springThread
+
+https://github.com/nwsj2008/Myprocess/blob/master/src/edu/opinion/process/multiThread/LogReadthread.java

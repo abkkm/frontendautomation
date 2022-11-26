@@ -1,0 +1,82 @@
+https://github.com/Black-WhiteBoard/order-management/blob/99b892c65a05f6f34145475a7e21b2d68f6ee54e/src/main/java/com/fresh/freshmart/orderManagement/OrderController.java
+https://github.com/junhuhdev/alpha/blob/4bf749a3ab3f4cbefdc95b16e65e550078961c72/src/main/java/huh/enterprise/alpha/component/oura/OuraServiceImpl.java
+https://github.com/skuarch/resilience-github
+https://github.com/sergiotorreslozano/chuck-client-circuit-breaker
+https://github.com/PCloud63514/Source/blob/336f118a09c48f51d4006aecb5115d913ed11193/components/item/src/main/java/org/pcloud/item/infrastructure/ItemDatabaseRepository.java
+https://github.com/luisorellana777/circuit-breaker-project/blob/e052c8851c0f7f88c5921d840e230824f747aeba/client/src/main/java/com/client/circuitbreaker/circuitbreaker/controller/DomainController.java
+
+
+1. Order service calls payment service.
+All threads in the thread pool gets occupied in getting response from payment service.
+
+Solutions
+
+1. Stop the communcation between order and payment service.
+2. Provide some mechanism to return a default response to the calling service.
+
+Based on certain threshold%lets say if our of N last requests 30% have failed then stop fruther call to the services.
+
+For a certain waiting time period the requests will not be allowed.
+
+After waiting period is over it will allow partial requests(half open state).
+
+there if the service is up and failure rate below threshold  value.
+
+----------------------
+
+
+types of cicuit breaker
+
+1. count based : the circuit breaker switches from a closed state to an open state when the last n request have failed or timeout.
+2. time based: the circuit breaker switches from a closed state to an open state when the last n time unit has failed or timeout.
+
+for exaplw : 50% of last 20 requests took more than 2 seconds
+50% of last 60 second of requests took more than 2 seconds
+
+https://www.youtube.com/watch?v=2W7SEjS4O98
+https://www.youtube.com/watch?v=2W7SEjS4O98  -  11.31
+
+---------------
+
+Resiliene4j Modules
+
+Resilience4j has got several core modules and add on modules from which you can choose what you want, you don’t have to go for all the modules. If you want to go with all the modules you can simply go for resilience4j all. Let’s talk about Resilience4j modules in detail.
+
+
+Resilience4j has the following 6 core modules.
+
+resilience4j-circuitbreaker: Circuit breaking
+resilience4j-ratelimiter: Rate limiting
+resilience4j-bulkhead: Bulkheading
+resilience4j-retry: Automatic retrying (sync and async)
+resilience4j-cache: Result caching
+resilience4j-timelimiter: Timeout handling
+Resilience4j has got several other modules as we talked above. Following are the other modules in Resilience4j
+
+add-on modules
+framework modules
+reactives modules
+metrics modules
+3rd party modules
+
+rate limiter - accept no of requests per second
+bulk head - accept max no of concurrent calls this is like a cap
+retry - 5 mts
+circuitbreaker interface
+
+1) Ressilience implementation
+2) Hystrix implementation
+3) Sentinel implementation
+
+------------------
+
+https://github.com/abkkm/resilience-pattern/tree/master/src
+https://github.com/abkkm/case-study-fbk-banking-service/blob/master/src/main/java/com/github/gilbertotcc/fbk/api/Response.java
+https://github.com/abkkm/resilience-1/tree/master/src/main
+https://github.com/abkkm/circuit-breaker-2/tree/master/circuit-breaker/src/main/java/com/intact/rx/circuit/breaker
+
+------------
+
+
+
+

@@ -1,0 +1,55 @@
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		ConfigurableApplicationContext context =  SpringApplication.run(DemoApplication.class, args);
+		Alien a = context.getBean(Alien.class);
+		a.show();
+
+	}
+
+}
+
+@Component
+public class Alien {
+
+	private int aid;
+	private String aname;
+	private String tech;
+	@Autowired
+	@Qualifier("lap1")
+	private Laptop laptop;
+	
+	
+	
+	import org.springframework.stereotype.Component;
+
+@Component("lap1")
+public class Laptop
+{
+
+by default autowired search by type 
+@Qualifier - Search by name
+@Componet - instanties object in spring container
+@component
+@Scope(value="prototype") - no specify it is singelton by default
+
+    ---------------
+
+
+    circuit braker
+
+
+    https://jsonplaceholder.typicode.com/albums
+
+    https://www.concretepage.com/spring-5/spring-resttemplate-exchange
+
+    https://jsession4d.com/a-quick-guide-to-resilience4j-with-spring-boot/
+
+    https://goonlinetools.com/yaml-formatter/
+
+    https://reflectoring.io/circuitbreaker-with-resilience4j/
+
+    https://jsession4d.com/database/
+
+    https://jsession4d.com/a-quick-guide-to-resilience4j-with-spring-boot/

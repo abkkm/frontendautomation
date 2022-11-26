@@ -1,0 +1,62 @@
+@component
+@Scope(value="prototype")
+
+siliar to electrical fuse
+break circuit temporrily to avoid entire failure
+1. wait and call or do someting
+Keep calling will exceed thread pool
+
+sprng cloud resilence4j framework - fhow framewoek handles falut tolerance - falut tolerance framework
+
+it provides no of functionalities
+
+1. circuit braker - open circuit to stop calling services
+2. rate limiter - restrict limit no of calls (how many requests can handle per sec) if more calls come we can reject
+3. buil head - maxium concurrent calls. thie is the cap. if more calls then reject them
+4. retry - retry after specified timeout.
+
+
+----
+
+circuitbeaker interface - 
+resilience4j implenettion, 
+hystrix implementation,
+sentinel implemattion
+
+1. API call
+2. fallack when it fails
+
+fallback method(what to do when api call fails)
+
+---
+
+circuitbreaker will have 3 states. open, closded, half open.
+
+
+when everything is normal. circuitbreaker will be in closed(normal) state.
+
+when failure rate above a threshold, circuitbreaker will go in tripped open state.
+
+after wait duration it goes to half open state. it again checks failure rate below a threshold. then it goes to closed state or else it goes to open state.
+
+------------ 
+1.@Retry => Only retry mechanism
+2.@CircuitBreaker => This is the Circuit Breaker framework.
+3.@RateLimiter => How many call you want to do in a specific time.
+4.@Bulkhead => How many concurrent calls you want to make.
+
+--
+
+
+ wrap around circuitt bearker
+
+ exceeds threshold limit it trips circuit Breaker
+ --
+
+ Aspect order
+The Resilience4j Aspects order is following: Retry ( CircuitBreaker ( RateLimiter ( TimeLimiter ( Bulkhead ( Function ) ) ) ) )
+
+
+
+
+

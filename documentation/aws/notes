@@ -1,0 +1,4 @@
+>serverless create --template aws-nodejs --name serverless-rest-api --path serverless-rest-api
+>cd serverless-rest-api
+>npm install --save aws-sdk
+
