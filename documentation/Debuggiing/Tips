@@ -1,0 +1,271 @@
+https://www.youtube.com/watch?v=oYvtsHu6GmY
+
+1. To see the event listener
+
+a) Elements - Event listner 
+
+2. Sources - Event listener (at the bottom)
+
+3. In console 
+>var elm = document.getElementById("addRecord")
+>elm
+>getElementListeners(elm)
+
+4. Search in the source
+
+
+Monitor event
+
+>unmonitorEvents(elm)
+>monitorEvents(elm, [['click', 'mouseout']
+
+Tip 5
+
+seacrch for element
+
+Ctrl + F 
+#name
+.btn success
+
+Tip7
+
+Elemts - styles
+
+CTrl +Z - reset css chanes
+
+Tip8
+
+Elemts - styles
+ - click .cls 
+
+Tip 9
+
+filter - padd
+
+Tip 10
+
+ctrl + N  - to open console
+
+Tip 11
+
+document.body.contentEditable = true
+
+Tipe 12
+
+console.table(chartItems)
+console.table(chartItems, '['name', 'salary'])
+
+Tip 13
+
+TO preseve log - Check on preserve log
+
+Tip 14
+
+>debug(addRecord)
+>undebug(addRecord
+
+Tip 16
+
+>monitor(addREcord)
+
+Tip 17
+
+>console.time('myTime');
+for(var i=0;i<100000; i++){
+}
+console.timeEnd('myTimer')
+myTimer: 4.700195
+
+Tip 18
+
+Tip 19 
+
+Performance
+
+console - verbose
+
+Tip 20
+
+consle
+
+function add(a,b){
+return a+b;
+}
+
+press enter - excute code
+
+Tip 21
+
+other browser extensions message
+
+right click hide
+
+Tip 22
+
+search a file
+
+Tip 22
+
+all files
+
+ctrl + F
+
+trl+shift+F
+
+Tip 3
+
+break point in a lengthy line
+
+
+tip 24
+
+To see the call stack - block box
+
+tip 26
+
+click on break point - edit breakpoint
+
+item.name == 'JS Dude'
+
+tip 27
+
+Sources - snippets
+
+tip 28
+
+XHR Breakpoints
+
+type data
+
+it breaks
+
+tip 29
+
+Sources - To open a file
+
+crtrl + P
+
+tipe 30
+
+Sources - close others
+
+tipe 31
+
+ctrl + Shift + O
+
+To find function name
+
+Tip 32
+
+Ctrl + Shipt + P
+
+- Go anywhere in dev tools
+
+
+Tip 33
+
+- Network - Capture screens shots 
+
+To record screenshots
+
+Tip 34
+
+- Nw- Throtting ( 2G,... )
+
+Tip 35
+
+To reload fresh wweb site
+
+click rolad +hold mouse+dev tools open fresh content will be reloaded
+
+Tip 36
+
+
+nw
+
+domain: 
+larget than
+get:
+post
+
+Tip 37
+
+Choose XHR, CSS
+
+Tip 38
+
+Nw
+click on the ulr to know the headers, preview, respons and timing
+
+Tip 39
+
+NW
+
+right click on the name and check initiator
+
+Tip 40
+
+Performance - press record button
+
+After few second new performance report will be generated.
+
+We can optimize code
+
+Tip 41
+
+Applcation - cookies. it is editable.
+
+Also session also
+
+Tip 42
+
+Security
+
+- To see the certificate
+
+Tip 43
+
+Audits
+
+If we check Reload page and audit on load
+
+click run
+
+To see website audit 
+
+Tip 44
+
+ctrl +click - to edit multipe line
+
+Tipe 45
+
+ctrl + D
+
+to select multiple line
+
+PRess delete button
+
+Tip 46
+
+ctrl + M - to jump the matching bracket
+
+Tip 47
+
+Click device tool box
+
+Tip 48
+
+Click device tool box - take screenshot ...
+
+Tip 49
+
+Console.log('hello tooll');
+
+to maintin logs
+
+click sources - Add folder to workspace
+after accepting permission
+
+Tip 50
+
+chrome://restart

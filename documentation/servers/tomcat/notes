@@ -75,3 +75,4 @@ right click on the project > Run As > maven clean
 right click on the project again > Run As > maven ins 
 
 and finally deploy the project on to the server. 
+

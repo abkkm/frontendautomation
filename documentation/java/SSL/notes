@@ -1,0 +1,14 @@
+We need dedicated IPs to install SSL certificate.
+
+
+click on the left side of this url in the browser address bar
+
+Go to connection - certificate information - detailst tab - copy to file-base64 encoded
+
+c:\temp\go.cer
+
+go to jre location
+
+keytool -import -trustcacerts -alias server -file your_domain_name.p7b -keystore your_site_name.jks
+
+certificate instaalled in your keystore

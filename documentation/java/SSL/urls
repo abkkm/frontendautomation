@@ -1,0 +1,287 @@
+https://8gwifi.org/docs/jks.jsp
+https://www.youtube.com/watch?v=MFYgCHC8t0o
+https://www.youtube.com/watch?v=UtbA7crhLVQ
+
+----Start of SSL--
+
+Step 1 : Generate RSA key pair
+
+Go to 
+
+C:\SSL
+
+keytool -genkeypair -alias Mycert -keyalg RSA -keystore "C:\SSL\Mycert.cert"
+
+password : pass123
+
+first and last name : A B
+Org unit : org unit
+Org : org
+City : Bendaluru
+State : KA
+Country : IN
+
+if yes Mycert.cert will be created in the directory
+
+
+Since we did not setup SSL the URL will failed
+http://localhost:8080/WebApp/
+
+if we setup SLL the URL will redirect to the following URL
+
+https://localhost:8443/WebApp/
+
+SSL Setup in tomcat
+
+Step 2:
+
+In server.xml (tomcat 8.5)
+
+Add the following attribute in server.xml(<Connector port="8443"..)
+
+keystoreFile="C:\SSL\Mycert.cert"  ketstorePass="pass123" />
+
+Step 3:
+
+Add the following in web.xml
+
+<web-app...
+<security-constraint>
+<web-resource-collection>
+<web-resource-name>WebApp</web-resource-name>
+<url-pattern>/*</url-pattern>
+</web-resource-collection>
+<user-data-constraint>
+<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+</user-data-constraint>
+</security-constraint>
+<servlet>
+<servlet-name>login</servlet-name>
+<servlet-class>com.infotech.controller.LoginServlet</servlet-class>
+</servlet>
+
+Step 4:
+
+Since we setup SSL the following URL
+
+http://localhost:8080/WebApp/
+
+if we setup SSL the URL will redirect to the following URL  correctly
+
+https://localhost:8443/WebApp/
+
+
+
+
+
+
+----End of SSL--
+
+keytool is a key and certificate management utility, keytool stores the keys and certificates in a keystore.
+
+Generate Keystore
+Option Defaults
+
+-alias "mykey"
+
+-keyalg
+"DSA" (when using -genkeypair)
+"DES" (when using -genseckey)
+
+-keysize
+2048 (when using -genkeypair and -keyalg is "RSA")
+1024 (when using -genkeypair and -keyalg is "DSA")
+256 (when using -genkeypair and -keyalg is "EC")
+56 (when using -genseckey and -keyalg is "DES")
+168 (when using -genseckey and -keyalg is "DESede")
+
+-validity 90
+
+-keystore the file named .keystore in the userâ€™s home directory
+
+-file stdin if reading, stdout if writing
+
+-protected false
+
+Generate RSA key pair
+keytool -genkey -alias mydomain -keyalg RSA -keystore keystore.jks -keysize 2048
+Generate DSA key pair
+ keytool -genkey -alias mydomain1 -keyalg DSA -keystore keystore.jks -keysize 2048
+Generate EC key pair
+keytool -genkey -alias mydomain3 -keyalg EC -keystore keystore.jks -keysize 256
+Alternatively storepass can be passed
+
+keytool -genkey -keyalg RSA -alias domain1 -keystore keystore.jks  -storepass hello123 -validity 360 -keysize 2048
+Generate CSR from existing keystore
+Generate a certificate signing request (CSR) for an existing Java keystore
+
+keytool -certreq -alias mydomain -keystore keystore.jks -file  8gwifi.csr
+This will generate a new CSR pem encoded begins with -----BEGIN NEW CERTIFICATE REQUEST----- ends -----END NEW CERTIFICATE REQUEST-----
+
+List Keystore
+The keytool -list prints the contents of the keystore entry identified by alias. If no alias is specified, the contents of the entire keystore are printed.
+
+keytool -list -keystore keystore.jks
+Enter keystore password:  
+This will list out all certificate finger print added in the keystore
+
+Keystore type: JKS
+Keystore provider: SUN
+
+Your keystore contains 3 entries
+
+mydomain3, Aug 1, 2018, PrivateKeyEntry, 
+Certificate fingerprint (SHA1): 65:9A:6F:43:2C:10:E7:56:4C:EF:B7:70:0B:3D:A8:66:41:DA:5B:22
+mydomain1, Aug 1, 2018, PrivateKeyEntry, 
+Certificate fingerprint (SHA1): DB:3E:30:83:C8:FD:E3:A5:28:BB:0B:D7:3B:FD:ED:B2:9B:75:46:37
+mydomain, Aug 1, 2018, PrivateKeyEntry, 
+Certificate fingerprint (SHA1): C5:A4:D7:24:10:70:FA:4C:57:36:1C:32:A6:AE:BA:2A:72:A6:33:DB
+verbose option check
+
+keytool -list -v -keystore keystore.jks
+Check a particular keystore entry using -alias option
+
+keytool -list -v -keystore keystore.jks -alias mydomain
+Import rootCA to Keystore
+Import a root or intermediate CA certificate to an existing Java keystore
+
+ keytool -import -trustcacerts -alias root -file rootCA.pem -keystore keystore.jks
+ Enter keystore password:  
+ Owner: CN=8gwifi.org, OU=Cryptography, O=8gwifi, L=IN, ST=BLR, C=IN
+ Issuer: CN=8gwifi.org, OU=Cryptography, O=8gwifi, L=IN, ST=BLR, C=IN
+ Serial number: c12f5c50dd458faf
+ Valid from: Wed Aug 01 09:37:03 IST 2018 until: Fri May 21 09:37:03 IST 2021
+ Certificate fingerprints:
+      MD5:  B9:88:92:11:11:ED:74:B6:D1:92:DB:61:07:60:34:B3
+      SHA1: 00:E7:41:90:9F:3E:1D:DA:B0:C0:18:6B:C2:34:E7:71:38:B7:57:3C
+      SHA256: 68:D4:CA:2B:23:0E:7B:EB:A6:C3:AE:FB:57:B9:A4:A3:F0:E3:FA:33:53:E9:89:99:4E:3A:18:F2:26:8C:52:BF
+      Signature algorithm name: SHA256withRSA
+      Version: 3
+Import a Certificate to keystore
+Import a primary certificate to an existing Java keystore, The procedure is same for importing Certificate/intermediateCA/rootCA
+
+keytool -import -trustcacerts -alias mydomain -file mydomain.crt -keystore keystore.jks
+Import CA into Trusted Certs
+Import CA into Trusted Certs $JAVA_HOME/jre/lib/security/cacerts
+
+keytool -import -trustcacerts -file /path/to/ca/ca.pem -alias CA_ALIAS -keystore $JAVA_HOME/jre/lib/security/cacerts
+Import DER in keystore
+Change format from cert.crt from PEM (----BEGIN CERTIFICATE----- ... -----END CERTIFICATE-----) to DER
+
+openssl x509 -in cert.crt -inform PEM -out cert.der -outform DER
+Create KeyStore keystore.jks for your domain ("alias" in keytool, "common name" or CN in openssl req)
+
+keytool -import -trustcacerts -alias 8gwifi -file cert.der -keystore keystore.jks
+Import PKCS12 in Keystore
+Convert the certificate and private key to PKCS 12 (.p12)
+
+openssl pkcs12 -export -in rootCA.pem -inkey rootCA.key -out my.p12
+Enter pass phrase for rootCA.key:
+Enter Export Password:
+Verifying - Enter Export Password:
+Then add the my.p12 in the key store
+
+$ keytool -v -importkeystore -srckeystore my.p12 -srcstoretype PKCS12 -destkeystore keystore.jks -deststoretype JKS
+Enter destination keystore password:  
+Enter source keystore password:  
+Entry for alias 1 successfully imported.
+Import command completed:  1 entries successfully imported, 0 entries failed or cancelled
+[Storing keystore.jks]
+Export Certificate from Keystore
+Export a certificate from a keystore
+
+    keytool -export -alias mydomain -file mydomain.crt -keystore  keystore.jks
+    Enter keystore password:
+    Certificate stored in file <mydomain.crt>
+Check Keystore
+Check a stand-alone certificate
+
+    keytool -printcert -v -file mydomain.crt
+The output
+
+Owner: CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown
+Issuer: CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown
+Serial number: 490e614f
+Valid from: Wed Aug 01 09:23:55 IST 2018 until: Tue Oct 30 09:23:55 IST 2018
+Certificate fingerprints:
+     MD5:  99:BC:8E:3B:54:AC:69:0E:FC:44:6F:5D:FC:5D:B5:2B
+     SHA1: C5:A4:D7:24:10:70:FA:4C:57:36:1C:32:A6:AE:BA:2A:72:A6:33:DB
+     SHA256: 9E:22:F6:1F:78:BD:A7:01:35:26:DF:01:DE:85:4E:63:27:63:0C:E8:69:6F:39:2D:37:65:F7:77:4A:57:04:11
+     Signature algorithm name: SHA256withRSA
+     Version: 3
+Delete Alias from Keystore
+Delete a certificate from a Java Keytool keystore
+
+keytool -delete -alias mydomain2 -keystore keystore.jks
+
+Change keystore password
+keytool -storepasswd -new new_storepass -keystore keystore.jks
+Android
+Android related kyetool command used for debug and troubleshooting, though keytool is agnostic to platform (android or linux env) and itâ€™s a cert and key managed tool, this section will help android user to locate and troubleshoot android keytsore which is present in apk file
+
+Generate Debug Keystore
+keystore	Description
+-keystore	debug.keystore
+-storepass	mykeystorepassword
+-alias	myalias
+-keypass	myandroidpass
+-keyalg	RSA
+-dname	C=US, O=Android, CN=Android Debug
+keytool -genkey -v -keystore my.keystore -storepass mykeystorepassword -alias myalias -keypass myandroid -keyalg RSA -keysize 2048 -validity 10000 -dname "C=US, O=Android, CN=Android Debug"
+This will generate debug.keystore
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+for: C=US, O=Android, CN=Android Debug
+[Storing my.keystore]
+Similar process will go to create release.keystore with CN name Modification
+
+Get Key Fingerprints
+To get the keystore certificate fingerprints of a given alias you can do:
+
+keytool -list -v -keystore [keystore path] -alias [alias-name] -storepass [storepass] -keypass [keypass] 
+The certificate fingerprints
+
+$ keytool -list -v -keystore debug.keystore  -alias myalias  -storepass mykeystorepassword  -keypass myandroid
+Alias name: myalias
+Creation date: Aug 1, 2018
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 3ca33a60
+Valid from: Wed Aug 01 08:24:42 IST 2018 until: Sun Dec 17 08:24:42 IST 2045
+Certificate fingerprints:
+     MD5:  57:C6:C5:06:1C:29:69:9E:EF:E0:A4:35:3A:3F:37:ED
+     SHA1: D1:FC:1A:52:BA:43:AE:D0:42:46:22:A5:3F:38:10:D7:7B:BB:05:B5
+     SHA256: C3:B2:F7:35:24:C1:51:C7:DD:DB:9F:54:BA:B4:D4:8D:2C:EC:A7:2B:04:40:1A:54:A5:B8:4C:35:33:14:34:78
+     Signature algorithm name: SHA256withRSA
+     Version: 3
+if you donâ€™t know the alias name list down your keystore
+
+$ keytool -list -v -keystore debug.keystore
+Enter keystore password: 
+Verify APK signature
+keytool -list -printcert -jarfile application.apk
+Using jarsigner
+
+jarsigner -verify -verbose -certs application.apk
+jarsigner -verify -verbose:summary -certs application.apk
+Verify APK keystore signature
+find out which keystore was used to sign an app?
+
+Unzip apk
+
+Get MD5 and SHA1 of certificate of APK:
+
+ $ keytool -printcert -file ./META-INF/ANDROID_.RSA
+Get MD5 and SHA1 of keystore:
+
+ $ keytool -list -keystore signing-key.keystore
+Compare MD5/SHA1 and if they are the same, so the APK was signed with signing-key.keystore.
+
+Export Certificate
+$ keytool -exportcert -alias myalias -keystore debug.keystore -file path_to_certificate_file
+Enter keystore password:  
+Certificate stored in file <path_to_certificate_file>
+

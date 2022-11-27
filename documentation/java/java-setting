@@ -14,3 +14,5 @@ set Path=%JAVA_HOME%\bin;%Path%
 echo Java 18 activated as system-wide default.
 
 ---------------
+
+>echo %JAVA_HOME
