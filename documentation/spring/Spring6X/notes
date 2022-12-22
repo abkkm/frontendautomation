@@ -1,0 +1,144 @@
+Spring6X
+
+JDK 17+
+Jakarta EE9and10
+AOT(Ahead of Time)
+Virtual Threads
+
+JDK 17(LTS) - Sep 2021
+JDK 18 - Mar 2022
+JDK 19 - Sep 2022
+JDK 20 - Mar 2023
+JDK 21(LTS) - Sep 2023
+
+JDK 17 baseline retained for long term support purposes
+JDK 17(LTS)
+Language - text blocks, switch expressions
+Type system - records, sealed classes
+
+
+Baseline: Jakarta ЕЕ 9
+
+     A new namespace: Java ЕЕ 8 - Jakarta ЕЕ 9
+         Servlet API 5.0 :javax.servlet jakarta.serviet
+         JPA 3.0 : javax.persistence - jakarta.persistence
+         Bean Validation 3.0 : javax.validation - jakarta.validation
+         Dependency Injection 2.0 : javax.inject - jakarta.inject
+         
+         All further API evolution to happen in jakarta namespace
+
+Baseline: Jakarta ЕЕ 9/10
+
+     Access to new generations of open source providers
+
+        Tomcat 10.0 / 10.1 - based on Servlet API 5.0 / 6.0
+        Jetty 11/12-based on Serviet API 5.0 / 6.0
+        Undertow 2.3 - based on Servlet API 6.0
+        Hibernate ORM 6.1 - based on JPA 3.0 / 3.1
+        Hibernate Validator 7.0 / 8.0 - based on Bean Validation 3.0
+        Note: API upgrades not coupled to major provider versions anymore!
+
+Baseline: JDK & Jakarta EE - Status
+
+     Spring Framework 6.0 : JDK 17-19/Jakarta ЕЕ 9 - 10
+        Compatible with JDK 17/18/19. early support for JDK 20
+        Compatible with Jakarta ЕЕ 9 & 10 APIs and providers at runtime
+        Serviet mocks require Serviet 6.0 API jar (EE 10 level) in test setups
+     Spring Framework 6.1 : JDK 17-21/ Jakarta ЕЕ 10 preferred
+        JDK 21 available as a new LTS release, superseding JDK 17
+        With Jetty 12 hopefully GA, we expect almost exclusively ЕЕ 10 usage
+
+
+AOT (Ahead-Of-Time)
+     Spring AOT: build-time pre-processing of bean definitions
+        Reducing startup time and memory footprint in production
+        Runtime hints for reflection, resources, serialization, proxies
+        Optional for optimized JVM deployments
+        Precondition for GraalVM native executables
+        AOT is a tradeoff: extra build setup and less flexibility at runtime
+
+GraalVM native executables
+    GraalVM as the de-facto standard for native executables
+     Strong closed-world assumption, no runtime adaptations
+    AOT-processed application as input - native executable as output
+    Very long build time for actual native code generation
+    A different mode of deployment with strong benefits and limitations
+
+Virtual Threads
+
+“Project Loom” as a preview feature in JDK 19
+
+JDK 19 finally includes Project Loom as a regular preview
+
+Virtual threads as a lightweight threading mode! within the JVM
+different magnitude of scalability for imperative programming
+Implemented as virtual variants of java.lang.Thread
+
+Not blocking an operating system thread on /O operations
+-------------
+
+Virtual Threads
+
+For messaging / scheduling
+
+‘Spring-managed task executors with virtual thread options
+Eg. for JMS message listener containers
+
+Eg. for @Scheduled handler methods
+
+Many of those listeners and handlers trigger VO operations
+
+Note: no benefits to be expected at all for purely CPU-bound handlers
+
+-----------
+
+Virtual Threads — Status
+
+Spring Framework 6.0 : basic compatibility
+
+© Spring Framework 6.0 can be used with virtual thread setups
+© Eg, Tomcat with a virtual thread based HTTP connector
+© Eg. TaskExecutorAdapter with a virtual thread based Executor
+
+Spring Framework 6.1: first-class support
+
+© Project Loom possibly going out of preview in OpenJOK 21
+*¢  Out-of-the-box configuration options for virtual thread setups
+
+---------
+
+Virtual Threads — Status
+
+Spring Framework 6.0 : basic compatibility
+
+© Spring Framework 6.0 can be used with virtual thread setups
+* Eg, Tomcat with a virtual thread based HTTP connector
+© Eg, TaskExecutorAdapter with a virtual thread based Executor
+
+Spring Framework 6.1: first-class support
+
+© Project Loom possibly going out of preview in OpenJOK 21
+® Qut-of-the-box configuration options for virtual thread setups
+
+--------
+
+Web Application Infrastructure
+
+Several longer-planned revisions in 6.0
+
+HTTP interface clients based on @HttpExchange service interfaces
+‘Support for RFC 7807 problem details
+
+Unified HTTP status code handling
+
+Revised multipart processing in WebFiux
+
+JDK HttpClient integration with WebClient
+
+Micrometer-based observability for RestTemplate & WebClient
+
+More to come in 6.1, e.g. a Loom-friendly imperative WebClient
+
+------
+
+

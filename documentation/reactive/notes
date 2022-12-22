@@ -1,5 +1,7 @@
 https://www.youtube.com/watch?v=q2ynYUkVWnY&list=PLF5kUO89mjNqNzTG8NvQWjqS7EGlDvGUs&index=2
 
+Recall that streams have three parts: a data source, zero or more intermediate operations, and zero or one terminal operation.
+
 Reactive programming library
 1. Reactor
 2. Rx Java

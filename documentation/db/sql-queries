@@ -1,0 +1,4 @@
+We can not truncate the users, roles tables. So we need to execute the following SQL commands in ten SQL editor.
+
+set foreign_key_checks =0;
+truncate table users;

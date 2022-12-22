@@ -1,0 +1,59 @@
+Spring boot 3.0 Migration guide    
+
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide
+
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-properties-migrator</artifactId>
+	<scope>runtime</scope>
+</dependency>
+Or if you use Gradle:
+
+runtime("org.springframework.boot:spring-boot-properties-migrator")
+
+First of all migrate to spring boot versioin 2.7.1 to latest versioin
+
+Go to project setting in SDK check 17 is selected
+
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>3.0.0</version>
+<relativePath/> <!-- lookup parent from repository -->
+</parent>
+
+Right click the project - Build project or build module - It will show the errors
+
+Compilatioin error comes
+
+1. javax.persistance to jakarta.persistence
+
+select javax.persistance - Ctrl + Shift - select file mask as *. java
+
+select javax.persistance - Ctrl + Shift + R - select file mask as *. java
+
+javax.validation
+javax.servlet
+
+click on deprecated method to use the real methods
+
+@Configuration
+@RequiredArgsConstructor
+public class BeansConfiguration {
+
+    //create beans here
+
+No pattern allowed after /**/ so use /app/
+
+Wihout using / we get 403
+
+http://localhost:8080/app/v1/auth/register/
+
+
+https://www.youtube.com/watch?v=VWdNfvNFXUc
+
+trailng slash as global Configuration
+
+-----------------
+https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x

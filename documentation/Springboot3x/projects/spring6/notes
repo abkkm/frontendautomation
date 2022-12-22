@@ -1,0 +1,16 @@
+start.spring.io
+
+Project - Maven project
+Language - Java
+Spring Boot - 3.0.0
+
+Note : Dontuse Snapshots - they are development versions
+If no specific it is a release version(No RC or M1,...)
+
+Project Metadata:
+
+Group com.abkkm
+artiface : spring
+Name : spring
+Packaging: Jar
+Java : 19

@@ -1,0 +1,44 @@
+View breakpoints - 
+expressions
+Variables
+
+Press on line numbers to set breakpoint
+
+F6 - Go to next line
+
+F8 - Resume to the next breakpoint
+
+F5 - Step into
+
+Method chaining - Select the method - right click - step into method
+
+Hyperlink navigation - same as step into selection
+
+select the method - ctrl + Alt + click
+
+if i dont want place breakpoing but want to pause execution at line # then go for run into line
+
+select the method -run into line
+
+Evaluate expression and watch
+
+select the Variable right click inspect
+
+
+select the exrepssion line right click execute it will display the value.
+
+Go expression view and give any expression we can Evaluate it.
+
+Variable - Show logical structure
+
+Conditional breakpoint
+
+right click in the line - breakpoint properties
+if(p.getAge()==50)
+return true
+
+Hitcount 3 - 3rd time execution stops
+
+Breakpoints - Add excetion breakpoint
+
+Thread - drop to frame
