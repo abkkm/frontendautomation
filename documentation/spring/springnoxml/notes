@@ -1,0 +1,31 @@
+javac -classpath .:/users/.../apache-tomct-10.0/lib/servlet-api.jar MyServlet.java
+
+So either migrate from javax to jakarta or downgrade to tomcat 9
+
+---------
+
+Method 1
+
+New Maven project - Clik next - Choose 
+org.apche.maven.archetypes -
+maven-archetype-webapp
+groupid - com.abkkm
+artifactid - springnoxml
+package - com.abkkm.noxml
+
+Step 1 Select project - right click - Add targeted runtimes - Apache tomcat v9.0
+
+or We can add servlet jar in the pom
+
+Method 2
+
+Using dynamic web project
+
+To add a a jsp file - Right click web app  - In the wizard - type jsp - select WEb- JSP file
+Give name as jsp file
+
+Then right click on the project - run as server
+
+
+
+To convert maven project - right click projet - configure - convert maven project
