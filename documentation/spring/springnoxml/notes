@@ -26,6 +26,58 @@ Give name as jsp file
 
 Then right click on the project - run as server
 
-
-
 To convert maven project - right click projet - configure - convert maven project
+---------------
+Define only spring-webmvc dependency in pom.xml
+it will automatically download - spring-web,mvc,
+spring-aop,
+spring-beans,
+spring-context,
+spring-core,
+spring-jcl
+spring-expression,
+spring-web
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>6.0.3</version>
+</dependency>
+
+-----------
+
+C:\1-2ndRound-From-30-Mar-2020\Git-2022\automation\frontendautomation\documentation\spring\springnoxml\demo\src\main
+
+Create java folder, resources folder
+
+web.xml replacement-Create a class
+AppInitializer that implements WebApplicationInitializer
+
+source foler demo/src/main/java
+package com.abkkm.config
+
+Add <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>6.0.0</version>
+    <scope>provided</scope>
+</dependency>
+
+------------
+
+when maven try to build .war file at that time always try to find web.xml but in servlet 3.0 configuration we do not require web.xml file so need to disable it using following configuration:
+
+
+               <configuration>
+                   <failOnMissingWebXml>false</failOnMissingWebXml>
+               </configuration>
+
+               Further see the code to understand
+
+            -----
+
+            You can create dispatcherservelet in two ways
+
+1. implements WebApplicationInitializer
+2. extends AbstractAnnotationConfigDispatcherServletInitializer
