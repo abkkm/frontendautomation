@@ -53,3 +53,20 @@ by default autowired search by type
     https://jsession4d.com/database/
 
     https://jsession4d.com/a-quick-guide-to-resilience4j-with-spring-boot/
+
+
+	Bean creation 3 ways
+
+	1. xml
+	2. Component-autowired
+	3. configuration-bean
+
+	Define only spring-webmvc dependency in pom.xml
+	it will automatically download - spring-web,vc,
+spring-aop,
+spring-beans,
+spring-context,
+spring-core,
+spring-jcl
+spring-expression,
+spring-web
