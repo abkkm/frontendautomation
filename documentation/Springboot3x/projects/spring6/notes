@@ -14,3 +14,10 @@ artiface : spring
 Name : spring
 Packaging: Jar
 Java : 19
+
+tightly
+Gamerunner is tightly coupled with thebclass Mariogame
+
+loosely coupled
+Gamerunner is not coupled with class.
+Gamerunner is copled with interface.
