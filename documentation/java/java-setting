@@ -17,6 +17,8 @@ echo Java 18 activated as system-wide default.
 
 >echo %JAVA_HOME
 
-While adding java system environment variable - use up or down keys
+While adding java system environment variable - use up or down keys(Bring top java bin)
+
+%JAVA_HOME%\bin
 
 ---
