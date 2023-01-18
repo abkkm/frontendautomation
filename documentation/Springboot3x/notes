@@ -57,3 +57,355 @@ trailng slash as global Configuration
 
 -----------------
 https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x
+
+
+
+Spring Boot 3+ works only with Java 17+
+
+start.spring.io
+
+context.getBean("name")
+
+@Configuration
+public class HelloWorldConfiguration {
+	@Bean
+	public String name() {
+		return "arrr";
+	}
+}
+
+
+---------------------------------
+
+POJO - Any java object
+Java Bean - 
+Public no args constructor, gettters and setters, implements seriable
+Spring Beans - Any java object managed by spring container(Bean factory or application context)
+
+@ComponentScan - Scans current packag & its sub package
+
+if bean is singleton when you get the bean second time. it has same hashcode
+
+java singelton - only one instane  per JVM
+spring singleton - only one instance per spring container
+protoype - stateful beans
+singleton - stateless beans
+@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+---
+Google spring xml configuration example
+search for schema
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+
+</beans>
+
+For xml configuration - while usig componentno need to specify component  scan and configuration annations(used only in java based configurations)
+
+START.SPRING.io
+-----
+
+JSON Formatter chrome plugin
+
+contional evaulation report - positive matches - autoconfigure automatically
+
+spring.profiles.active=dev
+prroperties + dev properties file gets higher priority
+
+trace
+debug
+info
+warning
+error
+off
+
+pom.xml needs to be restarted even is use devtools
+
+Go to target
+>java -jar learn-spring-boot-0.0.1-SNAPSHOT.jar
+
+http://localhost:8080/actuator
+http://localhost:8080/actuator/beans
+http://localhost:8080/actuator/env
+http://localhost:8080/actuator/metrics
+management.endpoints.web.exposure.include=health,metrics
+management.endpoints.web.exposure.include=*
+
+
+
+Spring boot - Starter projects, auto configuration, Actuator,Devtools
+
+
+http://localhost:8080/h2-console/
+jdbcurl : jdbc:h2:mem:testdb
+
+jdbc - write sql. more code
+spring jdbc - also write sql. less code
+
+""" - text blocks - retain Formatter
+
+@Responsebody - No need to have view(jsp). It will return as it as (whether it is string)
+
+/src/main/resources/META-INF/resources/WEB-INF/jsp
+
+Pass value from controller to jsp
+
+logger.debuf("Login name is {}", name);
+
+----------------------------
+
+
+application.properties
+
+#sayHello.jsp
+#/WEB-INF/jsp/sayHello.jsp
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+logging.level.org.springframework=debug
+
+--------------
+
+## Step17
+Step 17 - Adding JSTL to Spring Boot Project and Showing Todos in a Table
+
+
+### /pom.xml Modified
+
+```
+<dependency>
+	<groupId>jakarta.servlet.jsp.jstl</groupId>
+	<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.eclipse.jetty</groupId>
+	<artifactId>glassfish-jstl</artifactId>
+</dependency>
+
+-----------------
+
+Bootstrap CSS framework
+
+
+### /pom.xml Modified
+
+```
+<dependency>
+	<groupId>org.webjars</groupId>
+	<artifactId>bootstrap</artifactId>
+	<version>5.1.3</version>
+</dependency>
+
+<dependency>
+	<groupId>org.webjars</groupId>
+	<artifactId>jquery</artifactId>
+	<version>3.6.0</version>
+</dependency>
+
+<link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
+<script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<html>
+	<head>
+		<link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
+		<title>List Todos Page</title>		
+	</head>
+	<body>
+		<div class="container">
+			<h1>Your Todos</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Description</th>
+						<th>Target Date</th>
+						<th>Is Done?</th>
+					</tr>
+				</thead>
+				<tbody>		
+					<c:forEach items="${todos}" var="todo">
+						<tr>
+							<td>${todo.id}</td>
+							<td>${todo.description}</td>
+							<td>${todo.targetDate}</td>
+							<td>${todo.done}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		
+		</div>
+		<script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+		<script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+		
+	</body>
+</html>
+
+----------------------
+Step 22 - Adding Validations using Spring Boot Starter Validation
+
+### /pom.xml Modified
+
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
+-------------
+
+import jakarta.validation.constraints.Size;
+	
+@Size(min=10, message="Enter atleast 10 characters")
+private String description;
+
+------------
+
+public String addNewTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "todo";
+		}
+
+---------------
+
+```
+<dependency>
+	<groupId>org.webjars</groupId>
+	<artifactId>bootstrap-datepicker</artifactId>
+	<version>1.9.0</version>
+</dependency>
+```
+
+------------------
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
+
+--------------
+
+Adding Spring Boot Starter Data JPA and Getting H2 database ready
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>com.h2database</groupId>
+	<artifactId>h2</artifactId>
+	<scope>runtime</scope>
+</dependency>
+
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.jpa.defer-datasource-initialization=true
+
+------------
+
+### Install Docker
+
+- [Docker](https://docs.docker.com/engine/install/)
+
+### Launch MySQL using Docker
+
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:8-oracle
+```
+
+
+
+### Mysqlsh
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [Mysqlsh](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)
+
+
+### /pom.xml Modified
+
+```
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+
+### /src/main/resources/application.properties Modified
+
+```
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.url=jdbc:mysql://localhost:3306/todos
+spring.datasource.username=todos-user
+spring.datasource.password=dummytodos
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+#/connect todos-user@localhost:3306
+#docker run --detach 
+#--env MYSQL_ROOT_PASSWORD=dummypassword 
+#--env MYSQL_USER=todos-user 
+#--env MYSQL_PASSWORD=dummytodos 
+#--env MYSQL_DATABASE=todos 
+#--name mysql 
+#--publish 3306:3306 
+#mysql:8-oracle
+```
+
+---------------------------
+
+
+### Launch MySQL using Docker
+
+```
+docker run --detach --env MYSQL_ROOT_PASSWORD=dummypassword --env MYSQL_USER=todos-user --env MYSQL_PASSWORD=dummytodos --env MYSQL_DATABASE=todos --name mysql --publish 3306:3306 mysql:8-oracle
+```
+
+
+
+### Mysqlsh
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [Mysqlsh](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)
+
+
+### /pom.xml Modified
+
+```
+<dependency>
+	<groupId>mysql</groupId>
+	<artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+
+### /src/main/resources/application.properties Modified
+
+```
+#spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.url=jdbc:mysql://localhost:3306/todos
+spring.datasource.username=todos-user
+spring.datasource.password=dummytodos
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=update
+#/connect todos-user@localhost:3306
+#docker run --detach 
+#--env MYSQL_ROOT_PASSWORD=dummypassword 
+#--env MYSQL_USER=todos-user 
+#--env MYSQL_PASSWORD=dummytodos 
+#--env MYSQL_DATABASE=todos 
+#--name mysql 
+#--publish 3306:3306 
+#mysql:8-oracle
+```
+
+spring.mvc.format.date=yyyy-MM-dd
