@@ -1,1 +1,30 @@
 https://www.youtube.com/watch?v=F9PfWBE57O0 
+
+
+console.log();
+console.dir();
+console.table();
+console.time();
+...Some statements
+console.timeEnd();
+debugger;
+
+Go to console press refresh button
+
+Execution stops
+F10
+
+scope - values in the function
+-------------
+
+ctrl + O - Sources tab
+
+
+
+----------------
+Network - Fetch/XHR - Select preview - Under Name - Right click the link - Copy - Copy as curl
+
+Go to postman - Import - Paste raw text tab - click send 
+we can see output same in browser
+
+--------------------
