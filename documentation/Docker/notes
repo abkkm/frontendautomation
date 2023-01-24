@@ -124,11 +124,12 @@ docker compose automatically bridge nw
  
 it will create 2 containers
 
------
+-----NEW--------
 Google docker engine
 https://docs.docker.com/engine/install/
 Use admin account to install
-docker desktop needs to be started manually
+docker desktop needs to be started manually.It is used to run containers
+>= Windos 10
 >doker --version
 
 Launch MySQL using Docker
@@ -141,7 +142,7 @@ docker run --detach
 --publish 3306:3306 
 mysql:8-oracle
 
-where mysql is a conainter
+where mysql is a conainter, mysql:8-oracle - image name
 
 application.properties 
 #spring.datasource.url=jdbc:h2:mem:testdb
