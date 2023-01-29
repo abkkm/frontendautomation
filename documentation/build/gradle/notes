@@ -1,0 +1,110 @@
+Gradle
+
+• Goal: Build, automate and deliver better software, faster
+
+Build Anything: Cross-Platform Tool
+
+• Java, C/C++, JavaScript, Python,...
+
+Automate Everything: Completely Programmable
+
+Complete flexibility
+
+o Uses a DSL
+
+• Supports Groovy and Kotlin
+
+Deliver Faster: Blazing-fast builds 
+
+• Compile avoidance to advanced caching
+
+Can speed up Maven builds by up to 90% 
+
+Incrementality-Gradle runs only what is necessary
+
+•Example: Compiles only changed files
+
+Build Cache - Reuses the build outputs of other Gradle builds with the same inputs
+
+• Same project layout as Maven
+
+• IDE support still evolving
+
+---------------
+
+build.gradle = pom.xml
+
+settings.gradle
+
+right click the project - run as - run configurationd
+
+click gradle tak - new configuration
+
+Name - build
+gradlr task - build
+working direct - choose current workspace
+click on run
+
+BIN-build CREATED successfully/
+
+--------------
+
+Gradle Plugins
+
+Top 3 Java Plugins for Gradle:
+
+☐ 1: Java Plugin: Java compilation + testing + bundling capabilities
+
+Default Layout
+
+o src/main/java: Production Java source
+
+osrc/main/resources: Production resources, such as XML and properties files
+
+o src/test/java: Test Java source
+
+osrc/test/resources: Test resources
+
+Key Task: build
+
+☐ 2: Dependency Management: Maven-like dependency management
+
+name: 'spring-core',
+
+group: 'org.springframework', version: '10.0.3.RELEASE' OR
+
+Shortcut: org.springframework: spring-core: 10.0.3.RELEASE
+
+■ 3: Spring Boot Gradle Plugin: Spring Boot support in Gradle 
+
+• Package executable Spring Boot jar, Container Image (bootJar, bootBuildImage)
+
+o Use dependency management enabled by spring-boot-dependencies
+
+No need to specify dependency version 
+
+Ex: 'org.springframework.boot:spring-boot-starter')
+
+-----
+
+
+tasks.register('helloWorld'){
+	doLast {
+		System.out.println("Hello World");
+	}
+}
+
+-----
+
+https://gradle.org/releases
+C:\Sws\gradle-7.6
+Under System Variables select Path, then click Edit. Add an entry for C:\Sws\gradle-7.6\bin. Click OK to save.
+---------------
+
+In my case it is resolved by updating Buildship Gradle Integration 3.0 from Eclipse market place
+
+
+-----
+
+Remove bin, build, gradle folders before committing.
+
