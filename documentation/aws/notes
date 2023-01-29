@@ -2,3 +2,421 @@
 >cd serverless-rest-api
 >npm install --save aws-sdk
 
+mobile
+valid card
+
+google aws fee tier
+basic support free
+
+IAM & Best Practices
+
+IAM: Identity and Access Management
+
+Authentication (the right user?) and
+
+Authorization (the right access?)
+
+Root User: User we created our AWS account with
+
+Credentials: Email address and password
+
+DO NOT user Root User for day to day activities
+
+Create a new IAM User and use the IAM user for regular activities
+
+Things we will do now:
+
+Create an IAM Group - Developers - with admin access 
+
+Create an IAM user - example_dev - with group Developers
+
+Google aws management console
+
+Login as root user
+
+
+Create an user Group - Developers 
+Attach permissions 
+
+Type administrator in search box
+
+Select administrator access
+
+Go to users
+
+Create a user example_dev
+
+Select aws credential type : password
+Console password 
+
+Assign permissions
+
+Select checkbox
+
+Login in as iam user(example_dev)
+
+Regions and Zones
+
+--------------------------
+
+Regions - Advantages
+
+High Availability, Low Latency, Global Footprint, Adhere to government regulations
+
+---
+
+Availability Zones
+
+Each AWS Region consists of multiple AZ's
+
+Each Availability Zone:
+
+Can have One or more discrete data centers
+
+has independent & redundant power, networking & connectivity
+
+AZS in a Region are connected through low- latency links
+
+(Advantage) Increase availability and fault tolerance of applications in the same region
+
+-----------------------
+
+Amazon virtual machines - EC2 instances
+
+Attach storage(EBS) to your EC2 isntances
+Load balancing for multiple EC2 instances
+
+Launch instance
+
+Name : First EC2 instance
+Amazon machine image(software to choose)
+Choose Amazon linux..(Free tier eligible)
+Instance type(Hardware to choose)
+t2.micro(Free tier eligible)
+
+
+Key pair :
+
+create key pair
+
+key pair name : ec2-default
+key pair type : RSA
+private key file format : .pem
+
+Network setting
+
+create security group(acts like firewall)
+Allow SSH traffic from Anywhere
+
+Configure storage - Accepts default
+
+
+Lauch instances
+
+Instance state will shift from Pending to Rnning
+
+--------
+
+Select the instance click on connect
+
+>whoami
+>phyton --version
+Phython 2.7.18
+>
+X
+
+----
+
+Click on instane Id to see the instance details
+
+see the private and public IPs
+
+Stop intance , terminate instance(cannot restart)
+
+VPC amd subnets are use to craete own private nw in the cloud.
+
+Monitring - Metrics related to EC2 instance
+
+Cloud watch - 
+
+------------------
+
+Lauch EC2 instance & install web server(apache http)
+
+sudo su (To become super user(root))
+yum update -y (yum is a recommdended package manager in aws)
+yum install httpd
+systemctl start httpd
+
+Go security group
+
+edit Inbound rules
+
+
+add rule
+
+HTTP 
+port range : 80
+source : everywhere
+
+
+Acces public address in the URL
+
+-----------
+
+
+Reviewing Important EC2 Concepts
+
+Feature
+
+Amazon Machine Image (AMI)
+
+What operating system and what software do you want on the instance?
+
+Instance Families
+
+Choose the right family of hardware (General purpose or Compute/Storage/Memory optimized or GPU)
+
+Instance Size (t2.nano, t2.micro,t2.small,t2.medium...)
+
+Choose the right quantity of hardware (2 vCPUs, 4GB of memory)
+
+Elastic Block Store
+
+Attach Disks to EC2 instances (Block Storage)
+
+Security Group
+
+Virtual firewall to control incoming and outgoing traffic to/from AWS resources (EC2 instances, databases etc)
+
+Key pair
+
+tals you think of the captions
+
+Public key and a private key
+
+Public key is stored in EC2 instance Private key is stored by customer
+
+
+--------------------------
+
+Cloud Computing with AWS PAAS (Platform as a Service)
+
+• Use a platform provided by the cloud
+
+Cloud provider is responsible for:
+
+Hardware, Networking & Virtualization OS (incl. upgrades and patches)
+
+Application Runtime
+
+Auto scaling, Availability & Load balancing etc..
+
+■ You are responsible for:
+
+Configuration (of Application and Services) 
+Application code (if needed)
+
+• Examples:
+
+Compute: AWS Elastic Beanstalk, Azure App Service, Google App Engine
+
+Databases: Relational & NoSQL(Amazon RDS, Google Cloud SQL, Azure SQL Database etc)
+
+Queues, Al, ML, Operations etc!
+
+------------
+
+IAAS (Infrastructure as a Service)
+
+• Use only infrastructure from cloud provider
+
+ Ex: Using VM service to deploy your apps/databases
+
+• Cloud provider is responsible for:
+
+Hardware, Networking & Virtualization
+
+• You are responsible for:
+
+OS upgrades and patches
+
+Application Code and Runtime Configuring load balancing
+
+Auto scaling
+
+Availability
+
+------------
+Elastic Beanstalk -> Getting started
+
+Application name
+my-first-elastic-bean-application
+
+Platform : Python
+
+Application code - SAmple application
+
+Confgigure more options
+
+CApacity
+
+Edit 
+
+Environment type : Load balanced
+
+Instances:
+
+Min : 1
+
+Max : 2
+
+Click save
+
+------------
+AWS Elastic Beanstalk
+
+Simplest way to deploy and scale your web applications in AWS
+
+■ Provides end-to-end web application management
+
+■ Supports Java, .NET, Node.js, PHP, Ruby, Python, Go, and Docker applications
+
+■ No usage charges - Pay for AWS resources provisioned
+
+• Features:
+
+■ Automatic load balancing
+
+■ Auto scaling
+------------
+Auto Scaling Group and Elastic Load Bala
+
+Applications have millions of users:
+
+■ Same application is deployed to multiple VMs
+
+• How do you simplify creation and management of multiple VMs?
+
+■ Auto Scaling Groups
+
+■ Allow you to create and manage a group of EC2 instances
+
+• How do you distribute traffic across multiple EC2 instances?
+
+Elastic Load Balancing
+------------
+
+IAAS (Infrastructure as a Service)
+
+• Use only infrastructure from cloud provider
+
+ Ex: Using VM service to deploy your apps/databases
+
+• Cloud provider is responsible for:
+
+Hardware, Networking & Virtualization
+
+• You are responsible for:
+
+OS upgrades and patches
+
+Application Code and Runtime Configuring load balancing
+
+Auto scaling
+
+Availability
+
+Auto scaling group is created automtically.
+
+-----------
+
+
+
+Containers - Docker
+
+• Create Docker images for each microservice
+
+• Docker image has all needs of a microservice:
+
+ Application Runtime (JDK or Python or NodeJS)
+
+ Application code and Dependencies
+
+■Runs the same way on any infrastructure: 
+  o Your local machine, Corporate data center or in the Cloud
+
+• Advantages
+
+■ Docker is cloud neutral
+
+☐ Standardization: Simplified Operations • Consistent deployment, monitoring, logging...
+
+☐ Docker containers are light weight ON Compared to Virtual Machines as they do not have a Guest OS
+
+■ Docker provides isolation for containers
+
+--------------
+
+
+Container Orchestration
+
+Requirement: I want 10 instances of Microservice A container, 15 instances of Microservice B container and ....
+
+Typical Features:
+
+ Auto Scaling - Scale containers based on demand
+
+Service Discovery - Help microservices find one another
+
+Load Balancer - Distribute load among multiple instances of a microservice.
+
+Self Healing - Do health checks and replace failing instances
+
+Zero Downtime Deployments - Release new versions without downtime
+
+-------------------
+
+Container Orchestration Options
+
+• Cloud Neutral: Amazon EKS
+
+Kubernetes: Open source container
+
+Managed service: Amazon Elastic Kubernetes Service
+
+EKS does not have a free tier
+
+AWS Specific: Amazon ECS
+
+Amazon Elastic Container Service
+
+Fargate: Serverless ECS/EKS
+
+AWS Fargate does not have a free tier
+
+--------------
+Amazon ECS - Elastic container services manages docker containers
+
+Cluster - Services(multiple instances - Task definition(multiple containers) - Container definition
+
+Number of desired taks : 2
+
+Choose Elastic load balancing - 
+
+Load balancer type : Application load balancer
+
+fargate cluster is fully managed by AWS
+
+
+---------------
+
+Serverless
+-dont worry about infrastructure(servers, sacling, availability)
+focus on code
+aws lamda
+
+function URL
+
+
+
