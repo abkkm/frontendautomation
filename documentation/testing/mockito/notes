@@ -4,3 +4,5 @@ call will not go to db.
 unit testing should be done in isolation. If any dependencies we should mock it.
 
 mock bean - it will creata a stub not actual object
+
+stub, mock
