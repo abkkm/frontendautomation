@@ -1,0 +1,31 @@
+SQL server
+
+Reduce LDF file
+
+Select DB - Go to properties
+
+Options - Choose recovery model - simple
+
+
+-----
+
+Select DB - Tasks - Back up - Backup type as full - Click on 
+
+---
+
+Select DB - Tasks - Shrink - Files - 
+
+Choose File type - as log - select release unused space - ok
+
+-----
+
+How to Shrink Database Log File Size in SQL Server
+
+You can run the command sp_spaceused
+
+ALTER DATABASE TransactionDB SET RECOVERY SIMPLE WITH NO_WAIT
+USE TransactionDB
+
+DBCC SHRINKFILE (N‘MyDatabase_Log’ , @, TRUNCATEONLY)
+
+ALTER DATABASE TransactionDB SET RECOVERY FULL WITH NO_WAIT
