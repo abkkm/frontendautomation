@@ -168,4 +168,35 @@ Example versions in order:
 ☐ Use ONLY Released versions in PRODUCTION
 
 -----------------
+mvn archetype:generate -DgroupId=com.bharath -DartifactId=java-project -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+
+mvn archetype:generate -DgroupId=com.bharath -DartifactId=java-web-project -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+mvn archetype:generate -DgroupId=com.bharath -DartifactId=hellomaven -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+----------
+
+					Download and Install maven
+
+
+
+Download and install Maven from the URL Below
+
+
+   https://maven.apache.org/download.cgi
+
+		MAC:
+
+			export M2_HOME=/Users/bharaththippireddy/Documents/apache-maven-3.3.9/
+			export PATH=$M2_HOME/bin:$PATH
+		
+		Windows:
+
+			Select Start, go to Control Panel. double click System, and select the Advanced tab.
+			Click Environment Variables.
+			Select the PATH environment variable and edit it to include the <MavenHome>/bin folder
+			Reopen Command prompt window, and run your java code.
+
+-----------
 

@@ -17,7 +17,7 @@ git remote rm origin
 > git remote add origin https://github.com/goodfuture-start/Myrepository.git
 > git push -u origin master
 > git clone https://github.com/austinzheng/swift2048.git
-> git rm --cached -r
+> git rm --cached -r . (The above lines removed from staging area.)
 > https://github.com/github/gitignore
 
 create a new branvh

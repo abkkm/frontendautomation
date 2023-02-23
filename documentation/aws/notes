@@ -418,5 +418,33 @@ aws lamda
 
 function URL
 
+--------------------
 
+Creating a jar file
+
+mvn clean package
+
+Elasic beanstack -getting started
+
+create a web aoo
+
+name - o20rest-api
+platform - Java
+upload uour code -selec our jar
+
+Configure more options-
+sngle instancce
+database
+edit
+database setting - mysql
+give username and password
+
+databse deletion policy - Delete
+
+
+------------------
+
+if load balancing used then health chek to be downtime
+
+#CHANGE
 

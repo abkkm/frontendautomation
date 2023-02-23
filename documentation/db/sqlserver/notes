@@ -29,3 +29,150 @@ USE TransactionDB
 DBCC SHRINKFILE (N‘MyDatabase_Log’ , @, TRUNCATEONLY)
 
 ALTER DATABASE TransactionDB SET RECOVERY FULL WITH NO_WAIT
+
+---------
+
+Run the below query. It will list objects in recently modified order.
+
+SELECT name, create_date, modify_date
+FROM sys.objects order by 3 desc
+
+This will list all columns of all recently modified objects.
+
+SELECT * FROM sys.objects order by modify_date desc
+
+
+--------------------
+
+select schema_name(schema_id) as schema_name,
+       name as table_name,
+       create_date,
+       modify_date
+from sys.tables
+where modify_date > DATEADD(DAY, -30, CURRENT_TIMESTAMP)
+order by modify_date desc;
+
+----------------
+
+USE [AdventureWorks];
+GO
+SELECT name AS [Name], 
+       SCHEMA_NAME(schema_id) AS schema_name, 
+       type_desc, 
+       create_date, 
+       modify_date
+FROM sys.objects
+WHERE type ='u'
+
+-------------
+
+USE [AdventureWorks];
+GO
+SELECT name AS [Name], 
+       SCHEMA_NAME(schema_id) AS schema_name, 
+       type_desc, 
+       create_date, 
+       modify_date
+FROM sys.objects
+WHERE type ='p'
+
+----
+
+
+
+USE [AdventureWorks];
+GO
+SELECT name AS [Name], 
+       SCHEMA_NAME(schema_id) AS schema_name, 
+       type_desc, 
+       create_date, 
+       modify_date
+FROM sys.objects
+WHERE modify_date > GETDATE() - 60
+ORDER BY modify_date;  
+GO
+
+
+--------------
+
+To see view
+
+
+SELECT *
+FROM information_schema.Tables
+WHERE [Table_Name]='demotable'
+
+------
+
+
+SELECT *
+FROM information_schema.CHECK_CONSTRAINTS
+
+
+-----
+
+SELECT catalog_name AS DBName, 
+    Schema_name, 
+    schema_owner
+FROM information_schema.SCHEMATA;
+
+
+-----
+
+Search an object
+
+Search object using SSMS object explorer details
+We can use SSMS in-built object search functionality to find out specific objects across all online databases in SQL instance.
+
+Navigate to View-> Object Explorer Details in SSMS. You can use a keyboard shortcut F7 to open it.
+
+It opens the following screen and shows the various folders – Databases, Security, Server objects, Replication, PolyBase, Always on High Availability. You can also see the search box, as highlighted below.
+
+
+You can browse to the specified object in the database using the object explorer. Click on the particular object and navigate to Synchronize.
+
+----
+
+
+To filter the tables, expand [AdventureWorks] database, right-click on the tables and click on Filter settings.
+
+-------
+
+Check Recently Modified Objects In SQL Server Database
+
+SELECT * FROM sys.objects order by modify_date desc
+
+https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
+
+
+C:\Program Files\Microsoft SQL Server\
+C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Data
+C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Data
+C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup
+
+pwd : sqlserver2023
+
+C:\Program Files\Microsoft SQL Server\160\Setup Bootstrap\Log\20230209_210252\ConfigurationFile.ini
+
+C:\Program Files (x86)\Microsoft SQL Server Management Studio 19
+
+--------
+
+uswwr name : sa pwd : sqlserver2023
+
+select @@version;
+
+F5
+
+----
+
+ SQL Server sample database called BikeStores.
+
+1) Enter the Database name as BikeStores and (2) click the OK button to create the new database.
+
+From the File menu, choose Open > File… menu item to open a script file.
+Select the BikeStores Sample Database – create objects.sql file and click the Open button
+ same for load data.sql 
+
+--------------

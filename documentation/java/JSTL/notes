@@ -1,0 +1,54 @@
+Install JSTL Library
+
+¢ Either one of them works, may have others available
+
+<!-- https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl -->
+<dependency>
+    <groupId>org.glassfish.web</groupId>
+    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+    <version>3.0.1</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/apache-jstl -->
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>apache-jstl</artifactId>
+    <version>11.0.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>6.0.0</version>
+    <scope>provided</scope>
+</dependency>
+
+
+------------------
+
+Add JSP taglib directive 
+
+* Core Tag_library
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+* Function Tag Library
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+* Formatting Tag Library
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+* XML Tag Library
+
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+* SQL Tag Library
+
+* <%$@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl %>
+
+----------------
+

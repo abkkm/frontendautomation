@@ -20,4 +20,7 @@ curl -X PATCH -H "Content-Type: application/json" -d "{\"price\": 879.99}" local
 	
 curl -v -X DELETE localhost:8080/api/students/2
 
+Curl – making http request through command line
 
+>man curl 
+>curl https://www.google.com

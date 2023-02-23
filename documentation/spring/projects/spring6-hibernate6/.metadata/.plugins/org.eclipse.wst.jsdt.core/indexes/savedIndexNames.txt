@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+C:\1-2ndRound-From-30-Mar-2020\Git-2022\automation\frontendautomation\documentation\spring\spring-hbtemplate\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2593248244.index

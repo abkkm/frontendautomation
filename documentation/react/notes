@@ -1,0 +1,280 @@
+node --version
+
+npm --version
+npx --version
+>npm init (create a new project)
+first-npm-project
+Give all defaults
+package.json - your dependency definitions
+add a dependency
+npm intall jquery
+
+React - It is a open source javascript librabry to build a single page application
+
+npx -node package executorr - Execcutes js packages without installing  
+
+C:\10-2023\springboot3\springboot3-new1\13-full-stack\01-frontend
+
+Go to directory execute as 
+
+npx create-react-app todo-app-new
+npx clear-npx-cache
+npm uninstall -g create-react-app
+npx create-react-app todo-app-new
+
+Go to todo-app-new
+>npm start
+https://create-react-app.dev/docs/getting-started/
+google npm troubleshooting
+
+------------
+
+Important Commands
+
+npm start: Runs the app in development mode
+ Recommendation: Use Google Chrome
+
+npm test: Run unit tests
+
+npm run build: Build a production deployable unit
+
+Minified
+Optimized for performance
+
+npm install install --save react-router-dom:
+
+Add a dependency to your project
+
+--------------
+
+package.json: Define dependencies (similar to Maven pom.xml)
+
+node_modules: Folder where all the dependencies are downloaded to
+
+React Initialization
+
+public/index.html: Contains root div
+
+src/index.js: Initializes React App. Loads App component. src/index.css-Styling for entire application
+
+src/App.js: Code for App component src/App.css-Styling for App component
+
+src/App.test.js - Unit tests for App component Unit test is right along side production code (Different to Java approach)
+
+-----
+
+two levels of components
+
+functional component
+class level component
+
+For class component 
+
+1. remove ()
+2. add render() method
+3. extends Component
+4. Import component
+
+------------------
+
+import {Component} from 'react'
+
+class FourthComponent extends Component{
+  render() {
+    return (
+        <div className="FourthComponent">Fourth Component</div>
+    )
+  }
+}
+
+-------
+
+Earlier version of react state can not assoicated with funcational components
+From Hooks(From React 16.8 onwards) react state can be assoicated with funcational components
+
+------------
+
+JSX views
+
+1. Close tags are mandatory
+2. Only one top-level tag allowed(<div></div> or <>...</> empty wrapper
+
+
+-------------
+
+Babel -Ensures backward compatibilty
+
+(Converts JSX to Java script)
+
+https://babeljs.io/
+Go to try it out
+
+() - Returns JSX 
+
+Use the following
+
+return <div (tag on the same line)
+or
+return (we can use ()
+( <div...
+
+
+Component name first letter should be upper case
+
+all html should be lower case
+
+Instead of class we should use className
+-------------
+
+javascript best practices
+
+1. Each component in its own file(or module) and export it. In app file import it.
+
+FirstComponent.JSX
+
+import {Component} from 'react'
+export default function FirstComponent() {
+  return <div className="FirstComponent">First Component</div>;
+}
+
+In App.js
+
+import FirstComponent from "./components/learning/FirstComponent";
+
+Where we use {} for react components
+
+{} - use for non default import
+
+---------------------------
+
+Counter
+
+State (Internal data store specific to a component)
+Porps - Pass data between components
+
+Error : <button style={border-radius:30px}>
+Correct : <button style={{border-radius:"30px"}}>
+
+
+useState - It has two things
+
+1. Current state
+2. A function to update state
+
+Update the state - React update the view 
+
+---------
+
+What's happening in the background with React?
+• We updated the state => React updated the view
+☐ How can you update an HTML element?
+• A HTML page is represented by DOM (Document Object Model)
+Each element in a HTML page is a node in the DOM
+• You need to update the DOM to update the element
+• HOWEVER, writing code to update the DOM can be complex and slow!
+■ React takes a different approach:
+• Virtual DOM: "virtual" representation of a UI (kept in memory)
+React code updates Virtual DOM
+React identifies changes and synchronizes them to HTML page o 1: React creates Virtual DOM v1 on load of page
+2: You perform an action
+3: React creates Virtual DOM v2 as a result of your action
+4: React performs a diff between vl and v2)
+5: React synchronizes changes (updates HTML page)
+Summary: We are NOT updating the DOM directly!
+React identifies changes and efficiently updates the DOM
+
+
+-----------------
+
+React Developer tools - Chrome extension
+
+After install ing this extension
+
+we can sess components tab
+
+npm install bootstrap
+----
+
+Routing - Navigatinf from one page to other page
+
+Routing
+Forms
+Validation
+REST API Calls
+Authentication
+
+------------------
+
+• Starting with your TodoApp
+
+1:  LoginComponent
+
+Make LoginComponent Controlled
+
+• Link form fields with state
+
+• Implement Hard-coded Authentication
+
+• Implement Conditional Rendering
+
+2: WelcomeComponent • Implement Routing
+
+3: ErrorComponent
+
+4: ListTodosComponent
+
+5: Add Bootstrap & style our pages
+
+6: HeaderComponent
+
+7: FooterComponent
+
+8: LogoutComponent
+
+---------------
+
+const todos = [{id:1, description: 'Learn'}]
+
+todos.forEach(element => console.log(element))
+todos.map(element => element.id) - ceates array of ids
+
+
+-----------------
+
+use link nstead of href (to avoid refresh)
+
+npm install axios
+
+axios returns pomoise
+
+	//http://localhost:3000/ to 8080
+	//Cross Origin Requests
+	//Allow all requests only from http://localhost:3000/
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+					.allowedMethods("*")
+					.allowedOrigins("http://localhost:3000");
+			}
+		};
+	}
+
+---------------
+
+npm install formik
+npm install moment
+
+---
+async - await - waits for tthe response to come
+
+
+Send POST to http://localhost:8080/authenticate Get the TOKEN_VALUE from response
+
+• Use token in authorization header for future API calls:
+
+Authorization : "Bearer TOKEN VALUE"
+
+jwt.io - paste the roken to vlidate

@@ -1,0 +1,357 @@
+Spring Security
+
+Filter Chains
+
+1) All requests should be authenticated
+2) If a request is not authenticated, a web page is shown
+3) CSRF -> POST
+
+@onfiguration
+public class SpringSecurityConfiguration {
+@Bean
+public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
+1) All requests should be authenticated 
+http.authorizeHttpRequests(auth-> auth.anyRequest().authenticated());
+2) If a request is not authenticated, a web page is shown 
+http.httpBasic (withDefaults());
+3) CSRF -> POST, PUT http.csrf().disable();
+return http.build();
+}}
+
+
+
+----
+Security principles
+Authentication
+Authorizatioin
+Filter chain
+Form authentication
+BAsic Authentication
+JWT Authentication
+CSRF, CORS
+OAuth
+---
+Authentication - Is it the right user? -userid and password, Biometrics... (Basic A
+Authorization - Do they have the right access? - user ab can only read data, user xy can read and update data
+
+---
+
+1. Validate every request
+2. Assign least privileges
+
+
+----
+var user = User.withUsername("example");
+user.password("{noop}dummy");
+user.roles("USER");
+
+//		var user = User.withUsername("example")
+//			.password("{noop}dummy")
+//			.roles("USER")
+//			.build();
+
+https://spring.io/guides/
+
+-----------------------------
+
+Spring MVC works
+
+Request - Dispather Servlet - controller
+
+Dispatcher servlet acts as the front controller
+-Intercets all requests
+-Routes to the right controller
+
+Spring Security works
+
+Request - Spring Security - Dispather Servlet - controller
+
+-Spring security intercets all requests
+-Spring security executes a series of filters - also called sping security filter chain
+
+------------
+
+How does Spring Security Work? 
+• Spring Security executes a series of filters
+• Filters provide these features:
+Authentication: Is it a valid user? (Ex: BasicAuthenticationFilter)
+Authorization: Does the user have right access? (Ex: AuthorizationFilter)
+• Other Features:
+Cross-Origin Resource Sharing (CORS) - CorsFilter Should you allow AJAX calls from other domains?
+Cross Site Request Forgery (CSRF) - CsrfFilter • A malicious website making use of previous authentication on your website
+Default: CSRF protection enabled for update requests-POST, PUT etc..
+Login Page, Logout Page
+LogoutFilter, DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter
+Translating exceptions into proper Http Responses (ExceptionTranslationFilter)
+• Order of filters is important (typical order shown below)
+1: Basic Check Filters - CORS, CSRF, ..
+2: Authentication Filters
+3: Authorization Filters
+-----------------
+
+spring security default user name for spring security form is user
+password : printed on the tomcat console
+
+Exploring Form Based Authentication
+
+• Used by most web applications
+
+• Uses a Session Cookie
+
+JSESSIONID: E2E693A57F6F7E4AC112A1BF4D40890A
+
+Spring security enables form based authentication by default
+
+• Provides a default Login Page • Provides a default Logout Page
+
+• Provides a /logout URL
+
+------------------
+
+Getting started with Cross-Site Request Forgery (CSRF)
+1: You are logged-in to your bank website
+Acookie Cookie-A is saved in the your web browser
+2: You go to a malicious website without logging out
+
+3: Malicious website executes a bank transfer without
+your knowledge using Cookie-A
+
+How can you protect from CSRF?
+1: Synchronizer token pattern
+A token created for each request
+To make an update (POST, PUT, ..), you need a CSRF token from the previous
+request
+2: SameSite cookie (Set-Cookie: SameSite=Strict)
+
+application.properties
+server.servlet.session.cookie.same-site=strict
+--------------
+
+@Configuration
+public class BaicAuthSecurityConfiguration{
+@Bean
+SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+http.authorizeHttpRequests(
+auth —> {
+auth. anyRequest().authenticated();
+});
+
+http.sessionManagement (
+session -—>
+session. sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//http.formLogin();
+http. httpBasic();
+http.csrf().disable();
+return http.build();
+}
+
+------------------------
+
+Getting Started with CORS
+
+@Bean
+public WebMvcConfigurer corsConfigurer() {
+return new WebMvcConfigurer() {
+public void addCorsMappings(CorsRegistry registry) {
+registry.addMapping("/**")
+.allowedMethods("*")
+.allowedOrigins ("http://localhost:3000");
+
+  
+ 
+
+Browsers do NOT allow AJAX calls to resources outside current origin
+
+Cross-Origin Resource Sharing (CORS): Specification that allows you to configure which cross-domain requests are allowed
+Global Configuration
+Configure addCorsMappings callback method in WebMvcConfigurer
+Local Configuration
+@CrossOrigin - Allow from all origins
+@crossOrigin(origins = "https://www.in28minutes.com" ) - Allow from specific origin
+
+----------------
+
+Getting Started with JWT Security Configuration
+
+JWT Authentication using Spring Boot’s OAuth2 Resource Server
+
+1:Create Key Pair
+We will use java. security.KeyPairGenerator
+You can use openssl as well
+
+2: Create RSA Key object using Key Pair
+com.nimbusds. jose. jwk.RSAKey
+
+3: Create JWKSource (JSON Web Key source)
+Create JWKSet (a new JSON Web Key set) with the RSA Key
+Create JWKSource using the JWKSet
+
+4: Use RSA Public Key for Decoding
+NimbusJwtDecoder.withPublicKey (rsaKey().toRSAPublicKey() ).build()
+
+5: Use JWKSource for Encoding
+return new NimbusJwtEncoder(jwkSource() );
+
+------------
+
+Understanding Spring Security Authentication
+
+Authentication is done as part of the Spring Security Filter
+Chain! RMUUTeUCeACOMM VEEN a
+
+1: AuthenticationManager - Responsible for authentication
+Can interact with multiple authentication providers Authentication Provider(s)
+
+2: AuthenticationProvider - Perform specific authentication
+type
+
+=» JwtAuthenticationProvider - JWT Authentication
+
+3: UserDetailsService - Core interface to load user data
+
+How is authentication result stored?
+= SecurityContextHolder > SecurityContext > Authentication > GrantedAuthority
+
+ Authentication - (After authentication) Holds user (Principal) details
+ GrantedAuthority - An authority granted to principal (roles, scopes...)
+
+ ---
+
+ oAUTH2
+
+ Getting Started with Spring Boot and OAuth2 - Login with Google
+
+
+How can you give an application access to files present on your google drive?
+= You don't want to provide your credentials (NOT SECURE)
+
+  
+OAuth: Industry-standard protocol for authorization
+Also supports authentication now!
+
+Let's say you want to provide access to your Google
+
+Drive files to the Todo management application!
+
+Important Concepts:
+
+© Resource owner: You (Person owning the google drive files)
+© Client application: Todo management application
+© Resource server: Contains the resources that are being accessed - Google Drive
+© Authorization server: Google OAuth Server
+
+---------------
+
+Go to Google API console
+
+console.cloud.google.com
+https://console.cloud.google.com/apis/dashboard?project=warm-influence-249615
+
+Go to Oauth constent screen
+
+Create credentials for our application (xondfigure oauth 
+
+also add scope (to get email info adn personal info)
+
+Create credentials  - oauth client id
+
+http://localhost:8080/login/outh2/code/google
+
+noe the client id and secret is ready
+
+http://localhost:8080/login/outh2/code/google
+id authentication is succcess all the details are stred in authentication object
+
+--------------------------
+
+Spring AOP
+
+A few common aspects that apply to all layers. These are called cross cutting aspects.
+
+- Security
+- Performance
+- Logging
+
+Creating AOP Logging Aspect and Pointcut
+
+What is Aspect Oriented Programming? - 2
+
+  
+
+1: Implement the cross cutting concern as an aspect
+
+2: Define point cuts to indicate where the aspect should be applied Concerns
+
+TWO Popular AOP Frameworks Business
+
+Spring AOP
+	NOT acomplete AOP solution BUT very popular
+	Only works with Spring Beans
+	Example: Intercept method calls to Spring Beans
+
+AspectJ
+ Complete AOP solution BUT rarely used
+ Example: Intercept any method call on any Java class
+ Example: Intercept change of values in a field
+
+We will be focusing on Spring AOP in this section
+
+Pointcut - When
+
+@Pointcut("execution(* com.example.*.*(..))")
+
+------------
+
+ 
+
+Aspect Oriented Programming - Important Terminology
+
+Compile Time
+
+Advice - What code to execute?
+	Example: Logging, Authentication
+
+Pointcut - Expression that identifies method calls to be intercepted
+	Example: execution( com.in28minutes.aop.data. *(..))
+
+Aspect - A combination of
+
+1: Advice - what to do AND mee
+2: Pointcut - when to intercept a method call DTS
+
+
+Weaver - Weaver is the framework that implements AOP side
+AspectJ or Spring AOP Satin]
+
+
+Runtime
+
+Join Point - When pointcut condition is true, the advice is executed. A
+specific execution instance of an advice is called a Join Point.
+
+Proceeding Jointput - (we can get details of executed method).
+
+
+
+------------
+
+Exploring @After, @AfterReturning, @AfterThrowing AOP Annotations
+
+Aspect Oriented Programming - Important Annotations
+
+  
+
+@Before - Do something before a method is called
+
+@After - Do something after a method is executed irrespective of whether:
+
+1: Method executes successfully OR
+
+2: Method throws an exception fi
+
+@AfterReturning  - Do something ONLY when a method as executes successfully
+
+@AfterThrowing - Do something ONLY when a method throws an exception
+
+-------------

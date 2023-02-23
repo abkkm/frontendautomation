@@ -1,0 +1,3 @@
+
+hibernate.generate_statistics=true
+log4j.logger.org.hibernate.stat=debug

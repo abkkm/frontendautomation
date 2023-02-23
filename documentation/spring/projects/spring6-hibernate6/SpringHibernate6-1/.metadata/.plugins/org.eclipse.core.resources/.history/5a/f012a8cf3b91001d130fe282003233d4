@@ -1,0 +1,165 @@
+package com.example.SpringHibernate6;
+
+import com.example.SpringHibernate6.Entity.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+
+import java.nio.file.Path;
+import java.nio.file.PathMatcher;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.EnumSet;
+
+public class HibernateUtil
+{
+
+    private static final SessionFactory sessionFactory=buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                Configuration configuration = new Configuration().configure();
+                
+                /*for (Class cls : getEntityClassesFromPackage("com.example.SpringHibernate6.Entity")) {
+                    configuration.addAnnotatedClass(cls);
+                }*/
+                //configuration.addPackage("com.example.SpringHibernate6.Entity");
+                /*configuration.addAnnotatedClass(CategoryEntity.class);
+                configuration.addAnnotatedClass(CustomersEntity.class);
+                configuration.addAnnotatedClass(DeliveriesEntity.class);
+                configuration.addAnnotatedClass(MarketEntity.class);
+                configuration.addAnnotatedClass(ProductsEntity.class);
+                configuration.addAnnotatedClass(SalesEntity.class);
+                configuration.addAnnotatedClass(SuppliersEntity.class);*/
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                
+                //////
+                //MetadataSources sources = new MetadataSources(builder.getBootstrapServiceRegistry());
+                //sources.addPackage("com.example.SpringHibernate6.Entity");
+        		//MetadataSources metadata = new MetadataSources(
+        				//new StandardServiceRegistryBuilder()
+        						//.applySettings(configuration.getProperties())
+        						//.build());
+        		
+        		MetadataSources metadata = new MetadataSources(
+        				new StandardServiceRegistryBuilder()
+        						.applySettings(configuration.getProperties())
+        						.build());
+        		List<String> packages = Arrays.asList("com.example.SpringHibernate6.Entity");
+        		for (String packageName: packages.stream().sorted().collect(Collectors.toList())) {
+        			HibernateUtil.listClassNamesInPackage(packageName).stream().sorted().forEach(metadata::addAnnotatedClassName);
+        			metadata.addPackage(packageName);
+        		}        		
+        		return metadata.buildMetadata().buildSessionFactory();
+                //return configuration.buildSessionFactory(builder.build());
+            } catch (Exception e) {
+                System.out.println("Exception - " + e);
+            }
+        }
+        return sessionFactory;
+    }
+    
+    
+	static Set<String> listClassNamesInaPackage(String packageName) throws Exception {
+		Set<String> classes = new HashSet<>();
+		Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(packageName.replace('.', File.separatorChar));
+		if (!resources.hasMoreElements()) {
+			throw new IllegalStateException("No package found: " + packageName);
+		}
+		PathMatcher pathMatcher = FileSystems.getDefault().getPathMatcher("glob:*.class");
+		while (resources.hasMoreElements()) {
+			URL resource = resources.nextElement();
+			Files.walkFileTree(Paths.get(resource.toURI()), new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
+					if (pathMatcher.matches(path.getFileName())) {
+						try {
+							String className = Paths.get(resource.toURI()).relativize(path).toString().replace(File.separatorChar, '.');
+							classes.add(packageName + '.' + className.substring(0, className.length() - 6));
+						} catch (URISyntaxException e) {
+							throw new IllegalStateException(e);
+						}
+					}
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		}
+		return classes;
+	}
+
+    
+    
+    public static List<Class<?>> getEntityClassesFromPackage(String packageName) 
+    		throws ClassNotFoundException, IOException, URISyntaxException {
+        List<String> classNames = getClassNamesFromPackage(packageName);
+        List<Class<?>> classes = new ArrayList<Class<?>>();
+        for (String className : classNames) {
+            Class<?> cls = Class.forName(packageName + "." + className);
+            Annotation[] annotations = cls.getAnnotations();
+
+            for (Annotation annotation : annotations) {
+                System.out.println(cls.getCanonicalName() + ": " + annotation.toString());
+                if (annotation instanceof jakarta.persistence.Entity) {
+                    classes.add(cls);
+                }
+            }
+        }
+
+        return classes;
+    }
+    
+    
+    public static ArrayList<String> getClassNamesFromPackage(String packageName) 
+    		throws IOException, URISyntaxException, ClassNotFoundException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        ArrayList<String> names = new ArrayList<String>();
+
+        packageName = packageName.replace(".", "/");
+        URL packageURL = classLoader.getResource(packageName);
+
+        URI uri = new URI(packageURL.toString());
+        File folder = new File(uri.getPath());
+        File[] files = folder.listFiles();
+        for (File file: files) {
+            String name = file.getName();
+            name = name.substring(0, name.lastIndexOf('.'));  // remove ".class"
+            names.add(name);
+        }
+
+        return names;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static void shutdown() {
+        getSessionFactory().close();
+    }
+
+}
+

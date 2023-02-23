@@ -70,3 +70,12 @@ Alt+Enter - Introduce local variable.
 ctrl+alt+v  Introduce local variable.
 
 ---
+
+Delete the current line Ctrl + Y Copy the current line, directly copy the current line in the next line Ctrl + D Select the text, press continuously to expand the selected range (in words) Ctrl + W Insert a blank line above the current line. Note: You need to use the shortcut key Ctrl + Enter at the beginning of the line to delete a word, you can delete the entire word Ctrl + Backspace
+
+Quickly search and open the class Ctrl + N Quickly navigate to the beginning of the code block Ctrl + [ Quickly navigate to the end of the code block Ctrl + ] Quick prompt completion, when there may be syntax problems in the code, IDEA will prompt you to use this shortcut key to quickly and automatically Correction (very powerful, most commonly used) Alt + Enter Quickly generate constructors with arbitrary parameters, and Getter/Setter methods for private properties, etc. (most commonly used) Alt + insert Quickly locate highlighted errors or warnings F2 or Shift + F2 Quick format code Ctrl + Alt + L Automatically indent Ctrl + Alt + I Optimize imported classes and packages Ctrl + Alt + O Wrap the selected code with if, while, try/catch and other code blocks (function Powerful) Ctrl + Alt + T
+to move the code block where the cursor is up/down as a whole Ctrl + Shift + Up/Down arrows to quickly integrate two lines of code, and merge the code of the line where the cursor is and the next line into one line Ctrl + Shift + J
+
+View subclass method implementation Ctrl+Alt+B Find where the class or method is used Alt+F7
+
+------------------

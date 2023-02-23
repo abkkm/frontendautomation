@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;webApp1&apos; to &apos;SpringHibernate6&apos;" description="Rename resource &apos;webApp1&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/webApp1" name="SpringHibernate6" stamp="1673366652039" updateReferences="true"/>
+</session>

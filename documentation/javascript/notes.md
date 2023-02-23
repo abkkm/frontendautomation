@@ -224,3 +224,91 @@ console.log(scores1.sort((a,b)=> b-a))
 //const -
 //use const for xpath
 --End of Rahul JS---
+
+https://developer.mozilla.org/en-US/
+https://developer.mozilla.org/en-US/docs/Web/CSS/color_value  
+devdocs.io
+https://emojipedia.org
+seanhalpin.io
+https://www.favicon.cc/
+cssfontstack.com
+fonts.google.com(free for commercial use)
+loremipsumgenerator.com
+flaticon.com
+giphy.com
+techcrunch.com
+https://www.flaticon.com/
+https://css3buttongenerator.com/
+codeply.com ‐ check all framework button types
+
+https://getbootstrap.com/docs/4.3/examples/starter‐template/
+awwwards.com
+ui‐patterns.com
+https://dribbble.com/
+Wireframe(pencil)‐mockup(photoshop)‐prototype
+sneakpeekit.com(basic wireframe)
+https://balsamiq.com
+
+## forkify.com
+
+ES5‐ES6/ESNext
+create a project folder
+
+> node ‐v
+> npm ‐v
+> npm init
+> (give deails version, description,authur)
+> it will create package.json file
+> npm install webpack ‐‐save‐dev
+> it will add depencies entry in package.json
+> npm install jquery –save
+> npm install(it will install all packages from packes.json)
+> npm unistall jquery –save
+> ‐‐‐To install globally because all the files work inside the project
+> To make all files avaible outside the project
+> npm install live‐server ‐‐global
+> live‐server(simply server to see the install packages)
+> npm install webpack‐cli
+> npm run build
+> npm install webpack‐dev‐server –save
+> npm run start
+> npm install html‐webpack‐plugin –save
+> http://babeljs.io/
+> npm install babel‐core babel‐preset‐env babel‐loader ‐‐save‐dev
+> npm install babel‐polyfill
+> npm run dev
+> Material.google.com – polymer
+> Materialdesignicons.com(opensource)
+
+---
+
+<link 
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.cs
+s" rel="stylesheet"> 
+<link rel="stylesheet" href="css/styles.css">
+
+---
+
+fontawesome.com
+
+https://bootsnipp.com/
+
+slice(0,2)
+toUpperCase()
+
+https://minifier.org/
+https://2022.stateofjs.com/en-US/other-tools/
+
+https://bitcoinaverage.com/
+https://any-api.com/
+https://httpstatuses.com/
+
+document.querySelector("li a");
+document.querySelector("a");
+document.querySelector("h1").innerHTML;
+
+git rm --cache -r .
+
+The above lines removed from staging area.
+
+---

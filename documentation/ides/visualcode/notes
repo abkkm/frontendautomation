@@ -1,0 +1,11 @@
+ctrl+B - toggle full screen
+ctrl+P- OPen a file
+ctrl+/ - Comment the files
+
+Form elements with state - controlled component
+
+
+npm install react-router-dom
+
+navigate(`/welcome/${username}`)
+
