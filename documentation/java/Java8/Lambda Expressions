@@ -1,0 +1,265 @@
+
+t -> t.toUpperCase();
+t -> t.toLowerCase();
+
+---------------
+
+public interface CaseOperation {
+    String operate(String text);
+}
+
+public void printWithCaseOperation(String text, CaseOperation operation){
+
+    System.out.println(operation.operate(text));    
+}
+
+public void mainCode(){
+
+    if(upperCaseEnabled){
+        printWithCaseOperation("Hello Lambda!", t -> t.toUpperCase());
+    } else {
+        printWithCaseOperation("Hello Lambda!", t -> t.toLowerCase());
+    }
+}
+
+----------------------------
+
+
+(int a, int b) -> { return a + b; }
+
+(int a, int b) -> a + b
+
+(a, b) -> a + b
+
+a -> a.size()
+
+(String str) -> str.length()
+
+() -> "javalopment"
+
+(a, b) -> {
+    int result = a + b;
+    return result;
+
+(a, b) -> {
+    int result = a + b;
+    return result;
+}
+
+------------
+
+Built-in Functional Interfaces
+
+Functions
+
+one input, one output
+
+/**
+ * @param <T> the type of the input to the function
+ * @param <R> the type of the result of the function
+ */
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+}
+
+---------
+
+Function<Person, String> f = t -> t.getGivenName();
+String name = f.apply(Person.createShortList().get(0));
+System.out.println(name);
+
+-------
+
+Suppliers
+
+no input, one output
+
+/**
+ * @param <T> the type of results supplied by this supplier
+ */
+@FunctionalInterface
+public interface Supplier<T> {
+    T get();
+}
+
+public int sum(int a, int b) {		
+    int result = a + b;
+    debug("supplierTest", () -> "returns " + result + " - for a: " + a + ", b: " + b);
+    return result;
+}
+
+public void debug(String method, Supplier log){
+    if(logger.isDebugEnabled()){
+        logger.debug(method + " " + log.get());
+    }
+}
+
+-----------------
+
+Consumers
+
+one input, no output
+
+/**
+ * @param <T> the type of the input to the operation
+ */
+@FunctionalInterface
+public interface Consumer<T> {
+    void accept(T t);
+}
+
+
+Consumer<String> upperCaseWriter = (s) -> System.out.println(s.toUpperCase());
+Consumer<String> lowerCaseWriter = (s) -> System.out.println(s.toLowerCase());
+
+public void consumerTest(){
+    write("upper-cased", upperCaseWriter);
+    write("LOWER-CASED", lowerCaseWriter);
+    write("Just as how it's written!", (s) -> System.out.println(s));
+}
+
+public void write(String log, Consumer<String> writer){
+    writer.accept(log);
+}
+
+-----------------
+
+Predicates
+
+one input, one boolean output
+
+/**
+ * @param <T> the type of the input to the predicate
+ */
+@FunctionalInterface
+public interface Predicate<T> {
+    boolean test(T t);
+}
+
+
+public static final Predicate<Person> YOUNG = p -> p.getAge() >= 18 && p.getAge() <= 25;
+	
+public void predicateTest() {
+		
+    Person person = Person.createShortList().get(0);
+    System.out.println(YOUNG.test(person));
+}
+
+--
+
+
+BiPredicate
+
+two inputs, one boolean output
+
+public boolean filter(String a, String b, BiPredicate<String, String> filterPredicate){
+    return filterPredicate.test(a, b);
+}
+	
+public void testBiPredicate(){
+    boolean equals = filter("javalopment", "Javalopment", (a, b) -> a.equals(b));
+    System.out.println(equals);
+}
+
+---------------
+
+Primitives version of Predicate
+
+public static final IntPredicate IS_YOUNG = age -> age >= 18 && age <= 25;
+	
+public void isYoung() {
+    System.out.println(IS_YOUNG.test(14));
+}
+---------
+
+UnaryOperator
+
+one input, one output and both are the same type    
+
+/**
+ * @param <T> the type of the operand and result of the operator
+ */
+@FunctionalInterface
+public interface UnaryOperator<T> extends Function<T, T> {
+
+    static <T> UnaryOperator<T> identity() {
+        return t -> t;
+    }
+}
+
+public void testUnaryOperator(){		
+    UnaryOperator<String> upperCase = t -> t.toUpperCase();
+    System.out.println(upperCase.apply("test"));
+}
+
+-------------
+
+BinaryOperator
+
+two inputs, one output and all are the same type
+
+public static final BinaryOperator<Integer> SUM = (a, b) -> a + b; 
+	
+public void sum() {		
+    System.out.println(SUM.apply(10, 20));
+}
+
+------------------
+
+Composition Support In Built-in Functional Interfaces
+
+Predicate and
+------------
+String text = "abc.def_ghi";
+				
+Predicate<String> containsDot = str -> str.contains(".");
+Predicate<String> containsUnderscore = str -> str.contains("_");
+
+Predicate<String> combinedPredicate = containsDot.and(containsUnderscore);
+
+if(combinedPredicate.test(text)) {
+    System.out.println("passed");
+}
+
+-------
+
+Predicate or
+
+
+String text = "abc.def";
+				
+Predicate<String> containsDot = str -> str.contains(".");
+Predicate<String> containsUnderscore = str -> str.contains("_");
+
+Predicate<String> seperated = containsDot.or(containsUnderscore);
+
+if(seperated.test(text)) {
+    System.out.println("passed");
+}
+
+-----------
+
+ Function compose
+
+ Function<String, String> greet = str -> "Hi " + str;
+Function<String, String> upperCase = str -> str.toUpperCase();
+
+Function<String, String> upperCasedGreet = upperCase.compose(greet);
+
+String greetingText = upperCasedGreet.apply("Erol");
+System.out.println(greetingText); // HI EROL
+
+------
+
+Function andThen
+
+Function<String, String> greet = str -> "Hi " + str;
+Function<String, String> upperCase = str -> str.toUpperCase();
+
+Function<String, String> upperCasedGreet = greet.andThen(upperCase);
+
+String greetingText = upperCasedGreet.apply("Erol");
+System.out.println(greetingText); // HI EROL
+
+--------

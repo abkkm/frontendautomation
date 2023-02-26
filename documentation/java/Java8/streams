@@ -1,0 +1,353 @@
+Double sum = salaries.parallelStream()
+        .filter(p -> p.getSalary() > 0)
+        .mapToDouble(p -> p.getSalary())
+        .sum();
+
+        -----------------
+
+        Stream<T> filter(Predicate<? super T> predicate);
+
+        Arrays.asList("Abc", "Def", "Ghi", "Jkl")
+				.stream()
+				.filter(t -> !t.contains("A"))
+				.forEach(t -> System.out.println(t));
+
+        ---------------
+
+       <R> Stream<R> map(Function<? super T, ? extends R> mapper);
+
+       Arrays.asList("60", "70", "80", "90")
+				.stream()
+				.map(t -> Integer.valueOf(t))
+				.filter(t -> t > 70)
+				.forEach(t -> System.out.println(t));
+
+    -----------
+    flatMap
+The flatMap operation can be used to make a flat stream from a multiple-level stream
+
+//Teams starting with a 'B'
+List<List<String>> listOfGroups = Arrays.asList(
+		Arrays.asList("Galatasaray", "Bursa Spor"), 
+		Arrays.asList("Barcelona", "Real Madrid", "Real Sociedad"),
+		Arrays.asList("Juventus", "Milan")
+	);
+
+listOfGroups.stream()
+		.flatMap(group -> group.stream())
+		.filter(t -> t.startsWith("B"))
+		.forEach(t -> System.out.println(t));
+
+--------
+
+peek
+
+Stream<T> peek(Consumer<? super T> action);
+
+List<String> names = new ArrayList<>(Arrays.asList("Erol", "Zeynep", "Yusuf", "Can"));
+
+names.stream()
+	.filter(p -> p.length() > 3)
+	.peek(c -> System.out.println("Filtered Value: " + c))
+	.map(m -> m.toLowerCase())		
+	.peek(c -> System.out.println("Lower Case Value: " + c))
+	.collect(Collectors.toList());
+
+-------
+distinct
+
+Stream<T> distinct();
+
+List<String> names = new ArrayList<>(Arrays.asList("Erol", "Zeynep", "Yusuf", "Can", "Erol"));			
+
+names.stream()
+	.filter(p -> p.length() > 3)
+	.distinct()
+	.map(m -> m.toLowerCase())
+	.forEach(t -> System.out.println(t));
+
+-------
+
+limit
+
+Stream<T> limit(long maxSize);
+
+Stream<String> stream = Stream.of("abc", "defg", "hi", "jkl", "mnopr", "st");		
+
+List<String> list = stream
+	.filter(s -> s.length() < 4)
+	.limit(2)
+	.collect(Collectors.toList());
+
+System.out.println(list); // prints --> [abc, hi]
+
+Stream<String> stream = Stream.of("abc", "defg", "hi", "jkl", "mnopr", "st");		
+
+List<String> list = stream
+	.limit(2)
+	.filter(s -> s.length() < 4)
+	.collect(Collectors.toList());
+
+System.out.println(list); // prints --> [abc]
+
+-------
+
+skip
+
+Stream<T> skip(long n);
+
+Stream<String> stream = Stream.of("abc", "defg", "hi", "jkl", "mnopr", "st");        
+
+List<String> list = stream
+        .filter(s -> s.length() < 4)
+        .skip(2)
+        .collect(Collectors.toList());
+
+System.out.println(list); //prints --> [jkl, st]
+
+
+------
+
+sorted
+
+Stream<T> sorted(Comparator<? super T> comparator);
+
+List<String> list = Arrays.asList(new String[]{"1", "7", "0", "4", "4"});
+List<String> sortedList = list.stream()
+        .sorted(Comparator.comparing(t -> Integer.parseInt(t)))
+        .collect(Collectors.toList());
+
+List<Integer> numbers = new ArrayList<>(Arrays.asList(4, 2, 5, 8, 12, 3, 6, 9, 7));
+numbers.stream()
+        .sorted((a, b) -> Integer.compare(a, b))
+        .sorted(Comparator.reverseOrder())
+        .forEach(p -> System.out.println(p));
+
+
+    ----------------
+
+Terminal Operations Provided by Stream API
+
+forEach
+
+void forEach(Consumer<? super T> action);
+void forEachOrdered(Consumer<? super T> action);
+
+Stream.of("a1","b2","c3").parallel().forEach(t -> System.out.println(t));
+Stream.of("a1","b2","c3").parallel().forEachOrdered(t -> System.out.println(t));
+
+----
+
+collect
+
+<R, A> R collect(Collector<? super T, A, R> collector);
+
+Set<String> names = 
+	Stream.of("Erol", "Zeynep", "Yusuf", "Erol")
+		.collect(Collectors.toSet());
+System.out.println(names);
+
+---
+
+count
+
+List<String> list = Arrays.asList(new String[]{"1", "2", "3", "4", "4"});
+
+long count = list.stream()
+    .filter(t -> !t.equals("1"))
+    .count();
+
+System.out.println("count: " + count);
+
+
+--------
+
+min/max
+
+Optional<T> min(Comparator<? super T> comparator);
+Optional<T> max(Comparator<? super T> comparator);
+
+List<String> list = Arrays.asList(new String[]{"1", "2", "3", "4", "4"});
+
+String max = list.stream()
+    .filter(t -> !t.equals("1"))
+    .max(Comparator.comparing(t -> Integer.parseInt(t))).get();
+
+System.out.println("max: " + max);
+
+List<String> list = Arrays.asList(new String[]{"1", "2", "3", "4", "4"});
+
+int max = list.stream()
+    .filter(t -> !t.equals("1"))
+    .mapToInt(t -> Integer.valueOf(t))
+    .max()
+    .getAsInt();
+
+System.out.println("max: " + max);
+
+
+
+------------
+
+sum
+
+List<String> list = Arrays.asList(new String[]{"1", "2", "3", "4", "4"});
+
+double sum = list.stream()
+    .mapToDouble(t -> Double.parseDouble(t))
+    .sum();
+
+System.out.println("sum: " + sum);
+
+-----------
+
+reduce
+
+int reduce(int identity, IntBinaryOperator operator);
+
+int result = IntStream.rangeClosed(1, 5).parallel()
+        .reduce(0, (sum, element) -> sum + element);
+
+System.out.println("sum of [1, 5]: " + result);
+
+---------------
+
+More Advanced Scenarios
+
+Group By
+
+
+5.1 Group By
+We can group the elements of a stream by a specific key value. The groupingBy method in the Collectors helper class returns a Collector for the map implementation to be able to realize this case.
+
+Let’s look over the following samples:
+
+List<String> list = Arrays.asList(new String[]{"1", "7", "0", "4", "4"});
+
+//group by hashCode to value    
+Map<Integer, List<String>> map = list.stream()
+    .collect(Collectors.groupingBy(t -> t.hashCode()));
+
+map.forEach((k,v) -> System.out.println(k + ": " + v));
+---------------
+
+List<String> list = Arrays.asList(new String[]{"1", "7", "0", "4", "4"});
+
+//group by hashCode to length
+Map<Integer, Long> summingMap = list.stream()
+    .collect(Collectors.groupingBy(t -> t.hashCode(), Collectors.summingLong(t -> t.length())));
+
+summingMap.forEach((k,v) -> System.out.println(k + ": " + v));
+
+
+---------------
+5.2 collect, groupingBy, averagingLong, summingInt, maxBy, comparingLong, joining
+
+Map<Integer, List<String>> defaultGrouping = names.stream().collect(groupingBy(t -> t.length()));
+        
+Map<Integer, Set<String>> mappingSet = names.stream().collect(groupingBy(t -> t.length(), toSet()));
+        
+mappingSet = names.stream().collect(groupingBy(t -> t.length(), mapping(t -> t, toSet())));
+        
+//grouping by multiple fields
+Map<Integer, Map<Integer, Set<String>>> multipleFieldsMap = names.stream().collect(groupingBy(t -> t.length(), groupingBy(t -> t.hashCode(), toSet())));
+        
+//average w.r.t lengths
+Map<Integer, Double> averagesOfHashes = names.stream().collect(groupingBy(t -> t.length(), averagingLong(t -> t.hashCode())));
+        
+//sum w.r.t lengths
+Map<Integer, Long> sumOfHashes = names.stream().collect(groupingBy(t -> t.length(), summingLong(t -> t.hashCode())));
+        
+//max or min hashCode from group
+Map<Integer, Optional<String>> maxNames = names.stream().collect(groupingBy(t -> t.length(), maxBy(comparingLong(t -> t.hashCode()))));
+        
+Map<Integer, String> joinedMap = names.stream().collect(groupingBy(t -> t.length(), mapping(t -> t, joining(", ", "Joins To Lengths[", "]"))));
+joinedMap.forEach((k,v) -> System.out.println(k + ": " + v));
+
+
+5.3 Split a colletion into smaller chunks
+
+List<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+int chunkSize = 3;
+AtomicInteger counter = new AtomicInteger();
+Collection<List<Integer>> result = numbers.stream()
+        .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / chunkSize))
+        .values();
+result.forEach(t -> System.out.println(t));
+
+5.4 Concatenation
+
+List<String> list = Arrays.asList(new String[]{"1", "7", "0", "4", "4"});
+
+String str = list.stream()
+        .collect(Collectors.joining(", "));
+
+System.out.println("concatenated: " + str);
+
+5.5 Collections max/min
+
+Deque<String> stack = new ArrayDeque<>();
+stack.push("1");
+stack.push("2");
+stack.push("3");
+        
+System.out.println("max in the stack: " + 
+    Collections.max(stack, (s, t) -> Integer.compare(Integer.valueOf(s), Integer.valueOf(t))));
+System.out.println("min with max method via using different Comparator: " + 
+    Collections.max(stack, (s, t) -> Integer.compare(1/Integer.valueOf(s), 1/Integer.valueOf(t))));
+
+6. Stream API Enhancements in Java 9
+
+6.8.1 Stream.iterate
+Stream.iterate in Java 8 creates an infinite stream.
+Stream.iterate(initial value, next value)
+
+Stream.iterate(0, n -> n + 1)
+    .limit(10)
+    .forEach(x -> System.out.println(x));
+
+JDK 9 overloads iterate with three parameters that replicate the standard for loop syntax as a stream.
+
+For example, Stream.iterate(0, i -> i < 5, i -> i + 1) gives you a stream of integers from 0 to 4.
+Stream.iterate(initial value, stopper predicate, next value)
+
+Stream.iterate(1, n -> n < 20 , n -> n * 2)
+    .forEach(x -> System.out.println(x))
+;
+
+6.8.2 takeWhile
+
+With the method takeWhile, we can now specify the condition of the iteration as of the third parameter in the new overriden version of the iterate method in Java 9.
+
+Stream.iterate("", s -> s + "t")
+    .takeWhile(s -> s.length() < 10)
+    .reduce((first, second) -> second) //find last
+    .ifPresent(s -> System.out.println(s));
+;
+
+6.8.3 dropWhile
+
+dropWhile removes the elements while the given predicate returns true.
+
+System.out.print("when ordered:");
+Stream.of(1,2,3,4,5,6,7,8,9,10)
+    .dropWhile(x -> x < 4)
+    .forEach(a -> System.out.print(" " + a));
+
+System.out.print("when unordered:");
+Stream.of(1,2,4,5,3,7,8,9,10)
+    .dropWhile(x -> x < 4)
+    .forEach(a -> System.out.print(" " + a));
+
+6.8.4 Extracting null values – ofNullable
+Extracting null values in Java 8:
+
+Stream.of("1", "2", null, "4")
+    .flatMap(s -> s != null ? Stream.of(s) : Stream.empty())
+    .forEach(s -> System.out.print(s));
+
+Stream.of("1", "2", null, "4")
+    .flatMap(s -> Stream.ofNullable(s))
+    .forEach(s -> System.out.print(s));
+
+-------------

@@ -1,2 +1,17 @@
 @Data
 @ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "locations")
+
+
+Adding the Lombok Plugin in IDE (Eclipse)
+Here are the installation steps for Windows:
+
+Downloaded jar from https://projectlombok.org/download or use the jar which is downloaded from your maven build.
+Execute command in terminal: java -jar lombok.jar
+This command will open window as show in the picture below, install and quit the installer and restart eclipse.
+
+
