@@ -21,3 +21,30 @@ Gamerunner is tightly coupled with thebclass Mariogame
 loosely coupled
 Gamerunner is not coupled with class.
 Gamerunner is copled with interface.
+
+
+spring-boot-starter-parent - 3.0.0
+right click project - build module
+
+c.persistence -> jakarta.persistance
+
+cctrl+ shift + F -> javax.persistance
+
+ctrl+shift + R -> jakarta.persistance
+
+cctrl+ shift + F -> javax.validation
+
+ctrl+shift + R -> jakarta.validation
+
+FileMask -> *.java
+
+
+cctrl+ shift + F -> javax.servlet
+
+ctrl+shift + R -> jakarta.servlet
+
+
+@EnableGlobalMethodSecurity - > @EnableMethodSecurity
+
+.athorizeRequests -> authorizeHttpRequests
+.antMatchers -> .requestMatchers
