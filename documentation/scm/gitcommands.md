@@ -20,7 +20,7 @@ git remote rm origin
 > git rm --cached -r . (The above lines removed from staging area.)
 > https://github.com/github/gitignore
 
-create a new branvh
+create a new branch
 
 > git branch alien
 > git branvh
