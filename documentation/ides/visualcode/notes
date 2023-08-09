@@ -9,3 +9,56 @@ npm install react-router-dom
 
 navigate(`/welcome/${username}`)
 
+ctrl+D - select a word ( Mulitple times - multiple select)
+
+Split Editor - Shift + Alt + \ or 2,3,4
+
+
+Code folding - Ctrl + Shift + [or ]
+
+Copy line up/down - Shift + Alt + Up/Down
+
+Code formatting - Shift + Alt + F
+
+Trim trailing white spaces
+
+Preferences > Settings > User Settings tab
+
+Add a new "files.trimTrailingWhitespace": true
+
+Join line
+
+ Open keyboard shortcuts from File > Preferences > Keyboard shortcuts, and bind editor.action.joinLines to a shortcut you prefer.
+
+ Quick file open - Ctrl + P
+
+ Command Palette - Ctrl +Shift + P
+
+ Toggle terminal - Ctrl+backtick (Ctrl+`)
+
+ Switch Tabs -  Ctrl+1, Ctrl+2, Ctrl+3
+
+ Select current line - Ctrl + L
+
+ Delete line - Ctrl + Shift + K
+
+ Move line -  Alt + Up/Down arrow
+
+ Find word/phrase - Ctrl + F  (current file) Ctrl+Shidt + F - (Current project)
+
+ Peek Definition - Alt + F12
+
+ Rename - F2
+
+ Multi cursor selection(for multiple edits) - Alt + Click
+
+ Duplicate line -  Ctrl + Shift + D
+
+Ctrl + Shift + P - 
+ 
+https://dev.to/azure/is-your-vs-code-extension-slow-heres-how-to-speed-it-up-4d66
+
+https://vscode.one/make-vscode-faster/
+
+Developer:Show Running Extenions
+
