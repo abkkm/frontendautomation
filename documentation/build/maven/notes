@@ -200,3 +200,31 @@ Download and install Maven from the URL Below
 
 -----------
 
+https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+
+
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+Java 9 or later
+
+<properties>
+        <maven.compiler.release>11</maven.compiler.release>
+    </properties>
+ 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+	mvn clean dependency:copy-dependencies package
+
+	mvn site
+
+	------------------------
