@@ -70,3 +70,91 @@ spring-core,
 spring-jcl
 spring-expression,
 spring-web
+
+
+---------
+
+Method 1 - xml
+
+//web.xml
+public class WordCountWebConfig implements WebApplicationInitializer {
+@override
+public void onStartup(ServletContext servlietContext) throws ServletException {
+XmlWebApplicationContext webc = new XmlWebApplicationContext();
+webc.setConfiglocation( “classpath:appconfig.xml");
+//create DS
+DispatcherServlet ds = new DispatcherServiet(webAl);
+//register DS
+ServletRegistration.Dynamic servlet = servlietContext.addServlet("MyDs", ds);
+servlet.setLoadOnStartup(1);
+servlet.addMapping(”/wordcount.com/*");
+
+Method 2: - annotation based
+
+//web.xml
+public class WordCountWebConfig implements WebApplicationInitializer {
+@override
+public void onStartup(ServletContext servlietContext) throws ServletException {
+AnnotationConfigWebApplicationContext webc = new AnnotationConfigWebApplicationContext();
+webc.register(SpringAppllicationConfig.class);
+//webc.setConfiglocation( “classpath:appconfig.xml");
+//create DS
+DispatcherServlet ds = new DispatcherServiet(webc);
+//register DS
+ServletRegistration.Dynamic servlet = servlietContext.addServlet("MyDs", ds);
+servlet.setLoadOnStartup(1);
+servlet.addMapping(”/wordcount.com/*");
+
+//replacement of appconfig.xml
+
+package com.progrank.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.progrank.controller’
+public class SpringAppllicationConfig {
+	@Bean
+	public InternalResourceViewResolver viewResolver() {
+	{
+	InternalResourceViewResolver vw = new InternalResourceViewResolver();
+	vw. setPrefix("/WEB-INF/jsp/");;
+	vw. setSuffix(".jsp");;|
+	return vw;
+	}
+}
+
+
+Method 3: - less lines - java configuration
+
+public class WebXmlAppConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+@override
+
+protected Class<?>[] getRootConfigClasses() {
+// TODO Auto-generated method stub
+return null;
+
+}
+
+@override
+protected Class<?>[] getServletConfigClasses() {
+{
+// TODO Auto-generated method stub
+
+Class classArr[] = {SpringAppllicationConfig.class} ;
+return classArr;
+
+}
+
+@override
+
+protected String[] getServletMappings() {
+// TODO Auto-generated method stub T
+String arrMapping[] ={"/"};
+return arrMapping;
+}
+
+
+------------
