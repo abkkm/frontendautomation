@@ -176,3 +176,178 @@ Select the BikeStores Sample Database – create objects.sql file and click the 
  same for load data.sql 
 
 --------------
+
+server properties - > memory - 
+set maxixum server mempry in MB - > AVailable/2 --> 8000/2
+
+
+https://learn.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-shrinkfile-transact-sql?view=sql-server-ver16
+
+Shrink a log file to a specified target size
+
+USE AdventureWorks2022;
+GO
+-- Truncate the log by changing the database recovery model to SIMPLE.
+ALTER DATABASE AdventureWorks2022
+SET RECOVERY SIMPLE;
+GO
+-- Shrink the truncated log file to 1 MB.
+DBCC SHRINKFILE (AdventureWorks2022_Log, 1);
+GO
+-- Reset the database recovery model.
+ALTER DATABASE AdventureWorks2022
+SET RECOVERY FULL;
+GO
+
+-------------------
+
+http://www.techsapphire.in/index/sql_server_100_cpu_usage_fix/0-166
+
+
+SQL server 100% CPU usage fix
+This issue is very common and commonly faced by DBA, developers and server management team on production server i.e. SQL server leads into 100% CPU usage and also start consuming all available memory. Now most of the time you have seen technical people restarting sql services, or killing long running processes and even restarting complete server, and they can avoid this situation. Before starting any thing I would like to discuss a common myth people have that this is happening because of long running queries only. Which is not all ways true, some times:
+
+Longer running query can be problem
+Query having maximum worker time are also problem
+Query execution count can also cause problem
+Now in order to fix this issue you have to go through below video:
+
+
+
+In above video 2 methods are discussed to resolve this issue, both method are totally different from each other and also applied over 2 different situation, these methods are not solution for same problem, in spite both are different solution to different situation. Methods are:
+
+Fix Methods:
+Method 1 (traditional):
+Finding query with issue with traditional method. This involve tracing process on server which is running for long time and leading into this. And after tracing the process taking necessary actions in order to resolve situation.
+
+--Method 1
+--Checking for intense process running on server 
+--Taking required actions
+Exec sp_who2
+DBCC INPUTBUFFER(SPID)
+KILL SPID
+
+
+Killing process or taking other necessary action required.
+
+Method 2:
+Going 1 level deeper
+Using Built in Dynamic Management View. Dynamic Management View are views provided by sql server itself so that people can check what is happening in server. In this method we will be finding Query with maximum total_worker_time or execution_count. And optimizing it if it is select query.
+
+by creating index if suggested or required
+by droping index if required
+by creating partitions
+by changing cardinality
+by splitting long running update queries in smaller units
+
+--Method 2
+--Checking internal stats and execution plan
+--Stats to be considered
+--execution_count
+--last_worker_time
+--Internal check
+--Dynamic Management View
+select * from sys.dm_exec_query_stats
+select * from sys.dm_exec_query_stats order by creation_time desc
+select * from sys.dm_exec_query_stats order by total_worker_time desc
+select * from sys.dm_exec_query_plan(Plan)
+
+--here Plan is plan_handle from result of above query.
+select * from sys.dm_exec_procedure_stats order by total_worker_time desc
+
+For causing stress tool name SQL load generator is used it is free tool. You can download it from link here.
+
+They query used are mentioned below:
+
+select  * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+union all select * from sales.SalesOrderDetail
+
+
+-------------
+
+http://www.techsapphire.in/index/sql_complex_queries_query_optimization_and_interview_questions_sql_server_2016/0-190
+
