@@ -57,7 +57,7 @@ trailng slash as global Configuration
 
 -----------------
 https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x
-
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide
 
 
 Spring Boot 3+ works only with Java 17+
