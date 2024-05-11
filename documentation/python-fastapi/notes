@@ -1,0 +1,196 @@
+python -m pip install --upgrade pip
+
+To activate run the following
+
+>fastapienv\Scripts\activate.bat
+
+pip install fastapi
+pip install uvicorn[standard]
+pip install python-multipart
+
+> uvicorn main:app --reload
+
+pip install loguru
+pip install httpx
+pip install requests
+
+
+pip install python-dotenv
+
+
+Preparing for database connectivity
+• Creating synchronous CRUD transactions using SQLAlchemy
+• Implementing asynchronous CRUD transactions using SQLAlchemy
+• Using GINO for asynchronous CRUD transactions
+• Using Pony ORM for the repository layer
+• Building the repository using Peewee
+• Applying the CQRS design pattern
+
+
+pip list
+pip install SQLAlchemy
+pip install psycopg2
+
+
+pip install
+pip install asyncpg
+
+pip install gino (supports only pg db)
+
+## orms
+pip install pony
+pip install peewee
+
+
+pip install pymongo
+pip install mongoengine
+pip install beanie (odm - async)
+pip install odmantic  (odm - async)
+
+pip install python-multipart
+
+python -m uvicorn main:app --reload
+
+pip install alchemical
+pip install aiosqlite
+
+openapi documentation - previoulsy swagger
+
+
+localhost:8000/redoc
+localhost:8000/docs
+
+https://fastapi.tiangolo.com/tutorial/metadata/
+https://fastapi.tiangolo.com/tutorial/sql-databases/
+https://docs.sqlalchemy.org/en/14/core/engines.html
+
+
+pip install -r requirements.txt
+
+sqlalchemy is a ORM (We define tables in the form of classes)
+
+1. create engine(pool & dialect)
+2. Bind engine with Session(Workspace)
+3. Connect Engine
+4. Describe the database tables(using declarative base)
+5. Reading te database and build the metadata
+6. Create objects
+
+pydantic model - schema
+
+
+pip install pydantic[email]
+
+pip install passlib[bcrypt]
+pip install pytest
+
+nano -l 
+
+>>pytest -v
+
+
+pytest fixtures are called before & after the execution of  test cases
+fixtures are executed first before test case execution
+
+pytest-cov
+>>pytest --cov="."
+
+
+pytest -v --cov="." --cov-report html
+
+
+---------------
+
+
+autentation = who the user is
+authorization -whether the user has the particular access or not?(related to permission)
+
+
+There are very common methods for authorization
+
+1. Basic authentication : user of session and cokkies
+2. JWT : Identify user and send tem token and fur futher request, verify token data
+3. oAuth2 - Identify using 3rd party (facebook, Google, GitHub)
+4. OpenID connect --> Extension of OAuth2
+
+------------------
+
+python-jose
+
+
+openssl rand -hex 32
+
+-------------
+
+alembic init migrations (to create environment/folder)
+
+It will create two folders (alemic.ini, migrations)
+
+version 1 - It will store table 1
+Version 2 - It will store table 2
+...
+version n - It will store table n
+
+1. Change in alembic ini
+
+sqlalchemy.url = driver://user:pass@localhost/dbname
+
+sqlalchemy.url = postgresql://postgres:postgres@localhost:5432/testing
+
+mako is a template file
+
+We can go either Step 1(Manual) or Step 2 (Automatic)
+
+Step 1 -> 
+alembic revision -m "Initial"
+
+created a file based on .maco template file
+
+Step 2 ->
+
+Automaticlly create update meta data
+
+for that we need to make following changes in env.py file
+
+target_metadata = None to
+
+from models import Base
+target_metadata = Base.metadata
+
+
+add in main.py
+
+
+Base.metadata.create_all(bind=engine)
+
+delete the alembic_version table in the db
+
+run the following
+
+alembic revision --autogenerate -m "Initial"
+
+head - current
+
+alembic upgrade head
+
+alembic upgrade head
+alembic revision --autogenerate -m "remove is_admin column"
+
+alembic upgrade head
+
+Autogenerate is not intended to be perfect
+
+pip install jinja2
+pip install aiofiles
+
+
+black . --exclude=env 
+
+to format the code
+
+
+
+
+
+------------
+

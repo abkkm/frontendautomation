@@ -1,0 +1,150 @@
+Tools
+
+1. Log4J 2.x
+2. Java Logging
+3. Commons Logging
+..etc
+
+Log messages can be stored in the following ways
+
+1. File .log
+2. Database - Table
+3. Console - Sysout
+4. SMTP - Email
+
+Log4J implementation
+
+3 Components
+
+a) Logger - Which classes (java) 
+b) Appender - Where to store (confiured in xml)
+c) Layout - How to print  (confiured in xml)
+
+-----
+
+Logger log = LogManager.getLogger(EmployeeController.class)
+
+Do not create Logger object for Entity/DTO/POJO classes
+
+Controllers, Servivces, Utility..
+
+---
+
+Instead of above we can inject(called by aspect)
+
+-TRACE - To find messages from multiple stages/env/apps.
+We need to use with some tools(ex. slueth, ELK,...)
+(Added in Log4J version 2 for disbuted systems.ie. microservices)
+-DEBUG - To print final result of a process/internal details
+-INFO - current step(ex fetching information)
+-WARN - App realed messages(warning will effect performance)
+-ERROR - To give details about exception
+-FATAL - Environment related issues Ex.Database Connection is closed
+
+
+Appender:- Location of messages to be stored. (classes)
+1. FileAppender Write data to Log File (___.log)
+2. ConsoleAppender Prints data at console
+3. JDBCAppender Store messages at Database table
+4. SMTPAppender Write messages to Email.
+
+*) 1 Project can have even multiple appenders.
+
+Layout: Message Format/Pattern.
+
+1. Default Layout (Message and NextLine)
+2. HTML Layout (___ .html)
+3. XML Layout (___ .xml)
+4.*** patternLayout Cvour own format)
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.app.raghu</groupId>
+	<artifactId>Log4J2ExamplesEx</artifactId>
+	<version>1.0</version>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.11.2</version>
+		</dependency>
+
+	</dependencies>
+</project>
+
+--------
+Log4J2/src/main/resources/log4j2.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+	<Appenders>
+		<Console name="LogToConsole" target="SYSTEM_OUT">
+			<PatternLayout>
+				<Pattern>%d - %C [%M] -(%p) %m %n</Pattern>
+			</PatternLayout>
+		</Console>
+		<File name="LogToFile" fileName="logs/myapp.log">
+			<PatternLayout>
+				<Pattern>%d - %C [%M] -(%p) %m %n</Pattern>
+			</PatternLayout>
+		</File>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="LogToConsole" />
+			<AppenderRef ref="LogToFile" />
+		</Root>
+	</Loggers>
+</Configuration>
+
+
+--
+package com.app.raghu;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class Test {
+
+	private static final Logger log = LogManager.getLogger(Test.class);
+	
+	public static void main(String[] args) {
+		processData();
+	}
+	
+	public static void processData() {
+		log.trace("FROM TRACE METHOD");
+		log.warn("FROM WARN METHOD");
+		log.debug("FROM DEBUG METHOD");
+		log.error("FROM ERROR METHOD");
+		log.info("FROM INFO METHOD");
+		log.fatal("FROM FATAL METHOD");
+		//.. read inputs
+		//.. validate them
+		//.. store in db
+		//.. return results
+	}
+}
+----
+
+41.24
+
+https://www.youtube.com/watch?v=9i3eF1fJRSI
+
+
+Appender:- Location of messages to be stored. (classes)
+1. FileAppender Write data to Log File (___.log)
+2. ConsoleAppender Prints data at console
+3. JDBCAppender Store messages at Database table
+4. SMTPAppender Write messages to Email.

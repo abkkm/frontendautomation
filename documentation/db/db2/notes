@@ -1,0 +1,132 @@
+db2 datatypes
+
+INTEGER
+SMALL INTEGER
+DECIMAL
+CHAR
+VARCHAR
+DATE (YYYY-MM-DD)
+TIME(HH:MM:SS)
+TIMESTAMP(YYYY-MM-DD:HH:MM:SS:NNNNNN)
+GRAPH
+VARGRAPH
+
+EXEC SQL
+  CREATE TABLE EMP(EmpNo Int, EmpName VARCHAR(10))
+END-EXEC
+
+EXEC SQL
+  CREATE TABLE EMP(EmpNo Int, EmpName VARCHAR(10))
+END-EXEC
+
+EXEC SQL
+  ALTER TABLE EMP
+  ADD EMP-PHONENO INT
+END-EXEC
+
+EXEC SQL
+  DROP TABLE EMP
+END-EXEC
+
+EXEC SQL
+	INSERT INTO <TABLE_NAME> (FILED1, FIELD2,...) VALUES(VALUE1, VALUE2,...)
+END-EXEC
+
+
+UPDATE EMP SET EMPPH="111" WHERE EMPID=210
+
+DELETE EMP WHERE EMPID=210
+
+
+SELECT EMPPH FROM EMP WHERE EMID=210	
+
+-----------------
+
+Create view Bluedep as select * from empl where dep='Blu'
+Grant select, update (salary) on bluedep to clerk
+Grant select on table empl to mgrgroup
+Grant select, update (lastname, firstname) on table empl to peter, susan
+Revoke select, update (lastname, firstname) on table empl from peter
+
+---
+
+User defined data types
+Create distinct type can_dol as decimal(9,2) with comparisons
+
+----
+
+Create index inx1 on empl(lastname, firstname);
+
+-----
+
+Country char(30) default 'UNKNOWN'
+MILES_TO_LA SMALLINT DEFAULT -1
+
+Column level
+
+- Hemisphere char(1) check(Hemisphere in ('N','S')),
+
+table level
+
+Primary key(CIty_ID) constraint Pop_miles_check(Population between 1 and 50000 and miles > -1 and miles <1=100)
+
+----
+
+create table cities
+
+(city_id char(6) notnull,
+
+....
+primary key (CITY_ID),
+foreign key (country_code) references country)
+
+----
+RUNSTATS
+EXPLAIN
+
+---
+
+EXEC SQL
+FETCH CUR1
+INTO :ID, :NAME
+END-EXEC
+
+----
+
+SIGLE ROW
+
+MOVE '000010' TO ID
+EXEC SQL
+SELECT LASTNAME, FIRSTNAME 
+INTO  :LASTNAME, :FIRSTNAME
+FROM EMPL 
+WHERE EMPNO = :ID
+END-EXEC
+
+----
+
+MULTIPLE ROWS
+
+
+
+EXEC SQL
+DECLARE CUR1
+CURSOR FOR
+SELECT LASTNAME, FIRSTNAME 
+INTO  :LASTNAME, :FIRSTNAME
+FROM EMPL 
+WHERE EMPNO = :DEP
+END-EXEC
+
+MOVE 'E11' TO DEP
+EXEC SQL OPEN CUR1 END-EXEC
+EXEC SQL FETCH CUR1 INTO :ID, :NAME END-EXEC
+EXEC SQL CLOSE CUR1 END-EXEC
+
+EXEC SQL CALL SPNAME(A1, A2, A3) END-EXEC
+------
+
+75-82 NOT DONE
+
+
+

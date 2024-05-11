@@ -1,3 +1,7 @@
+https://www.pgadmin.org/download/pgadmin-4-windows/
+https://www.postgresql.org/download/
+
+
 This is optional. Please use this docker compose file for setting up Postgres if you need.
 
 
