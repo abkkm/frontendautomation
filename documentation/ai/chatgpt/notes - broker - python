@@ -1,0 +1,338 @@
+import yfinance as yf
+import pandas as pd
+import pandas_ta as ta
+def indicator (data):
+super = ta.supertrend(data[ 'High'], data['Low'], data['Close'], 20, 2.0) ['SUPERT_20_2.0']
+data["Supertrend"] = super
+rs = ta.rsi(data['Close'], 14)
+data["RSI"] = rs
+data.loc [(data['RSI'] > 60), 'Strategy 1'] = 'Buy'
+data.loc [(data[*'RSI'] < 40), 'Strategy 1'] = 'Sell'
+data.loc [(data['RSI'] > 70), 'Strategy 2'] = 'Overbought zone and ready to sell'
+data.loc[(data['RSI'] < 30), 'Strategy 2'] = 'Oversold zone and ready to buy'
+data.loc [(data['Adj Close'] > data[ 'Supertrend']), 'Supertrend S/G'] = 'BUY'
+data.loc[(data['Adj Close'] < data[ 'Supertrend']), 'Supertrend S/G'] = 'SELL'
+return data
+print( )
+print(" NIFTY BANK       ")
+print( )
+data =yf.download ('^NSEBANK', period = "7d", interval = "5m")
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+NSEBANK = indicator (data)
+print("NSEBANK",NSEBANK.tail (5))
+print( )
+data =yf.download (HDFCBANK.NS', period = "7d", interval = "5m")
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+HDFCBANK = indicator (data)
+print("HDFCBANK",HDFCBANK.tail (5))
+print( )
+data =yf.download ('ICICIBANK.NS', period = "7d", interval "5m")
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+ICICIBANK = indicator (data)
+
+
+import datetime
+import time
+import yfinance as yf
+import pandas as pd
+while(True):
+data = yf.download ("INFY", period="5d", interval="5m")
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_column', None)
+pd.set_option('display.max_rows', None)
+print (data.tail (1))
+time.sleep (308)
+
+
+import yfinance as yf
+import pandas as pd
+ticker =
+data = yf.download (ticker, period="5d", interval="5m")
+data[ "EMA9"] = data[ 'Close'].ewm (span=9, adjust=False).mean()
+data[ "EMA26"] = data['Close'].ewm(span=26, adjust=False).mean()
+# EMA crossing
+data.loc [(data['Adj Close'] > data[ 'EMA20']) & (data['EMA9'] >data[ 'EMA20']), 'S/G'] = 'BUY'
+data.loc [ (data['Adj Close'] < data['EMA20']) & (data[ 'EMA20'] < data[ 'EMA20']), 'S/G'] = 'SELL'
+pd.set_option('display.width", 1500)
+pd.set_option('display.max_column", None)
+pd.set_option('display.max_rows', None)
+print(data.tail(50))
+
+
+import pandas as pd
+data = pd.read_csv (r"C:\Users\anand\Pictures\Saved Pictures\BankNiftyFut.csv")
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_column', None)
+pd.set_option('display.max_rows', None)
+data["Back0I"]= data["01"].shift (1)
+data["BackClose"]= data["Close"].shift (1)
+data["CloseDiff"] = (data["Close"] - data["BackClose"])
+data["OIDiff"] = (data["01"] - data["BackOI"])
+# Long Buildup = Price increase & OI increase
+# Short Covering = Price increase & OI decrease
+# Short Buildup = Price decrease & OI increase
+# Long Unwinding = Price decrease & OI decrease
+data.loc[(data['Close'] >data[ 'BackClose']) & (data['01'] > data['Back0I']), 'Decode'] = 'Long Buildup'
+data.loc [ (data['Close'] > data[ 'BackClose']) & (data['0I'] <data['Back0I']), 'Decode'] = 'Short Covering'
+data.loc[(data['Close'] <data[ 'BackClose']) & (data['0I'] > data['Back0I']), 'Decode'] = 'Short Buildup'
+data.loc [(data['Close'] < data['BackClose']) & (data['01'] < data['Back0I']), 'Decode'] = 'Long Unwinding'
+data.loc[(data['Close'] › data['Supertrend']) & (data['Close'] > data['VWAP']) & (data['RSI'] > 60), 'Signal'] = 'Long'
+data.loc [(data['Close'] <data[ 'Supertrend']) & (data[ 'Close'] <data['VWAP']) & (data['RSI'] < 40), 'Signal'] = 'Short'
+print(data.iloc[:, [0, 4, 7, 11, 12, 13, 14]])
+#print (data)
+
+----------------
+
+import yfinance as yf
+import pandas as pd
+import pandas ta as ta
+data =yf.download ('^NSEBANK', period = "7d", interval = "5m")
+rs = ta.rsi(data['Close'], 14)
+data["RSI"] = rs
+data.loc[(data['RSI'] > 60), 'Strategy 1'] 'Buy'
+data.loc[(data['RSI'] < 40), 'Strategy 1'] = 'Sell'
+data.loc [(data['RSI'] > 70), 'Strategy 2'] = 'Overbought zone and ready to sell'
+data.loc[(data['RSI'] < 30), 'Strategy 2'] = 'Oversold zone and ready to buy'
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_column', None)
+pd.set_option('display.max_rows None)
+3
+print(data.tail (100))
+
+----
+
+import yfinance as yf
+import pandas as pd
+import pandas_ta as ta
+data =yf.download ('^NSEBANK', period = "7d", interval = "5m")
+mac = ta.macd(data['Close'], 12, 26, 9.0) ["MACD_12_26_9']
+data["Macd"] = mac
+sig = ta.macd(data['Close'], 12, 26, 9.0) ["MACDs_12_26_9']
+data["Signal"] = sig
+(variable) data: Any
+data.loc[(data['Macd'] > data['Signal']) & (data['Macd'] > 0) & (data['Signal'] > 0), 'S/G'] = 'STRONG BUY'
+data.loc[(data['Macd'] <data['Signal']) & (data['Macd'] < 0) & (data[ 'Signal'] < 0), 'S/G'] = 'STRONG SELL'
+data.loc[(data['Macd'] > data['Signal']) & (data['Macd'] < 0) & (data['Signal'] < 0), 'S/G'] = 'WEAK BUY'
+data.loc[(data['Macd'] < data['Signal']) & (data['Macd'] > 0) & (data['Signal'] > 0), 'S/G'] = 'WEAK SELL*
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_column', None)
+pd.set_option('display.max_rows', None)
+print (data.tail (100))
+
+----
+
+import yfinance as yf
+import pandas as pd
+import pandas_ta as ta
+data =yf.download (*^NSEBANK', period = "7d", interval = "5m")
+super = ta.supertrend (data['High'], data['Low'], data['Close'], 20, 2.0) ['SUPERT_20_2.0']
+data["Supertrend"] = super
+data.loc[(data['Adj Close'] > data[ 'Supertrend']), 'S/G'] = 'BUY'
+data.loc[(data['Adj Close'] <data['Supertrend']), 'S/G'] = 'SELL'
+pd.set_option('display.width', 1500)
+pd.set_option('display.max_column", None)
+pd.set_option('display.max_rows', None)
+print(data.tail (100))
+
+
+
+
+
+	
+	
+----
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+-----
+
+
+
+
+
+
+
+
+-----------------
+
+
+import pandas as pd
+import pandas_ta as ta
+
+
+
+
+
+	
+	
+	-----
+	
+
+
+	------
+	
+	
+	import pandas as pd
+import pandas_ta as ta
+import time
+
+
+
+# Main function
+def main():
+
+
+if __name__ == "__main__":
+    main()
+
+	
+	
+	------------
+	
+	
+
+
+# Main function
+def main():
+
+
+if __name__ == "__main__":
+    main()
+
+----
+
+
+import pandas as pd
+import pandas_ta as ta
+import time
+
+# Function to connect to Zerodha API and get live data
+def get_live_data():
+    # Implement Zerodha API connection and data retrieval here
+    # Return live data as DataFrame
+    pass
+
+# Function to exit position
+def exit_position(symbol, quantity):
+    # Implement position exit logic here
+    pass
+
+
+
+# Main function
+def main():
+
+
+if __name__ == "__main__":
+    main()
+
+	
+	----
+	
+	
+	import pandas as pd
+import pandas_ta as ta
+import time
+
+# Function to connect to Zerodha API and get live data
+def get_live_data():
+    # Implement Zerodha API connection and data retrieval here
+    # Return live data as DataFrame
+    pass
+
+# Function to place order
+def place_order(symbol, quantity, order_type, price):
+    # Implement order placement logic here
+    pass
+
+# Function to exit position
+def exit_position(symbol, quantity):
+    # Implement position exit logic here
+    pass
+
+
+# Main function
+def main():
+    while True:
+        # Get live data from Zerodha API
+        live_data = get_live_data()
+
+        # Calculate signals
+        signals = calculate_signals(live_data)
+
+        # Exit positions based on Supertrend and PVI
+        if signals['supertrend_signal'].iloc[-1] == False and signals['pvi'].iloc[-1] <= 0:
+            exit_position(symbol='XYZ', quantity=100)
+
+        # Wait for 1 minute before fetching new data and repeating the process
+        time.sleep(60)
+
+if __name__ == "__main__":
+    main()
+
+	
+	
+	---------------
+	
+	
+	import pandas as pd
+import pandas_ta as ta
+import time
+
+# Function to connect to Zerodha API and get live data
+def get_live_data():
+    # Implement Zerodha API connection and data retrieval here
+    # Return live data as DataFrame
+    pass
+
+# Function to place order
+def place_order(symbol, quantity, order_type, price):
+    # Implement order placement logic here
+    pass
+
+# Function to exit position
+def exit_position(symbol, quantity):
+    # Implement position exit logic here
+    pass
+
+# Calculate Supertrend signal and Positive Volume Index
+def calculate_signals(data):
+    # Calculate Supertrend
+    data['supertrend'] = ta.supertrend(data['high'], data['low'], data['close'], length=10, multiplier=3.0)
+    data['supertrend_signal'] = data['close'] > data['supertrend']
+
+    # Calculate Positive Volume Index (PVI)
+    data['pvi'] = ta.pvi(data['close'], data['volume'])
+
+    # Your logic for stop loss, trailing stop loss, and target goes here
+
+    return data
+
+# Main function
+def main():
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,88 @@
+hi, i need your help in creating a microservice in java
+
+i have my own requirements that i am going to send you
+
+Put ll below press enter
+
+
+I want to build production ready microservice for product management, below features that i want
+
+User should be able to add the product
+User should be able to update the details in the existing product
+User should be able to remove the product
+User should be able to get the product by id
+User should be able to get all the products
+User should be able to get all the products by category
+User should be able to get all the products by price range
+
+Attributes of the product entity >>{id, name, category, description, images, price,created_date, updated_date)
+
+Reasonable validation should be there. If there is any validataion failure client should get the proper message.
+
+The tech stack that I want for this project is Java, Spring boot, mysql and gradle as build tool.
+Initially I dont want to setup the mysql database so use in memory database H2. this should be in such a way that if i restart the application thenn data shouldn't be lost.
+
+
+Write all the unit test cases
+Write all the integration test cases.
+I also want to measure the code coverage.
+I also want to measure the resiliency of the test cases so add mutation testing >> i know this is too much but i need it
+
+The service should be
+* scalable to high load
+* maintainable
+* logs must be there properly to help in debugging if there is any issue
+* proper exception handling in place
+* Postman collection to test the features of the services
+* At the end create a documentation of the microservice too, in the documentation have all the needed details including but not limited to diagram and how to test the service.
+
+
+------------
+
+import requests
+
+def make_api_request(api_key, access_token):
+    try:
+        # Make an API request using the provided credentials
+        response = requests.get("https://api.example.com/endpoint", headers={"api_key": api_key, "access_token": access_token})
+        
+        # Check if the request was successful
+        if response.status_code == 200:
+            print("API request successful!")
+            # Process the response data here
+            data = response.json()
+            return data
+        else:
+            print(f"API request failed with status code {response.status_code}")
+            # Optionally, you can raise an exception here if needed
+            return None
+    except requests.exceptions.RequestException as e:
+        print("Error making API request:", e)
+        # Handle the exception here, such as logging or raising a custom exception
+        return None
+
+# Example usage
+api_key = "your_api_key"
+access_token = "your_access_token"
+
+api_data = make_api_request(api_key, access_token)
+if api_data:
+    # Process the API response data
+    print(api_data)
+else:
+    # Handle the case where the API request failed
+    print("API request failed. Check your credentials.")
+
+------------
+Preparing for database connectivity
+• Creating synchronous CRUD transactions using SQLAlchemy
+• Implementing asynchronous CRUD transactions using SQLAlchemy
+• Using GINO for asynchronous CRUD transactions
+• Using Pony ORM for the repository layer
+• Building the repository using Peewee
+• Applying the CQRS design pattern
+
+from sqlalchemy import create_engine
+import pandas as pd
+
+-------------
